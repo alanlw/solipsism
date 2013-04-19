@@ -2,12 +2,15 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <qapplication.h>
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QTimer>
 #include <QTimeLine>
 #include <QGraphicsItemAnimation>
 #include <QBoxLayout>
+
+#include <QPushButton>
 
 #include "gamelevel.h"
 
@@ -31,12 +34,22 @@ public:
     /**Show*/
     void show();
 
+    void displayStartMenu();
+
     
 private:
 
-    /** To display stuff */
-    QGraphicsScene *scene;
-    /** To display stuff*/
+    /** To display gameplay */
+    QGraphicsScene* gamePlayScene;
+
+    /** To Display Start Menu */
+    QGraphicsScene* startMenuScene;
+        //Start Menu Components
+        /** Quit Button */
+        QPushButton* quitButton;
+
+
+    /** What the user sees */
     QGraphicsView *view;
     /**x coordinate of scrolling view*/
     int viewRectX;
@@ -46,8 +59,8 @@ private:
     /**For animation*/
     QTimer* myTimer;
 
-    /** To nicely arrange my widgets*/
-    QHBoxLayout * l ;
+    /** To nicely arrange my start menu widgets*/
+    QVBoxLayout * startMenuLayout ;
 
     /** To hold my level data*/
     QVector<GameLevel*> myLevels;

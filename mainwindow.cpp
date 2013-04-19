@@ -6,31 +6,49 @@ MainWindow::MainWindow()  {
     myLevel = new GameLevel("sample_map01.gif");
 
     //We need a scene and a view to do graphics in QT
-    scene = new QGraphicsScene();
-    view = new QGraphicsView( scene );
+    startMenuScene = new QGraphicsScene();
 
-    l = new QHBoxLayout( this );
-    view->setLayout(l);
+    gamePlayScene = new QGraphicsScene();
+
+    view = new QGraphicsView( gamePlayScene );
+
 
     viewRectX = 0;
     viewRectY = 0;
     view->setSceneRect(viewRectX, viewRectY, WINDOW_MAX_X*2, WINDOW_MAX_Y*2);
+
+
+    /**************************************************************************
+      gamePlayScene
+      ************************************************************************/
 
     view->setWindowTitle( "Side Scroller Game");
     view->setBackgroundBrush(*myLevel->getBgImage());
 
     //Set timer for animation.
     myTimer = new QTimer(this);
-    myTimer->setInterval(15);
+    myTimer->setInterval(5);
 
     //For scrolling of screen
     connect(myTimer, SIGNAL(timeout()), this, SLOT(scrollWindow()));
 
+    /**************************************************************************
+      startMenuScene
+      ************************************************************************/
+    quitButton = new QPushButton("Quit");
+    startMenuLayout = new QVBoxLayout( this );
+    startMenuLayout->addWidget(quitButton);
+    connect( quitButton, SIGNAL(clicked()), qApp, SLOT(quit()) );
+
 }
 MainWindow::~MainWindow()
 {
-    delete scene;
+    delete gamePlayScene;
+    delete startMenuScene;
+
     delete view;
+
+    delete myTimer;
 
     delete myLevel;
 }
@@ -46,6 +64,24 @@ void MainWindow::show() {
 ----------------------------------------------*/
 
 void MainWindow::scrollWindow(){
-    viewRectX++;
-    view->setSceneRect(viewRectX, viewRectY, WINDOW_MAX_X*2, WINDOW_MAX_Y*2);
+    if (viewRectX<= myLevel->getBgImage()->width() - WINDOW_MAX_X*2){
+        viewRectX++;
+        view->setSceneRect(viewRectX, viewRectY, WINDOW_MAX_X*2, WINDOW_MAX_Y*2);
+    }
+    else{
+        //Once we reach the end of the map, then stop and display start menu for now.
+        displayStartMenu();
+
+    }
+
+}
+
+void MainWindow::displayStartMenu(){
+    cout << "Timer stopped" << endl;
+    myTimer->stop();
+    cout << "Scene changed" << endl;
+    view->setScene(startMenuScene);
+    cout << "Showing this scene" << endl;
+    view->setLayout(startMenuLayout);
+    view->show();
 }
