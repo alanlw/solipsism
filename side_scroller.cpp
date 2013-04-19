@@ -1,7 +1,4 @@
-#include <iostream>
-#include <cstdlib>
-#include <qapplication.h>
-
+#include <QtGui>
 #include "mainwindow.h"
 
 using namespace std;
@@ -9,8 +6,8 @@ using namespace std;
 int main(int argc, char *argv[])
 {
   QApplication a(argc, argv);
-  MainWindow w;
 
+  MainWindow w;
   w.show();
 
   return a.exec();

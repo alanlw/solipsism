@@ -1,13 +1,15 @@
 #include "mainwindow.h"
 
-MainWindow::MainWindow()  {
+MainWindow::MainWindow(QWidget *parent) : QWidget(parent)  {
+
+    setFocus();
+    cout << "Has focus? " << hasFocus() << endl;
 
     //Load my level
     myLevel = new GameLevel("sample_map01.gif");
 
     //We need a scene and a view to do graphics in QT
     startMenuScene = new QGraphicsScene();
-
     gamePlayScene = new QGraphicsScene();
 
     view = new QGraphicsView( gamePlayScene );
@@ -31,6 +33,11 @@ MainWindow::MainWindow()  {
 
     //For scrolling of screen
     connect(myTimer, SIGNAL(timeout()), this, SLOT(scrollWindow()));
+
+    myPlayer = new GamePlayer();
+    gamePlayScene->addItem(myPlayer);
+    myPlayer->setX(WINDOW_MAX_X);
+    myPlayer->setY(WINDOW_MAX_Y);
 
     /**************************************************************************
       startMenuScene
@@ -58,21 +65,35 @@ void MainWindow::show() {
     //This is how we get our view displayed.
     view->show();
 }
+void MainWindow::keyPressEvent(QKeyEvent *e){
+    if(e->key() == Qt::Key_Escape){
+        cout << "You pressed ESC" << endl;
+    }
+    else{
+        cout << "You pressed a key." << endl;
+    }
+}
+
 
 /*---------------------------------------------
                Slot Definitions
 ----------------------------------------------*/
 
 void MainWindow::scrollWindow(){
+
     if (viewRectX<= myLevel->getBgImage()->width() - WINDOW_MAX_X*2){
         viewRectX++;
         view->setSceneRect(viewRectX, viewRectY, WINDOW_MAX_X*2, WINDOW_MAX_Y*2);
+
+        //Keep the Player on the screen too!
+        myPlayer->moveBy(1,0);
     }
     else{
         //Once we reach the end of the map, then stop and display start menu for now.
         displayStartMenu();
-
     }
+
+
 
 }
 
