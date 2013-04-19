@@ -1,13 +1,17 @@
 #include <iostream>
 #include <cstdlib>
+#include <qapplication.h>
+
+#include "mainwindow.h"
 
 using namespace std;
 
 int main(int argc, char *argv[])
 {
-	//So I dont' get warning flags for now. 
-	argc = argc;
-	argv = argv;
+  QApplication a(argc, argv);
+  MainWindow w;
 
-  return 0;
+  w.show();
+
+  return a.exec();
 }

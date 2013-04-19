@@ -8,11 +8,11 @@
 #include <QTimeLine>
 #include <QGraphicsItemAnimation>
 #include <QBoxLayout>
-#include <qapplication.h>
 
-#define WINDOW_MAX_X 250
-#define WINDOW_MAX_Y 250
+#include "gamelevel.h"
 
+#define WINDOW_MAX_X 300
+#define WINDOW_MAX_Y 300
 
 
 /**
@@ -38,11 +38,26 @@ private:
     QGraphicsScene *scene;
     /** To display stuff*/
     QGraphicsView *view;
+    /**x coordinate of scrolling view*/
+    int viewRectX;
+    /**y coordinate of scrolling view*/
+    int viewRectY; //I'm probably not going to be updating this.
+
+    /**For animation*/
+    QTimer* myTimer;
 
     /** To nicely arrange my widgets*/
     QHBoxLayout * l ;
 
+    /** To hold my level data*/
+    QVector<GameLevel*> myLevels;
+        //Temporary, just to make this easier to test.
+        GameLevel * myLevel;
+
+
 public slots:
+    /** Scroll the window according to myTimer*/
+    void scrollWindow();
 
 };
 
