@@ -1,89 +1,33 @@
 # Game Design Document
-This is a place holder for your game design document. You are advised to write your document in [Markdown](http://daringfireball.net/projects/markdown/) and the following section will show you how to write a document using Markdown markup.
+This is the beginning of my Game Design Document. 
 
-Alternativley, you can write your document in plain text if you wish.
+## Game Overview
+This game is a side scrolling game set on a background that looks like lined paper. The player is a small hand-drawn-looking character that can move or attack to overcome various obstacles.
 
-----
+###Monsters
+- Pile of Dung
+    - You cannot touch pile of dung. If you do, you will instantly die. 
+Dung stays still and stinks. Piles of dung will momentarily emit stink. If you get collid with the stink your life will be reduced. Cannot be destroyed by player.
 
-## Markdown
-Markdown is a human-readable structured plain text format that is used to convert text into HTML. GitHub automatically renders Markdown into HTML.
+- Automatic Vacuum Cleaner
+    - These small machines move in straight lines and turn at right angles 
+randomly triggered at fixed intervals by a timer. Contact with a player will
+reduce player health, and vacuum cleaner will reverse direction as if it hit
+a wall. Can be destroyed by player.
 
-This is a crash course on how to use Markdown. The following section will show you the plain text used to generate the document shown in the rendering section.
+- Cute Dust Ball
+    - Cute dust balls move randomly about the map. If they collide with an
+automatic vacuum cleaner, they die. Can be destroyed by player.
 
-### Code
+- Eraser-Hand
+    - Eraser-Hand moves up and down the screen. If player contacts Eraser-Hand,
+player dies instantly.
 
-```
-# Header 1
-## Header 2
-### Header 3
-#### Header 4
-##### Header 5
-
-You can also write in **bold** or _italics_. You can also ~~strike through~~ or write inline `Code Segments`
-
->Blockquotes are done as such.
-
-Just make sure to separate paragraphs with an emptyline. 
-Otherwise, they are considered in the same paragraph.
-
-You link to [Google](https://www.google.com) as such and lists are written has follows:
-  1. First you indent with two empty spaces.
-  1. Then, you use:
-    * `1.` to signal an ordered (i.e. numbered) list, or
-    * `*`, `-`, `+` to represent an unordered list.
-      1. Make sure to maintain indentation
-      1. As it is used to identify sub-lists
-  1. Numbering and symboles don't matter as they are auto-generated later.
-
-Tables are pretty easy to make:
-
-| Tables        | Are           | Easy          |
-| ------------- |:-------------:| -------------:|
-| left-aligned  | centered      | right-aligned |
-| header are    | bolded and    | centered      |
-| zebra stripes | are neat      | 1             |
+- Aggressive Kid
+    - Aggressive kid moves toward player. If aggressive kid hits player, player
+loses hit points. Player must attack agressive kid mutliple times to defeat 
+him. If player clears a stage without attack Aggressive Kid, then he gets a 
+score bonus for being non-violent. 
 
 
-Images are added inline by using the following syntax
-![alt text](http://octodex.github.com/images/Professortocat_v2.png "Image Title")
-```
-
-----
-
-### Rendering
-This section shows the rendering of the plain text above.
-
-# Header 1
-## Header 2
-### Header 3
-#### Header 4
-##### Header 5
-
-You can also write in **bold** or _italics_. You can also ~~strike through~~ or write inline `Code Segments`
-
->Blockquotes are done as such.
-
-Just make sure to separate paragraphs with an emptyline. 
-Otherwise, they are considered in the same paragraph.
-
-You link to [Google](https://www.google.com) as such and lists are written has follows:
-  1. First you indent with two empty spaces.
-  1. Then, you use:
-    * `1.` to signal an ordered (i.e. numbered) list, or
-    * `*`, `-`, `+` to represent an unordered list.
-      1. Make sure to maintain indentation
-      1. As it is used to identify sub-lists
-  1. Numbering and symboles don't matter as they are auto-generated later.
-
-Tables are pretty easy to make:
-
-| Tables        | Are           | Easy          |
-| ------------- |:-------------:| -------------:|
-| left-aligned  | centered      | right-aligned |
-| header are    | bolded and    | centered      |
-| zebra stripes | are neat      | 1             |
-
-
-Images are added inline by using the following syntax
-![alt text](http://octodex.github.com/images/Professortocat_v2.png "Image Title")
-
+## The Implementation
