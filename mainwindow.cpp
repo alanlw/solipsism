@@ -1,108 +1,52 @@
 #include "mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) : QWidget(parent)  {
+    
 
-    setFocus();
-    cout << "Has focus? " << hasFocus() << endl;
+    myGamePlay = new GamePlay(this);
 
-    //Load my level
-    myLevel = new GameLevel("sample_map01.gif");
+    myLabel = new QLabel("LABEL");
+    mainLayout = new QVBoxLayout;
+    mainLayout->addWidget(myLabel);
 
-    //We need a scene and a view to do graphics in QT
-    startMenuScene = new QGraphicsScene();
-    gamePlayScene = new QGraphicsScene();
+    myGamePlay->setFixedHeight(600);
+    myGamePlay->setFixedWidth(600);
+    mainLayout->addWidget(myGamePlay);
 
-    view = new QGraphicsView( gamePlayScene );
-
-
-    viewRectX = 0;
-    viewRectY = 0;
-    view->setSceneRect(viewRectX, viewRectY, WINDOW_MAX_X*2, WINDOW_MAX_Y*2);
-
-
-    /**************************************************************************
-      gamePlayScene
-      ************************************************************************/
-
-    view->setWindowTitle( "Side Scroller Game");
-    view->setBackgroundBrush(*myLevel->getBgImage());
-
-    //Set timer for animation.
-    myTimer = new QTimer(this);
-    myTimer->setInterval(5);
-
-    //For scrolling of screen
-    connect(myTimer, SIGNAL(timeout()), this, SLOT(scrollWindow()));
-
-    myPlayer = new GamePlayer();
-    gamePlayScene->addItem(myPlayer);
-    myPlayer->setX(WINDOW_MAX_X);
-    myPlayer->setY(WINDOW_MAX_Y);
-
-    /**************************************************************************
-      startMenuScene
-      ************************************************************************/
-    quitButton = new QPushButton("Quit");
-    startMenuLayout = new QVBoxLayout( this );
-    startMenuLayout->addWidget(quitButton);
-    connect( quitButton, SIGNAL(clicked()), qApp, SLOT(quit()) );
-
+    setLayout(mainLayout);
 }
 MainWindow::~MainWindow()
 {
-    delete gamePlayScene;
-    delete startMenuScene;
 
-    delete view;
-
-    delete myTimer;
-
-    delete myLevel;
-}
-void MainWindow::show() {
-
-    myTimer->start();
-    //This is how we get our view displayed.
-    view->show();
 }
 void MainWindow::keyPressEvent(QKeyEvent *e){
     if(e->key() == Qt::Key_Escape){
         cout << "You pressed ESC" << endl;
     }
-    else{
-        cout << "You pressed a key." << endl;
+
+    switch (e->key()){
+    case Qt::Key_W:
+        cout << "W pressed for up." << endl;
+        myGamePlay->movePlayer(UP);
+        break;
+    case Qt::Key_A:
+        cout << "A pressed for left" << endl;
+        myGamePlay->movePlayer(LEFT);
+        break;
+    case Qt::Key_S:
+        cout << "S pressed for down" << endl;
+        myGamePlay->movePlayer(DOWN);
+        break;
+    case Qt::Key_D:
+        cout << "D pressed for right" << endl;
+        myGamePlay->movePlayer(RIGHT);
+        break;
+    default:
+        e->ignore(); //do nothing
+        return;
+
     }
 }
 
 
-/*---------------------------------------------
-               Slot Definitions
-----------------------------------------------*/
 
-void MainWindow::scrollWindow(){
-
-    if (viewRectX<= myLevel->getBgImage()->width() - WINDOW_MAX_X*2){
-        viewRectX++;
-        view->setSceneRect(viewRectX, viewRectY, WINDOW_MAX_X*2, WINDOW_MAX_Y*2);
-
-        //Keep the Player on the screen too!
-        myPlayer->moveBy(1,0);
-    }
-    else{
-        //Once we reach the end of the map, then stop and display start menu for now.
-        displayStartMenu();
-    }
-
-
-
-}
-
-void MainWindow::displayStartMenu(){
-    cout << "Timer stopped" << endl;
-    myTimer->stop();
-    cout << "Scene changed" << endl;
-    view->setScene(startMenuScene);
-    cout << "Showing this scene" << endl;
-    view->setLayout(startMenuLayout);
-    view->show();
-}
