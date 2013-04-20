@@ -65,16 +65,16 @@ void GamePlay::show(){
 void GamePlay::movePlayer(MoveDirection dir){
     switch(dir){
     case UP:
-        myPlayer->moveBy(0,-20);
+        myPlayer->moveBy(0,-5);
         break;
     case LEFT:
-        myPlayer->moveBy(-20,0);
+        myPlayer->moveBy(-5,0);
         break;
     case DOWN:
-        myPlayer->moveBy(0,20);
+        myPlayer->moveBy(0,5);
         break;
     case RIGHT:
-        myPlayer->moveBy(20,0);
+        myPlayer->moveBy(5,0);
         break;
     default:
         return;

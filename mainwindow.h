@@ -26,6 +26,7 @@ public:
 
 protected:
     void keyPressEvent(QKeyEvent *e);
+    void mousePressEvent(QMouseEvent *e);
     
 private:
     GamePlay* myGamePlay;
