@@ -5,12 +5,16 @@ This is the beginning of my Game Design Document.
 This game is a side scrolling game set on a background that looks like lined 
 paper. 
 
+###The Player
+
 The player is a [Brain in a Vat](http://www.iet.utm.edu/brainvat/), or
 perhaps more accurately, a Brain in a Vat on a rolling cart that can dodge
 obstacles.
 
 The player must survive by dodging obstacles and using psychic attacks to 
-vanquish intellectual challenges.  
+vanquish intellectual challenges. Points are accumulated only while the 
+player is living.  
+
 
 	![Brain in Vat](/graphics/player/brain_in_vat.png)
 
