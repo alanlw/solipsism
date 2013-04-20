@@ -15,8 +15,7 @@ The player must survive by dodging obstacles and using psychic attacks to
 vanquish intellectual challenges. Points are accumulated only while the 
 player is living.  
 
-
-	![Brain in Vat](/graphics/player/brain_in_vat.png)
+![Brain in Vat](/graphics/player/brain_in_vat.png)
 
 ###Monsters
 - Contradiction (Mujun)
