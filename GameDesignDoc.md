@@ -46,6 +46,9 @@ Mean Words.
 These words will appear as words, example:
 BAKABAKABAKABAKABAKA
 
+	- Text will move in streams. Conceptually, I want to show literal attacks 
+being uttered at the User's consciousness.
+
 ###Player Abilities
 
 - Psychic Attack
@@ -72,6 +75,9 @@ used to launch psychic attacks.
 - Players will begin with three lives, which will be stored in a variable 
 in the GamePlay class. Players will also have a finite number of hit points.
 Once hit points are depleted, the player will lose a life.
+
+- Players die when they run out of lives. They will then have to restart the 
+game if they want to try to get a better score.
 
 ###User Interface
 
