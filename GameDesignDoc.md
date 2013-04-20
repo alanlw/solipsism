@@ -12,6 +12,8 @@ obstacles.
 The player must survive by dodging obstacles and using psychic attacks to 
 vanquish intellectual challenges.
 
+	<img src = "/graphics/player/brain_in_vat.png" height = "25%" width = "25%">
+
 ###Monsters
 - Contradiction (Mujun)
     - You cannot touch or defeat a contradiction.
