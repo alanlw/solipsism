@@ -13,9 +13,20 @@ public:
     GamePlayer();
     ~GamePlayer();
 
+    int getLives() const;
+    int getHitPoints() const;
+
+    void setLives(int n);
+    void setHitPoints(int n);
+
 private:
     //For testing, of course.
     QPixmap * testImage;
+
+    /**Number of lives*/
+    int lives;
+    /**Number of hitpoints*/
+    int hitPoints;
 
 protected:
 

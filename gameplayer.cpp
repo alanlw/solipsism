@@ -16,3 +16,17 @@ GamePlayer::~GamePlayer(){
 
 }
 
+int GamePlayer::getLives() const{
+    return lives;
+}
+
+int GamePlayer::getHitPoints() const{
+    return hitPoints;
+}
+
+void GamePlayer::setLives(int n){
+    lives = n;
+}
+void GamePlayer::setHitPoints(int n){
+    hitPoints = n;
+}

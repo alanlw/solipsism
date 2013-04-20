@@ -46,8 +46,8 @@ Mean Words.
 These words will appear as words, example:
 BAKABAKABAKABAKABAKA
 
-	- Text will move in streams. Conceptually, I want to show literal attacks 
-being uttered at the User's consciousness.
+- Text will move in streams. Conceptually, I want to show literal attacks 
+being uttered at the User's consciousness.  
 
 ###Player Abilities
 
