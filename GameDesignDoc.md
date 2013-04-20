@@ -10,32 +10,35 @@ perhaps more accurately, a Brain in a Vat on a rolling cart that can dodge
 obstacles.
 
 The player must survive by dodging obstacles and using psychic attacks to 
-vanquish intellectual challenges.
+vanquish intellectual challenges.  
 
-	<img src = "/graphics/player/brain_in_vat.png" height = "25%" width = "25%">
+	![Brain in Vat](/graphics/player/brain_in_vat.png)
 
 ###Monsters
 - Contradiction (Mujun)
-    - You cannot touch or defeat a contradiction.
+    - You cannot touch or defeat a contradiction.  
+
 	![Contradiction Monster](/graphics/monsters/contradiction.png)
 
 - Sound Arguments
     - Sound Arguments move in straight lines and turn at right angles 
 randomly triggered at fixed intervals by a timer. Contact with a player will
 reduce player health, and vacuum cleaner will reverse direction as if it hit
-a wall. Can be destroyed by player.
+a wall. Can be destroyed by player.  
+
 	![Sound Argument Monster](/graphics/monsters/Sulfuric_Acid_Molecule_VdW.png)
 
 - Anxieties
     - Anxieties move randomly about the map. If they collide with an
 automatic vacuum cleaner, they die. Can be destroyed by player. Anxieties
-generate Mean Words.
+generate Mean Words.  
+
 	![Anxiety Monster](/graphics/monsters/anxiety.png)
 
 - Mean Words
     - Mean Words moves toward player. If Mean Words hits player, player
 loses hit points. Player must attack agressive kid mutliple times to defeat 
-Mean Words.
+Mean Words.  
 
 These words will appear as words, example:
 BAKABAKABAKABAKABAKA
@@ -45,8 +48,30 @@ BAKABAKABAKABAKABAKA
 - Psychic Attack
     - By clicking on certain monsters, the player can reduce these monster's
     health and eventually make them disappear. An animation of a rippling
-    purple circles will represent this object.
+    purple circles will represent this object.  
+
     ![Psychic Attack](/graphics/attacks/psychic_attack.png)
 
 
 ## The Implementation
+
+###Game Play
+
+- Players use W-A-S-D to control the movement of the avatar. The mouse is 
+used to launch psychic attacks.
+
+###Scoring
+
+- For each monster that is destroyed, points are awarded. Scores cannot go down.
+
+###Player Lives
+
+- Players will begin with three lives, which will be stored in a variable 
+in the GamePlay class. Players will also have a finite number of hit points.
+Once hit points are depleted, the player will lose a life.
+
+###User Interface
+
+Here is an image of the user interface:  
+
+![Game Design Doc](/game_design_doc.jpg)
