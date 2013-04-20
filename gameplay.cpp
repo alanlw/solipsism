@@ -31,12 +31,12 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
     
 
     //Set timer for animation.
-    myTimer = new QTimer(this);
-    myTimer->setInterval(10);
+    scrollTimer = new QTimer(this);
+    scrollTimer->setInterval(10);
 
 
     //For scrolling of screen
-    connect(myTimer, SIGNAL(timeout()), this, SLOT(scrollWindow()));
+    connect(scrollTimer, SIGNAL(timeout()), this, SLOT(scrollWindow()));
 
     myPlayer = new GamePlayer();
     gamePlayScene->addItem(myPlayer);
@@ -53,25 +53,25 @@ GamePlay::~GamePlay(){
 
     delete gamePlayView;
 
-    delete myTimer;
+    delete scrollTimer;
 
     delete myLevel;
 }
 void GamePlay::show(){
-    myTimer->start();
+    scrollTimer->start();
     gamePlayView->show();
 }
 
 void GamePlay::movePlayer(MoveDirection dir){
     switch(dir){
     case UP:
-        myPlayer->moveBy(0,-5);
+        myPlayer->moveBy(0, -10);
         break;
     case LEFT:
         myPlayer->moveBy(-5,0);
         break;
     case DOWN:
-        myPlayer->moveBy(0,5);
+        myPlayer->moveBy(0, 10);
         break;
     case RIGHT:
         myPlayer->moveBy(5,0);

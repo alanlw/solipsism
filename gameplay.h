@@ -46,8 +46,12 @@ private:
     /**y coordinate of scrolling view*/
     int viewRectY; //I'm probably not going to be updating this.
 
-    /**For animation*/
-    QTimer* myTimer;
+    /**For scrolling animation*/
+    QTimer* scrollTimer;
+    /**For attack animations*/
+    QTimer* attackTimer; //This still needs to be initialized, etc.!!
+    /**For monster animations*/
+    QTimer* monsterTime; //This still needs to be initialized, etc.!!
 
     /** Data of player*/
     GamePlayer* myPlayer;
@@ -59,7 +63,7 @@ private:
 
 
 public slots:
-    /** Scroll the window according to myTimer*/
+    /** Scroll the window according to scrollTimer*/
     void scrollWindow();
 
 
