@@ -39,7 +39,7 @@ public:
     void movePlayer(MoveDirection dir);
 
     /**Function called to attack with the mouse*/
-    void clickAttack(const QPoint& pos);
+    void clickAttack(QMouseEvent *e);
 
     /**Return myPlayer's hitpoints. Needed for ScoreWidget.*/
     int getPlayerHitpoints();
@@ -53,6 +53,11 @@ protected:
 
     /**Return true if player is colliding with a monster.*/
     bool monsterCollision();
+
+    /**Return true if attack is colliding with a monster Will need to write this later...*/
+    bool attackCollision();
+
+
 
 private:
     /** To display gameplay */
@@ -68,10 +73,11 @@ private:
 
     /**For scrolling animation*/
     QTimer* scrollTimer;
-    /**For attack animations*/
-    QTimer* attackTimer; //This still needs to be initialized, etc.!!
-    /**For monster animations*/
-    QTimer* monsterTime; //This still needs to be initialized, etc.!!
+    /**For attacking animation*/
+    QTimer* attackTimer;
+
+    /**Store the attacks that I "summon"*/
+    QVector<Attack*> myAttacks;
 
     /** Data of player*/
     GamePlayer* myPlayer;
@@ -89,6 +95,9 @@ private:
 public slots:
     /** Scroll the window according to scrollTimer*/
     void scrollWindow();
+
+    /** Animate attacks according to attackTimer*/
+    void animateAttacks();
 
     /** When player loses lives, stop the game.*/
     void gameOver();

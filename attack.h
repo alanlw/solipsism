@@ -11,11 +11,19 @@ public:
     Attack();
     virtual ~Attack();
 
+    int getAttackDuration() const;
+    int getAttackCountDown() const;
+
+    void setAttackDuration(int n);
+    void setAttackCountDown(int n);
+
 protected:
     QPixmap* attackImage;
-    QTimer* attackTimer;
 
 private:
+
+    int attackDuration;
+    int attackCountDown;
 
 };
 

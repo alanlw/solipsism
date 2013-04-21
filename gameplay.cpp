@@ -40,9 +40,15 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
     scrollTimer = new QTimer(this);
     scrollTimer->setInterval(10);
 
+    attackTimer = new QTimer();
+    attackTimer->setInterval(10);
+
 
     //For scrolling of screen
     connect(scrollTimer, SIGNAL(timeout()), this, SLOT(scrollWindow()));
+    //For attack animations
+    connect(attackTimer, SIGNAL(timeout()), this, SLOT(animateAttacks()));
+
 
     //Load Player onto Screen
     myPlayer = new GamePlayer();
@@ -88,6 +94,7 @@ GamePlay::~GamePlay(){
 }
 void GamePlay::show(){
     scrollTimer->start();
+    attackTimer->start();
     gamePlayView->show();
 }
 
@@ -129,12 +136,30 @@ void GamePlay::movePlayer(MoveDirection dir){
         return;
     }
 }
-void GamePlay::clickAttack(const QPoint& pos){
-    QPoint myPoint = pos; //so errors don't complain.
+void GamePlay::clickAttack(QMouseEvent *e){
+    QPoint myPoint = e->pos(); //so errors don't complain.
+    myPoint.setX(myPoint.x() + viewRectX - 35);
+    myPoint.setY(myPoint.y() - 65);
+    //Right here I am only correcting the symptom... I must find how to
+    //get the actual scene coordinate instead of just correcting for the
+    //global window one.  Maybe this is a result of getting the QMouseEvent
+    //from MainWindow, but I haven't been able to successfully get it from
+    //somewhere else yet (nor do I know I would want to)
+
     cout << "ATTACK!! (" << myPoint.x() << ", " << myPoint.y() << ") " << endl;
 
     //Now I will want to either create, or move some attack object here so I
     //can do collision calculations with the other objects.
+
+    //Do I want to make this less specific to a psychic attack later?
+    PsychicAttack* tempAtk = new PsychicAttack();
+    myAttacks.push_back(tempAtk);
+    tempAtk->setPos(myPoint);
+    tempAtk->setAttackCountDown(tempAtk->getAttackDuration());
+    gamePlayScene->addItem(tempAtk);
+
+
+
 }
 
 int GamePlay::getPlayerHitpoints(){
@@ -198,9 +223,35 @@ void GamePlay::scrollWindow(){
         //Once we reach the end of the map, then stop and display start menu for now.
         //displayStartMenu();
     }
+}
+
+void GamePlay::animateAttacks(){
+    // Must connect this.
+
+    //For every attack...
+    for(int i = 0; i < myAttacks.size(); i++){
+        if(myAttacks[i]->getAttackCountDown() == 0){
+            //'Destroy' attack.
+            gamePlayScene->removeItem(myAttacks[i]);
+
+            //Is it unwise to delete here?
+            delete myAttacks[i];
+            myAttacks.remove(i);
 
 
-
+        }
+        else{
+            myAttacks[i]->
+                    setAttackCountDown(myAttacks[i]->getAttackCountDown() - 1);
+           //I can insert movement animation here.
+            if (myAttacks[i]->getAttackCountDown() % 2 == 0){
+                myAttacks[i]->moveBy(20, 0);
+            }
+            else{
+                myAttacks[i]->moveBy(-20, 0);
+            }
+        }
+    }
 }
 
 void GamePlay::gameOver(){
