@@ -86,6 +86,9 @@ public slots:
     /** Scroll the window according to scrollTimer*/
     void scrollWindow();
 
+    /** When player loses lives, stop the game.*/
+    void gameOver();
+
 signals:
     void updateScore();
 

@@ -48,6 +48,13 @@ private slots:
 
 protected:
 
+signals:
+    /**When a single life is lost (will I reset the player's position, or
+    bring the player back to the beginning of the level?*/
+    void lifeLost();
+    /**When all of a player's lives are lost. (Losing condition?) */
+    void allLivesLost();
+
 };
 
 #endif // GAMEPLAYER_H

@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)  {
 
     //Connect the ScoreWidget to this
     connect(myGamePlay, SIGNAL(updateScore()), myScoreWidget, SLOT(scoreChanged()));
+
 }
 MainWindow::~MainWindow()
 {

@@ -66,6 +66,9 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
 
     score = 0;
 
+    //When a player loses all lives, the game is over.
+    connect(myPlayer, SIGNAL(allLivesLost()), this, SLOT(gameOver()));
+
     show();
 }
 
@@ -85,7 +88,9 @@ void GamePlay::show(){
 
 void GamePlay::movePlayer(MoveDirection dir){
 
-
+    if (!myPlayer->isEnabled()){
+        return;
+    }
     if (monsterCollision()){
         //"Bump back" player a little bit so he can escape being locked in
         //collided position.
@@ -181,4 +186,10 @@ void GamePlay::scrollWindow(){
 
 
 
+}
+
+void GamePlay::gameOver(){
+    emit updateScore();
+    cout << "Game Over!" << endl;
+    scrollTimer->stop();
 }

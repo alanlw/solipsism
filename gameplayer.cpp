@@ -1,5 +1,6 @@
 #include "gameplayer.h"
 
+#define DEFAULT_HITPOINTS 100
 GamePlayer::GamePlayer(){
     playerImage = new QPixmap();
     if(playerImage->load("graphics/player/brain_in_vat.png")){
@@ -13,7 +14,7 @@ GamePlayer::GamePlayer(){
     playerImage->scaledToWidth(100);
 
     lives = 3;
-    hitPoints = 100;
+    hitPoints = DEFAULT_HITPOINTS;
 
     //Player is born mortal.
     invincible = 0;
@@ -42,6 +43,21 @@ void GamePlayer::takeDamge(int n){
     if(!invincible){
         hitPoints -= n;
     }
+    if (hitPoints <= 0){
+        lives = 0;
+        emit lifeLost();
+
+        if (lives <= 0){
+            emit allLivesLost();
+            this->setEnabled(false);
+            return;
+        }
+
+        setHitPoints(DEFAULT_HITPOINTS);
+
+
+    }
+
 
 }
 void GamePlayer::tempInvincible(int numCycles){
