@@ -4,14 +4,20 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)  {
     
 
     myGamePlay = new GamePlay(this);
+    myScoreWidget = new ScoreWidget(this);
 
-    myLabel = new QLabel("LABEL");
+    myLabel = new QLabel("Some game controls will go here.");
     mainLayout = new QVBoxLayout;
+    gameAndScore = new QHBoxLayout;
+
     mainLayout->addWidget(myLabel);
 
     myGamePlay->setFixedHeight(600);
     myGamePlay->setFixedWidth(600);
-    mainLayout->addWidget(myGamePlay);
+    gameAndScore->addWidget(myGamePlay);
+    gameAndScore->addWidget(myScoreWidget);
+
+    mainLayout->addLayout(gameAndScore);
 
     setLayout(mainLayout);
 }

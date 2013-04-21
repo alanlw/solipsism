@@ -8,6 +8,7 @@
 #include <QBoxLayout>
 
 #include "gameplay.h"
+#include "scorewidget.h"
 
 /**
 MainWindow (add documentation later)
@@ -29,7 +30,10 @@ protected:
     void mousePressEvent(QMouseEvent *e);
     
 private:
+
+    QHBoxLayout* gameAndScore;
     GamePlay* myGamePlay;
+    ScoreWidget* myScoreWidget;
 
     QLabel *myLabel;
     QVBoxLayout *mainLayout;
