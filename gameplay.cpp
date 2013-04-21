@@ -193,6 +193,42 @@ bool GamePlay::monsterCollision(){
     return false;
 }
 
+bool GamePlay::attackCollision(){
+    for(int i = 0; i < myAttacks.size(); i++){
+        for(int j = 0; j < myLevel->getMonsters().size(); j++){
+            if(myAttacks[i]->collidesWithItem(myLevel->getMonsters()[j])){
+                //cout << "Attack hit monster." << endl;
+
+                myLevel->getMonsters()[j]->takeDamge(myAttacks[i]->getAttackDamage());
+
+                //Check if this kills this monster
+                if(myLevel->getMonsters()[j]->getHitPoints() <= 0){
+                    gamePlayScene->removeItem(myLevel->getMonsters()[j]);
+                    myLevel->getMonsters().remove(j);
+                    return true;
+                }
+
+                if(!myLevel->getMonsters()[j]->getInvincible()){
+                    myLevel->getMonsters()[j]->tempInvincible(2);
+                }
+
+                return true;
+                //If I return here, that means an attack can only hit one
+                //monster at a time. I must decide if this is desirable.
+            }
+        }
+    }
+    return false;
+}
+
+
+void GamePlay::mousePressEvent(QMouseEvent *e){
+    if(e->button() == Qt::LeftButton){
+        cout << "Left Mouse Button pressed" << endl;
+        this->clickAttack(e);
+    }
+
+}
 /*---------------------------------------------
                Slot Definitions
 ----------------------------------------------*/
@@ -206,7 +242,7 @@ void GamePlay::scrollWindow(){
         viewRectX++;
         gamePlayView->setSceneRect(viewRectX, viewRectY, WINDOW_MAX_X*2, WINDOW_MAX_Y*2);
 
-
+        //Check if player has run into a monster.
         if(!monsterCollision()){
             //Do not move so player gets "pushed back" by item.
             //Keep the Player on the screen too!
@@ -217,11 +253,18 @@ void GamePlay::scrollWindow(){
             //scrolling.
             myPlayer->moveBy(-15, 0);
         }
+
+        //Check if any monsters are sustaining attacks.
+        if(attackCollision()){
+            //cout << "    ...will apply appropriate damage" << endl;
+        }
     }
     else{
 
         //Once we reach the end of the map, then stop and display start menu for now.
         //displayStartMenu();
+
+        //I must find out how to end the game here.
     }
 }
 

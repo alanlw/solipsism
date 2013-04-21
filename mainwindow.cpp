@@ -57,6 +57,7 @@ void MainWindow::keyPressEvent(QKeyEvent *e){
 
     }
 }
+/*
 void MainWindow::mousePressEvent(QMouseEvent *e){
     if(e->button() == Qt::LeftButton){
         cout << "Left Mouse Button pressed" << endl;
@@ -64,6 +65,7 @@ void MainWindow::mousePressEvent(QMouseEvent *e){
     }
 
 }
+*/
 
 
 

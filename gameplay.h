@@ -51,6 +51,8 @@ public:
 
 protected:
 
+    void mousePressEvent(QMouseEvent *e);
+
     /**Return true if player is colliding with a monster.*/
     bool monsterCollision();
 

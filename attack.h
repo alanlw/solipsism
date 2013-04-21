@@ -13,17 +13,20 @@ public:
 
     int getAttackDuration() const;
     int getAttackCountDown() const;
+    int getAttackDamage() const;
 
     void setAttackDuration(int n);
     void setAttackCountDown(int n);
+    void setAttackDamage(int n);
 
 protected:
     QPixmap* attackImage;
 
-private:
-
     int attackDuration;
     int attackCountDown;
+    int attackDamage;
+
+private:
 
 };
 

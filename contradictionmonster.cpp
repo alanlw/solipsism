@@ -9,7 +9,7 @@ ContradictionMonster::ContradictionMonster(){
         cout << "Image failed to load." << endl;
     }
     setPixmap(*monsterImage);
-    hitPoints = 2;
+    hitPoints = 50;
     collisionDamage = 50;
 
 }

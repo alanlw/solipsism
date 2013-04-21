@@ -4,7 +4,6 @@
 using namespace std; //to make cout statements more convenient.
 
 PsychicAttack::PsychicAttack(){
-    cout << "In PsychicAttack constructor beginning" << endl;
 
     if(attackImage->load("graphics/attacks/psychic_attack.png")){
         cout << "Image loaded successfully" << endl;
@@ -16,7 +15,8 @@ PsychicAttack::PsychicAttack(){
 
 
     setPixmap(*attackImage);
-    cout << "In PsychicAttack constructor end" << endl;
+
+    attackDamage = 10;
 }
 PsychicAttack::~PsychicAttack(){
 

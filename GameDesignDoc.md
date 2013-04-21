@@ -18,30 +18,30 @@ player is living.
 ![Brain in Vat](/graphics/player/brain_in_vat.png)
 
 ###Monsters
-- Contradiction (Mujun)
-    - You cannot touch or defeat a contradiction.  
+- Contradiction
+    - Contradictions are very robust and will take multiple attacks.
+to destroy. Contact with a Contradiction reduces hitpoints.  
 
 	![Contradiction Monster](/graphics/monsters/contradiction.png)
 
 - Sound Arguments
     - Sound Arguments move in straight lines and turn at right angles 
 randomly triggered at fixed intervals by a timer. Contact with a player will
-reduce player health, and vacuum cleaner will reverse direction as if it hit
-a wall. Can be destroyed by player.  
+reduce player health, and Sound Argument will reverse direction as if it hit
+a contradiction. Can be destroyed by player.  
 
 	![Sound Argument Monster](/graphics/monsters/Sulfuric_Acid_Molecule_VdW.png)
 
 - Anxieties
     - Anxieties move randomly about the map. If they collide with an
-automatic vacuum cleaner, they die. Can be destroyed by player. Anxieties
+Contradiction Monster, they die. Can be destroyed by player. Anxieties
 generate Mean Words.  
 
 	![Anxiety Monster](/graphics/monsters/anxiety.png)
 
 - Mean Words
     - Mean Words moves toward player. If Mean Words hits player, player
-loses hit points. Player must attack agressive kid mutliple times to defeat 
-Mean Words.  
+loses hit points. Player must attack Mean Words mutliple times to defeat.  
 
 These words will appear as words, example:
 BAKABAKABAKABAKABAKA
