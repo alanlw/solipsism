@@ -15,6 +15,10 @@
 #include <QKeyEvent>
 #include <QMouseEvent>
 
+
+//Temporary
+#include "contradictionmonster.h"
+
 /** For controlling player avatar's movement*/
 enum MoveDirection {NONE, LEFT, RIGHT, UP, DOWN };
 
@@ -33,6 +37,9 @@ public:
     /**Function called when movement keys are pressed*/
     void movePlayer(MoveDirection dir);
 protected:
+
+    /**Return true if player is colliding with a monster.*/
+    bool monsterCollision();
 
 private:
     /** To display gameplay */

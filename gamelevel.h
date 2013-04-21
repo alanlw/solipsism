@@ -29,7 +29,7 @@ public:
     QPixmap * getBgImage();
 
     /**Get monsters*/
-    QVector<Monster*> getMonsters();
+    QVector<Monster*>& getMonsters();
 
 private:
     /**The Background Image*/

@@ -27,6 +27,6 @@ QPixmap* GameLevel::getBgImage(){
     return bgImage;
 }
 
-QVector<Monster*> GameLevel::getMonsters(){
+QVector<Monster*>& GameLevel::getMonsters(){
     return monsters;
 }
