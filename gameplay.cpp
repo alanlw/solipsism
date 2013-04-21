@@ -73,6 +73,7 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
     //When a player loses all lives, the game is over.
     connect(myPlayer, SIGNAL(allLivesLost()), this, SLOT(gameOver()));
 
+
     show();
 }
 
@@ -127,6 +128,13 @@ void GamePlay::movePlayer(MoveDirection dir){
     default:
         return;
     }
+}
+void GamePlay::clickAttack(const QPoint& pos){
+    QPoint myPoint = pos; //so errors don't complain.
+    cout << "ATTACK!! (" << myPoint.x() << ", " << myPoint.y() << ") " << endl;
+
+    //Now I will want to either create, or move some attack object here so I
+    //can do collision calculations with the other objects.
 }
 
 int GamePlay::getPlayerHitpoints(){

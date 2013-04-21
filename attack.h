@@ -3,6 +3,7 @@
 #include <QPixmap>
 #include <QGraphicsPixmapItem>
 #include <QObject>
+#include <QTimer>
 
 class Attack : public QObject, public QGraphicsPixmapItem {
 Q_OBJECT
@@ -12,6 +13,7 @@ public:
 
 protected:
     QPixmap* attackImage;
+    QTimer* attackTimer;
 
 private:
 

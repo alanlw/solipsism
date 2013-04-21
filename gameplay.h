@@ -3,7 +3,6 @@
 
 #include "gamelevel.h"
 #include "gameplayer.h"
-#include "attack.h"
 
 #include <QGraphicsScene>
 #include <QGraphicsView>
@@ -19,6 +18,7 @@
 
 //Temporary
 #include "contradictionmonster.h"
+#include "psychicattack.h"
 
 /** For controlling player avatar's movement*/
 enum MoveDirection {NONE, LEFT, RIGHT, UP, DOWN };
@@ -37,6 +37,9 @@ public:
 
     /**Function called when movement keys are pressed*/
     void movePlayer(MoveDirection dir);
+
+    /**Function called to attack with the mouse*/
+    void clickAttack(const QPoint& pos);
 
     /**Return myPlayer's hitpoints. Needed for ScoreWidget.*/
     int getPlayerHitpoints();

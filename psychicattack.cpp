@@ -11,7 +11,10 @@ PsychicAttack::PsychicAttack(){
     else{
         cout << "Image failed to load." << endl;
     }
+
+    attackTimer = new QTimer();
+    attackTimer->setInterval(5);
 }
 PsychicAttack::~PsychicAttack(){
-
+    delete attackTimer;
 }
