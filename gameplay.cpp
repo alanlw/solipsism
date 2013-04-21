@@ -1,6 +1,9 @@
 #include "gameplay.h"
 #include <qapplication.h>
 
+//Temporary
+#include "contradictionmonster.h"
+
 GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
 
 
@@ -44,6 +47,11 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
     myPlayer->setX(WINDOW_MAX_X);
     myPlayer->setY(WINDOW_MAX_Y);
 
+    //Let's try adding a contradiction monster too...
+    ContradictionMonster* myContradiction = new ContradictionMonster();
+    gamePlayScene->addItem(myContradiction);
+    myContradiction->setX(850);
+    myContradiction->setY(350);
 
     show();
 }
@@ -64,7 +72,8 @@ void GamePlay::show(){
 
 void GamePlay::movePlayer(MoveDirection dir){
 
-    cout << "Player: " << myPlayer->x() << ", viewRectX: " << viewRectX << endl;
+    //cout << "Player: " << myPlayer->x() << ", viewRectX: " << viewRectX << endl;
+
     switch(dir){
     case UP:
         if(myPlayer->y() - 10 >= 0 ){

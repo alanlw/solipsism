@@ -20,8 +20,8 @@ public:
     void setHitPoints(int n);
 
 private:
-    //For testing, of course.
-    QPixmap * testImage;
+    /**Image of the player*/
+    QPixmap * playerImage;
 
     /**Number of lives*/
     int lives;

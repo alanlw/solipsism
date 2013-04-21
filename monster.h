@@ -9,8 +9,8 @@ using namespace std;
 
 class Monster : public QGraphicsPixmapItem {
 public:
-    GamePlayer();
-    ~GamePlayer();
+    Monster();
+    virtual ~Monster();
 
     bool isAlive() const;
     int getHitPoints() const;
@@ -18,16 +18,16 @@ public:
     void setLives(int n);
     void setHitPoints(int n);
 
-private:
-    //For testing, of course.
+protected:
+    /**Image of the monster*/
     QPixmap * monsterImage;
 
     /**Is the monster alive?*/
-    bool isAlive;
+    bool alive;
     /**Number of hitpoints*/
     int hitPoints;
 
-protected:
+private:
 
 };
 #endif // MONSTER_H

@@ -1,4 +1,5 @@
 #include "gamelevel.h"
+#include "contradictionmonster.h"
 GameLevel::GameLevel(){
     bgImage = new QPixmap();
 }
@@ -24,4 +25,8 @@ GameLevel::~GameLevel(){
 
 QPixmap* GameLevel::getBgImage(){
     return bgImage;
+}
+
+QVector<Monster*> GameLevel::getMonsters(){
+    return monsters;
 }
