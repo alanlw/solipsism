@@ -5,17 +5,22 @@
 #include <QLabel>
 #include <QBoxLayout>
 
+#include "gameplay.h"
+
 class ScoreWidget : public QWidget {
     Q_OBJECT
 public:
-    ScoreWidget(QWidget *parent=0);
+    ScoreWidget(QWidget *parent=0, GamePlay* gp=0);
     ~ScoreWidget();
+
 protected:
 
 
 private:
 
     QWidget* parent_;
+    GamePlay* myGamePlay;
+
     QVBoxLayout* l;
 
     //Labels
@@ -28,6 +33,8 @@ private:
     QLabel* scoreLabel;
     QLabel* score;
 
+public slots:
+    void scoreChanged();
 
 };
 #endif // SCOREWIDGET_H

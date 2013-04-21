@@ -7,7 +7,7 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
 
 
     //setFocus();
-    cout << "Has focus? " << hasFocus() << endl;
+    //cout << "Has focus? " << hasFocus() << endl;
 
     //Load my level
     myLevel = new GameLevel("sample_map01.gif");
@@ -64,6 +64,8 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
         myLevel->getMonsters()[i]->setY(qrand()%300);
     }
 
+    score = 0;
+
     show();
 }
 
@@ -118,9 +120,28 @@ void GamePlay::movePlayer(MoveDirection dir){
     }
 }
 
+int GamePlay::getPlayerHitpoints(){
+    return myPlayer->getHitPoints();
+}
+
+int GamePlay::getPlayerLives(){
+    return myPlayer->getLives();
+}
+int GamePlay::getScore(){
+    return score;
+}
+
 bool GamePlay::monsterCollision(){
     for(int i = 0; i < myLevel->getMonsters().size(); i++){
         if (myPlayer->collidesWithItem(myLevel->getMonsters()[i])){
+
+
+            //Apply collision damage to player.
+            myPlayer->takeDamge(myLevel->getMonsters()[i]->getCollisionDamage());
+            if(!myPlayer->getInvincible()){
+                myPlayer->tempInvincible(15);
+            }
+
             return true;
         }
     }
@@ -133,6 +154,8 @@ bool GamePlay::monsterCollision(){
 
 void GamePlay::scrollWindow(){
 
+    //Will it make this game significantly slower to do this here?
+    emit updateScore();
 
     if (viewRectX<= myLevel->getBgImage()->width() - WINDOW_MAX_X*2){
         viewRectX++;

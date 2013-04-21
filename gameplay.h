@@ -36,6 +36,15 @@ public:
 
     /**Function called when movement keys are pressed*/
     void movePlayer(MoveDirection dir);
+
+    /**Return myPlayer's hitpoints. Needed for ScoreWidget.*/
+    int getPlayerHitpoints();
+    /**Return myPlayer's lives. Needed for ScoreWidget. */
+    int getPlayerLives();
+    /**Return the score. Needed for ScoreWidget*/
+    int getScore();
+
+
 protected:
 
     /**Return true if player is colliding with a monster.*/
@@ -69,9 +78,16 @@ private:
         GameLevel * myLevel;
 
 
+    /**Current game score*/
+    int score;
+
+
 public slots:
     /** Scroll the window according to scrollTimer*/
     void scrollWindow();
+
+signals:
+    void updateScore();
 
 
 };

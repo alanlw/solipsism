@@ -4,7 +4,7 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)  {
     
 
     myGamePlay = new GamePlay(this);
-    myScoreWidget = new ScoreWidget(this);
+    myScoreWidget = new ScoreWidget(this, myGamePlay);
 
     myLabel = new QLabel("Some game controls will go here.");
     mainLayout = new QVBoxLayout;
@@ -20,6 +20,9 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)  {
     mainLayout->addLayout(gameAndScore);
 
     setLayout(mainLayout);
+
+    //Connect the ScoreWidget to this
+    connect(myGamePlay, SIGNAL(updateScore()), myScoreWidget, SLOT(scoreChanged()));
 }
 MainWindow::~MainWindow()
 {

@@ -14,6 +14,7 @@ public:
 
     bool isAlive() const;
     int getHitPoints() const;
+    int getCollisionDamage() const;
 
     void setLives(int n);
     void setHitPoints(int n);
@@ -26,6 +27,8 @@ protected:
     bool alive;
     /**Number of hitpoints*/
     int hitPoints;
+    /**How much damage does the monster do to players?*/
+    int collisionDamage;
 
 private:
 

@@ -1,10 +1,10 @@
 #include <iostream>
 #include "scorewidget.h"
 
-ScoreWidget::ScoreWidget(QWidget *parent){
-    std::cout << "Start of ScoreWidget constructor" << std::endl;
+ScoreWidget::ScoreWidget(QWidget *parent, GamePlay* gp){
 
     parent_ = parent;
+    myGamePlay = gp;
     l = new QVBoxLayout(this);
 
     //Make my QLabels
@@ -46,8 +46,22 @@ ScoreWidget::ScoreWidget(QWidget *parent){
     l->addWidget(scoreLabel);
     l->addWidget(score);
 
-    std::cout << "End of ScoreWidget constructor" << std::endl;
 }
 ScoreWidget::~ScoreWidget(){
     delete l;
+}
+
+void ScoreWidget::scoreChanged(){
+
+    //Get the updated score from the GamePlay object that holds the score.
+    QString temp = QString::number(myGamePlay->getPlayerHitpoints());
+    hitpoints->setText(temp);
+
+    temp = QString::number(myGamePlay->getPlayerLives());
+    lives->setText(temp);
+
+    temp = QString::number(myGamePlay->getScore());
+    score->setText(temp);
+
+
 }
