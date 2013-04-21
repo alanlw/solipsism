@@ -11,8 +11,11 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
 
     //Load my level
     myLevel = new GameLevel("sample_map01.gif");
-    ContradictionMonster* myContradiction = new ContradictionMonster();
-    myLevel->getMonsters().push_back(myContradiction);
+
+    for (int n = 0; n < 15; n++){
+        ContradictionMonster* myContradiction = new ContradictionMonster();
+        myLevel->getMonsters().push_back(myContradiction);
+    }
 
     //We need a scene and a view to do graphics in QT
     gamePlayScene = new QGraphicsScene(this);
@@ -59,6 +62,7 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
         cout << qrand()%300 << endl;
 
         int sceneWidth = gamePlayScene->width();
+        cout << "sceneWidth = " << sceneWidth << endl;
         myLevel->getMonsters()[i]->setX(qrand()%sceneWidth + 800); //These are arbitrary values for now.
         //cout << "Scene width: " << gamePlayScene->width() << endl;
         myLevel->getMonsters()[i]->setY(qrand()%300);
@@ -94,7 +98,7 @@ void GamePlay::movePlayer(MoveDirection dir){
     if (monsterCollision()){
         //"Bump back" player a little bit so he can escape being locked in
         //collided position.
-        myPlayer->moveBy(-15, 0);
+        //myPlayer->moveBy(-15, 0);
         return;
     }
     //cout << "Player: " << myPlayer->x() << ", viewRectX: " << viewRectX << endl;
@@ -137,6 +141,9 @@ int GamePlay::getScore(){
 }
 
 bool GamePlay::monsterCollision(){
+    if(myPlayer->getInvincible()){
+        return false;
+    }
     for(int i = 0; i < myLevel->getMonsters().size(); i++){
         if (myPlayer->collidesWithItem(myLevel->getMonsters()[i])){
 
@@ -173,9 +180,9 @@ void GamePlay::scrollWindow(){
             myPlayer->moveBy(1,0);
         }
         else{
-            //"Bump back" player a little bit so he can escape being locked in
-            //collided position.
-            myPlayer->moveBy(-5, 0);
+            //"Bump back" player a little bit when he hits something while
+            //scrolling.
+            myPlayer->moveBy(-15, 0);
         }
     }
     else{

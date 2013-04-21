@@ -3,6 +3,7 @@
 
 #include "gamelevel.h"
 #include "gameplayer.h"
+#include "attack.h"
 
 #include <QGraphicsScene>
 #include <QGraphicsView>

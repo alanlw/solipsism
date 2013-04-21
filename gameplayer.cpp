@@ -44,7 +44,7 @@ void GamePlayer::takeDamge(int n){
         hitPoints -= n;
     }
     if (hitPoints <= 0){
-        lives = 0;
+        lives--;
         emit lifeLost();
 
         if (lives <= 0){
