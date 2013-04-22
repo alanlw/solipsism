@@ -41,7 +41,8 @@ generate Mean Words.
 
 - Mean Words
     - Mean Words moves toward player. If Mean Words hits player, player
-loses hit points. Player must attack Mean Words mutliple times to defeat.  
+loses hit points. Player must attack Mean Words mutliple times to defeat.
+Mean Words are projectiles launched by Anxieties.  
 
 These words will appear as words, example:
 BAKABAKABAKABAKABAKA
