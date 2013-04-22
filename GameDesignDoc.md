@@ -66,6 +66,10 @@ being uttered at the User's consciousness.
 - Players use W-A-S-D to control the movement of the avatar. The mouse is 
 used to launch psychic attacks.
 
+- Instructions will initially be put on the screen to show how the user 
+pause the game. The Start and Quit buttons are located at the top of the 
+scren. The Escape key will be used to pause the game. 
+
 ###Scoring
 
 - For each monster that is destroyed, points are awarded. Scores cannot go down.
