@@ -85,6 +85,10 @@ game if they want to try to get a better score.
 
 ###User Interface
 
+Players will be prompted for their name when the game starts, after they click
+ the "Start Game" button. After they enter their name, there will be a slight 
+delay, and game play will launch into the screen shown below. 
+
 Here is an image of the user interface:  
 
 ![Game Design Doc](/game_design_doc.jpg)
