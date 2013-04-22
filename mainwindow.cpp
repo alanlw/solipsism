@@ -6,11 +6,25 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)  {
     myGamePlay = new GamePlay(this);
     myScoreWidget = new ScoreWidget(this, myGamePlay);
 
-    myLabel = new QLabel("Some game controls will go here.");
+    myLabel = new QLabel("Display Level Status Here.");
+
+    startButton = new QPushButton("Start Game", this);
+    quitButton = new QPushButton("Quit", this);
+    connect( quitButton, SIGNAL(clicked()), qApp, SLOT(quit()) );
+
+
     mainLayout = new QVBoxLayout;
     gameAndScore = new QHBoxLayout;
+    gameControls = new QHBoxLayout;
 
-    mainLayout->addWidget(myLabel);
+
+    gameControls->addWidget(startButton);
+        startButton->setFixedWidth(300);
+    gameControls->addWidget(quitButton);
+        quitButton->setFixedWidth(300);
+    gameControls->addWidget(myLabel);
+
+    mainLayout->addLayout(gameControls);
 
     myGamePlay->setFixedHeight(600);
     myGamePlay->setFixedWidth(600);

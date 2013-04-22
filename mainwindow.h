@@ -36,6 +36,10 @@ private:
     ScoreWidget* myScoreWidget;
 
     QLabel *myLabel;
+    QHBoxLayout* gameControls;
+    QPushButton *startButton;
+    QPushButton *quitButton;
+
     QVBoxLayout *mainLayout;
 
 };
