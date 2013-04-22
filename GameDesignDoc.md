@@ -70,6 +70,15 @@ used to launch psychic attacks.
 pause the game. The Start and Quit buttons are located at the top of the 
 scren. The Escape key will be used to pause the game. 
 
+- Players can restart the game by pressing the "Start" button again, even 
+after the game is already started.
+
+- When players die, a death screen is displayed. Players must click the 
+"Start" button to try playing again.
+
+- The game will become progressively more difficult by speeding up and the
+ spawning of more monsters.
+
 ###Scoring
 
 - For each monster that is destroyed, points are awarded. Scores cannot go down.
@@ -88,6 +97,8 @@ game if they want to try to get a better score.
 Players will be prompted for their name when the game starts, after they click
  the "Start Game" button. After they enter their name, there will be a slight 
 delay, and game play will launch into the screen shown below. 
+
+
 
 Here is an image of the user interface:  
 
