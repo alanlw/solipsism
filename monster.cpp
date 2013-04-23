@@ -6,6 +6,7 @@ Monster::Monster(){
     alive = true;
     hitPoints = 1;
     collisionDamage = 0;
+    scoreVal = 0;
 
     //Monster is born mortal
     invincible = 0;
@@ -23,6 +24,9 @@ int Monster::getHitPoints() const{
 }
 int Monster::getCollisionDamage() const{
     return collisionDamage;
+}
+int Monster::getScoreVal() const{
+    return scoreVal;
 }
 int Monster::getInvincible() const{
     return invincible;

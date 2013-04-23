@@ -11,6 +11,7 @@ ContradictionMonster::ContradictionMonster(){
     setPixmap(*monsterImage);
     hitPoints = 50;
     collisionDamage = 50;
+    scoreVal = 10;
 
 }
 ContradictionMonster::~ContradictionMonster(){

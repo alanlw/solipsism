@@ -18,6 +18,7 @@ public:
     bool isAlive() const;
     int getHitPoints() const;
     int getCollisionDamage() const;
+    int getScoreVal() const;
     int getInvincible() const;
 
     void setLives(int n);
@@ -36,6 +37,8 @@ protected:
     int hitPoints;
     /**How much damage does the monster do to players?*/
     int collisionDamage;
+    /**How many points does the player get for defeating this monster?*/
+    int scoreVal;
 
     /**For temporary invincibility after hitting an obstacle.
        will count down to 0 (no longer invincible) with monsterTimer.*/

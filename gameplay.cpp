@@ -11,6 +11,8 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
 
 
     myPlayer = new GamePlayer();
+
+    //This is temporary, I need to think of a better way to store/access/etc. level data.
     //Load my level
     myLevel = new GameLevel("sample_map01.gif");
 
@@ -189,7 +191,7 @@ void GamePlay::clickAttack(QMouseEvent *e){
     //from MainWindow, but I haven't been able to successfully get it from
     //somewhere else yet (nor do I know I would want to)
 
-    cout << "ATTACK!! (" << myPoint.x() << ", " << myPoint.y() << ") " << endl;
+    //cout << "ATTACK!! (" << myPoint.x() << ", " << myPoint.y() << ") " << endl;
 
     //Now I will want to either create, or move some attack object here so I
     //can do collision calculations with the other objects.
@@ -253,6 +255,8 @@ bool GamePlay::attackCollision(){
                 //Check if this kills this monster
                 if(myLevel->getMonsters()[j]->getHitPoints() <= 0){
                     gamePlayScene->removeItem(myLevel->getMonsters()[j]);
+                    score += myLevel->getMonsters()[j]->getScoreVal();
+                    delete myLevel->getMonsters()[j]; //Will this cause errors?
                     myLevel->getMonsters().remove(j);
                     return true;
                 }

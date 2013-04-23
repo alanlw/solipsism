@@ -145,7 +145,13 @@ public slots:
     void gameOver();
 
 signals:
+    /**Emit this signal so that the ScoreWidget can check the GamePlay widget
+      for score updates*/
     void updateScore();
+
+    /**Emit this signal when a level is cleared so that a new level can be
+      loaded.*/
+    void levelCleared();
 
 
 };
