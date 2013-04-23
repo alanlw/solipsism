@@ -18,29 +18,29 @@ using namespace std;
 class GameLevel{
 
 public:
-    /**Default constructor*/
+    /** Default constructor*/
     GameLevel();
-    /**Constructor with path to level image file*/
+    /** Constructor with path to level image file*/
     GameLevel(QString imageFileName, QString myLevelName = "New Level");
-    /**Destructor*/
+    /** Destructor*/
     ~GameLevel();
 
 
     // Accessor Functions
     //=========================================================================
-    /**Get bgImgae*/
+    /** Get bgImgae*/
     QPixmap * getBgImage();
-    /**Get monsters*/
+    /** Get monsters*/
     QVector<Monster*>& getMonsters();
 
 private:
-    /**The Level Name*/
+    /** The Level Name*/
     QString levelName;
 
-    /**The Background Image*/
+    /** The Background Image*/
     QPixmap * bgImage;
 
-    /**Pointer to monsters in level*/
+    /** Pointer to monsters in level*/
     QVector<Monster*> monsters;
 
 protected:

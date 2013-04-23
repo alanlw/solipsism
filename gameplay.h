@@ -35,9 +35,10 @@ public:
 
     void show();
 
+    //=========================================================================
     //Game Control Related Functions
     //=========================================================================
-    /*
+    /**
       Load the specified level into the gamePlayScene.
       @param level A pointer to the level to be loaded.
     */
@@ -45,27 +46,28 @@ public:
     void pauseGame();
     void unPauseGame();
 
+    //=========================================================================
     //Functions Triggered by User Input
     //=========================================================================
 
-    /**Function called when movement keys are pressed*/
+    /** Function called when movement keys are pressed*/
     void movePlayer(MoveDirection dir);
-    /**Function called to attack with the mouse*/
+    /** Function called to attack with the mouse*/
     void clickAttack(QMouseEvent *e);
 
-
+    //=========================================================================
     //Accessor Functions
     //=========================================================================
 
-    /**Return myPlayer's hitpoints. Needed for ScoreWidget.*/
+    /** @return Return myPlayer's hitpoints. Needed for ScoreWidget.*/
     int getPlayerHitpoints();
-    /**Return myPlayer's lives. Needed for ScoreWidget. */
+    /** @return Return myPlayer's lives. Needed for ScoreWidget. */
     int getPlayerLives();
-    /**Return the score. Needed for ScoreWidget*/
+    /** @return Return the score. Needed for ScoreWidget*/
     int getScore();
-    /**Is a level currently loaded?*/
+    /** @return Is a level currently loaded?*/
     bool getLevelLoaded();
-    /**Is the game paused?*/
+    /** @return Is the game paused?*/
     bool getGamePaused();
 
 
@@ -73,10 +75,10 @@ protected:
 
     void mousePressEvent(QMouseEvent *e);
 
-    /**Return true if player is colliding with a monster.*/
+    /** @return Return true if player is colliding with a monster.*/
     bool monsterCollision();
 
-    /**Return true if attack is colliding with a monster Will need to write this later...*/
+    /** @return Return true if attack is colliding with a monster Will need to write this later...*/
     bool attackCollision();
 
 
@@ -90,9 +92,9 @@ private:
 
     /** What the user sees */
     QGraphicsView *gamePlayView;
-    /**x coordinate of scrolling view*/
+    /** x coordinate of scrolling view*/
     int viewRectX;
-    /**y coordinate of scrolling view*/
+    /** y coordinate of scrolling view*/
     int viewRectY; //I'm probably not going to be updating this.
 
     /** To hold my level data*/
@@ -100,12 +102,12 @@ private:
         //Temporary, just to make this easier to test.
         //GameLevel * myLevel;
 
-    /**Is the level loaded?*/
+    /** @return Is the level loaded?*/
     bool levelLoaded;
-    /**Is the game paused?*/
+    /** @return Is the game paused?*/
     bool gamePaused;
 
-    /**The index of the level the player is playing*/
+    /** @return The index of the level the player is playing*/
     int levelPlaying;
 
 
@@ -114,14 +116,14 @@ private:
     //Animation Related Fields
     //=========================================================================
 
-    /**For scrolling animation*/
+    /** For scrolling animation*/
     QTimer* scrollTimer;
-    /**For attacking animation*/
+    /** For attacking animation*/
     QTimer* attackTimer;
 
     //Objects in the Game
     //=========================================================================
-    /**Store the attacks that I "summon"*/
+    /** Store the attacks that I "summon"*/
     QVector<Attack*> myAttacks;
 
     /** Data of player*/
@@ -132,7 +134,7 @@ private:
     //Score-Keeping
     //=========================================================================
 
-    /**Current game score*/
+    /** Current game score*/
     int score;
 
 
@@ -142,6 +144,9 @@ public slots:
 
     /** Animate attacks according to attackTimer*/
     void animateAttacks();
+
+    /** Function called by timer to move monsters*/
+    void animateMonsters();
 
     /** When the player clicks the start button, launch game appropriately.*/
     void launchGame();
@@ -153,11 +158,11 @@ public slots:
     void nextLevel();
 
 signals:
-    /**Emit this signal so that the ScoreWidget can check the GamePlay widget
+    /** Emit this signal so that the ScoreWidget can check the GamePlay widget
       for score updates*/
     void updateScore();
 
-    /**Emit this signal when a level is cleared so that a new level can be
+    /** Emit this signal when a level is cleared so that a new level can be
       loaded.*/
     void levelCleared();
 

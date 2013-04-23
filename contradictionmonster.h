@@ -5,7 +5,9 @@
 
 class ContradictionMonster : public Monster{
 public:
+    /** Constructor*/
     ContradictionMonster();
+    /** Destructor*/
     ~ContradictionMonster();
 
 protected:
