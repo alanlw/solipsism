@@ -363,6 +363,11 @@ void GamePlay::mousePressEvent(QMouseEvent *e){
 ----------------------------------------------*/
 
 void GamePlay::scrollWindow(){
+    //Is this necessary? I am not sure if I have fully solved the level
+    //transition crash.
+    if(!getLevelLoaded()){
+        return;
+    }
 
     //Will it make this game significantly slower to do this here?
     emit updateScore();
@@ -400,7 +405,10 @@ void GamePlay::scrollWindow(){
 }
 
 void GamePlay::animateAttacks(){
-    // Must connect this.
+    //Will this be necessary?
+    if(!getLevelLoaded()){
+        return;
+    }
 
     //For every attack...
     for(int i = 0; i < myAttacks.size(); i++){
@@ -429,6 +437,12 @@ void GamePlay::animateAttacks(){
 }
 void GamePlay::animateMonsters(){
     //Write this so that monsters are animated via the scroll timer!
+    //cout << "In animateMonsters!()" << endl;
+
+   //Loop through monsters and call move() function on each.
+    for(int j = 0; j < myLevels[levelPlaying]->getMonsters().size(); j++){
+        myLevels[levelPlaying]->getMonsters()[j]->move();
+    }
 }
 
 void GamePlay::launchGame(){

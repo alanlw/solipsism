@@ -13,6 +13,13 @@ public:
     /** Destructor*/
     ~SoundArgumentMonster();
 
+    //=========================================================================
+    // Animation Functions
+    //=========================================================================
+    /** Overloaded move() function. Makes SoundArgumentMonster move in
+        random cardinal directions about playing area. */
+    void move();
+
 protected:
 
 private:
