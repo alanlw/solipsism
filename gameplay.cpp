@@ -5,10 +5,11 @@
 GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
 
 
-
     //setFocus();
     //cout << "Has focus? " << hasFocus() << endl;
 
+
+    myPlayer = new GamePlayer();
     //Load my level
     myLevel = new GameLevel("sample_map01.gif");
 
@@ -19,10 +20,10 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
 
     //We need a scene and a view to do graphics in QT
     gamePlayScene = new QGraphicsScene(this);
-
     gamePlayView = new QGraphicsView( gamePlayScene, this );
 
 
+    levelLoaded = false;
     viewRectX = 0;
     viewRectY = 0;
     gamePlayView->setSceneRect(viewRectX, viewRectY, WINDOW_MAX_X*2, WINDOW_MAX_Y*2);
@@ -48,37 +49,10 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
     connect(scrollTimer, SIGNAL(timeout()), this, SLOT(scrollWindow()));
     //For attack animations
     connect(attackTimer, SIGNAL(timeout()), this, SLOT(animateAttacks()));
-
-
-    //Load Player onto Screen
-    myPlayer = new GamePlayer();
-    gamePlayScene->addItem(myPlayer);
-
-    myPlayer->setX(WINDOW_MAX_X);
-    myPlayer->setY(WINDOW_MAX_Y);
-
-    //Load Monsters
-
-    cout << "Are there monsters to add?" << endl;
-    for(int i = 0; i < myLevel->getMonsters().size(); i++){
-        cout << "There are " << i+1 << " monsters to add." << endl;
-        gamePlayScene->addItem(myLevel->getMonsters()[i]);
-
-        cout << qrand()%300 << endl;
-        cout << qrand()%300 << endl;
-
-        int sceneWidth = gamePlayScene->width();
-        cout << "sceneWidth = " << sceneWidth << endl;
-        myLevel->getMonsters()[i]->setX(qrand()%sceneWidth + 800); //These are arbitrary values for now.
-        //cout << "Scene width: " << gamePlayScene->width() << endl;
-        myLevel->getMonsters()[i]->setY(qrand()%300);
-    }
-
-    score = 0;
-
     //When a player loses all lives, the game is over.
     connect(myPlayer, SIGNAL(allLivesLost()), this, SLOT(gameOver()));
 
+    score = 0;
 
     show();
 }
@@ -93,9 +67,45 @@ GamePlay::~GamePlay(){
     delete myLevel;
 }
 void GamePlay::show(){
+    gamePlayView->show();
+}
+
+bool GamePlay::loadLevel(GameLevel *level){
+
+
+    if(level == NULL){
+        return false;
+    }
+
+    levelLoaded = true;
+
+    //Load Player onto Screen
+    gamePlayScene->addItem(myPlayer);
+
+    myPlayer->setX(WINDOW_MAX_X);
+    myPlayer->setY(WINDOW_MAX_Y);
+
+    //Load Monsters
+
+    cout << "Are there monsters to add?" << endl;
+    for(int i = 0; i < level->getMonsters().size(); i++){
+        cout << "There are " << i+1 << " monsters to add." << endl;
+        gamePlayScene->addItem(level->getMonsters()[i]);
+
+        cout << qrand()%300 << endl;
+        cout << qrand()%300 << endl;
+
+        int sceneWidth = gamePlayScene->width();
+        cout << "sceneWidth = " << sceneWidth << endl;
+        level->getMonsters()[i]->setX(qrand()%sceneWidth + 800); //These are arbitrary values for now.
+        //cout << "Scene width: " << gamePlayScene->width() << endl;
+        level->getMonsters()[i]->setY(qrand()%300);
+    }
+
     scrollTimer->start();
     attackTimer->start();
-    gamePlayView->show();
+
+    return true;
 }
 
 void GamePlay::movePlayer(MoveDirection dir){
@@ -172,6 +182,9 @@ int GamePlay::getPlayerLives(){
 int GamePlay::getScore(){
     return score;
 }
+bool GamePlay::getLevelLoaded(){
+    return levelLoaded;
+}
 
 bool GamePlay::monsterCollision(){
     if(myPlayer->getInvincible()){
@@ -223,8 +236,11 @@ bool GamePlay::attackCollision(){
 
 
 void GamePlay::mousePressEvent(QMouseEvent *e){
+    if(!getLevelLoaded()){
+        return;
+    }
     if(e->button() == Qt::LeftButton){
-        cout << "Left Mouse Button pressed" << endl;
+        //cout << "Left Mouse Button pressed" << endl;
         this->clickAttack(e);
     }
 
@@ -295,6 +311,15 @@ void GamePlay::animateAttacks(){
             }
         }
     }
+}
+
+void GamePlay::launchGame(){
+    if (levelLoaded){
+        cout << "A level is already loaded." << endl;
+        return;
+    }
+    cout << "Game launched." << endl;
+    loadLevel(myLevel);
 }
 
 void GamePlay::gameOver(){

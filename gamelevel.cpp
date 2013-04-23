@@ -3,7 +3,7 @@
 GameLevel::GameLevel(){
     bgImage = new QPixmap();
 }
-GameLevel::GameLevel(QString imageFileName){
+GameLevel::GameLevel(QString imageFileName, QString myLevelName){
     bgImage = new QPixmap;
 
     QString imagePath;
@@ -17,6 +17,8 @@ GameLevel::GameLevel(QString imageFileName){
     else{
         cout << "Image failed to load." << endl;
     }
+
+    levelName = myLevelName;
 }
 
 GameLevel::~GameLevel(){

@@ -35,11 +35,25 @@ public:
 
     void show();
 
+    //Game Control Related Functions
+    //=========================================================================
+    /*
+      Load the specified level into the gamePlayScene.
+      @param level A pointer to the level to be loaded.
+    */
+    bool loadLevel(GameLevel* level);
+
+    //Functions Triggered by User Input
+    //=========================================================================
+
     /**Function called when movement keys are pressed*/
     void movePlayer(MoveDirection dir);
-
     /**Function called to attack with the mouse*/
     void clickAttack(QMouseEvent *e);
+
+
+    //Accessor Functions
+    //=========================================================================
 
     /**Return myPlayer's hitpoints. Needed for ScoreWidget.*/
     int getPlayerHitpoints();
@@ -47,6 +61,8 @@ public:
     int getPlayerLives();
     /**Return the score. Needed for ScoreWidget*/
     int getScore();
+    /**Is a level currently loaded?*/
+    bool getLevelLoaded();
 
 
 protected:
@@ -65,7 +81,6 @@ private:
     /** To display gameplay */
     QGraphicsScene* gamePlayScene;
 
-
     /** What the user sees */
     QGraphicsView *gamePlayView;
     /**x coordinate of scrolling view*/
@@ -73,22 +88,36 @@ private:
     /**y coordinate of scrolling view*/
     int viewRectY; //I'm probably not going to be updating this.
 
+    /** To hold my level data*/
+    QVector<GameLevel*> myLevels;
+        //Temporary, just to make this easier to test.
+        GameLevel * myLevel;
+
+    bool levelLoaded;
+
+
+
+
+    //Animation Related Fields
+    //=========================================================================
+
     /**For scrolling animation*/
     QTimer* scrollTimer;
     /**For attacking animation*/
     QTimer* attackTimer;
 
+    //Objects in the Game
+    //=========================================================================
     /**Store the attacks that I "summon"*/
     QVector<Attack*> myAttacks;
 
     /** Data of player*/
     GamePlayer* myPlayer;
 
-    /** To hold my level data*/
-    QVector<GameLevel*> myLevels;
-        //Temporary, just to make this easier to test.
-        GameLevel * myLevel;
 
+
+    //Score-Keeping
+    //=========================================================================
 
     /**Current game score*/
     int score;
@@ -100,6 +129,9 @@ public slots:
 
     /** Animate attacks according to attackTimer*/
     void animateAttacks();
+
+    /** When the player clicks the start button, launch game appropriately.*/
+    void launchGame();
 
     /** When player loses lives, stop the game.*/
     void gameOver();

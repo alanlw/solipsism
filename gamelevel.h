@@ -21,17 +21,22 @@ public:
     /**Default constructor*/
     GameLevel();
     /**Constructor with path to level image file*/
-    GameLevel(QString imageFileName);
+    GameLevel(QString imageFileName, QString myLevelName = "New Level");
     /**Destructor*/
     ~GameLevel();
 
+
+    // Accessor Functions
+    //=========================================================================
     /**Get bgImgae*/
     QPixmap * getBgImage();
-
     /**Get monsters*/
     QVector<Monster*>& getMonsters();
 
 private:
+    /**The Level Name*/
+    QString levelName;
+
     /**The Background Image*/
     QPixmap * bgImage;
 

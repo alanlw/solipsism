@@ -9,6 +9,8 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)  {
     myLabel = new QLabel("Display Level Status Here.");
 
     startButton = new QPushButton("Start Game", this);
+    connect( startButton, SIGNAL(clicked()), myGamePlay, SLOT(launchGame()));
+
     quitButton = new QPushButton("Quit", this);
     connect( quitButton, SIGNAL(clicked()), qApp, SLOT(quit()) );
 
