@@ -12,21 +12,29 @@ using namespace std;
 class Monster : public QObject, public QGraphicsPixmapItem {
 Q_OBJECT
 public:
+    //=========================================================================
+    // Constructors and Destructor
+    //=========================================================================
+
     /** Constructor*/
     Monster();
     /** Destructor*/
     virtual ~Monster();
 
-    /** Is the Monster alive?*/
+    //=========================================================================
+    // Accessor and Mutator Functions
+    //=========================================================================
+
+    /** @return Is the Monster alive?*/
     bool isAlive() const;
-    /** Get the Monster's hitpoints*/
+    /** @return Get the Monster's hitpoints*/
     int getHitPoints() const;
-    /** Get the amount of damage the Monster does when it collides
+    /** @return Get the amount of damage the Monster does when it collides
       with a player*/
     int getCollisionDamage() const;
-    /** Get the number of points scored by vanquishing this Monster.*/
+    /** @return Get the number of points scored by vanquishing this Monster.*/
     int getScoreVal() const;
-    /** Is this monster temporarily invincible because it was just attacked?*/
+    /** @return Is this monster temporarily invincible because it was just attacked?*/
     int getInvincible() const;
 
 
@@ -34,8 +42,15 @@ public:
     void setHitPoints(int n);
 
     /** Apply damage to the Monster*/
+
+    //=========================================================================
+    // Functions activated by interactions with other in-game objects.
+    //=========================================================================
+    /** @post Player takes n damage.
+        @param n The amount of damage the player takes */
     void takeDamge(int n);
-    /** Make monster temporarily invincible (after taking damage)
+    /** @post Player will not take damage temporarily.
+        Make monster temporarily invincible (after taking damage)
         so that it takes some effort to defeat it.*/
     void tempInvincible(int numCycles);
 
@@ -66,7 +81,8 @@ protected:
 private:
 
 private slots:
-    /** According to the monsterTimer, reduce invincible*/
+    /** @post reduce the counter before Monster is no longer invincible.
+        According to the monsterTimer, reduce invincible*/
     void reduceInvincible();
 
 };
