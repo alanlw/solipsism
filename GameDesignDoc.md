@@ -25,10 +25,7 @@ to destroy. Contact with a Contradiction reduces hitpoints.
 	![Contradiction Monster](/graphics/monsters/contradiction.png)
 
 - Sound Arguments
-    - Sound Arguments move in straight lines and turn at right angles 
-randomly triggered at fixed intervals by a timer. Contact with a player will
-reduce player health, and Sound Argument will reverse direction as if it hit
-a contradiction. Can be destroyed by player.  
+    - Sound Arguments move in straight lines and turn at right angles randomly triggered at fixed intervals by a timer. Contact with a player will reduce player health. Will reverse direction if hit by a Contradiction. Can be destroyed by player.  
 
 	![Sound Argument Monster](/graphics/monsters/Sulfuric_Acid_Molecule_VdW.png)
 

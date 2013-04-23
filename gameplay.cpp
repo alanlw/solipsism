@@ -53,12 +53,6 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
     gamePlayScene = new QGraphicsScene(this);
     gamePlayView = new QGraphicsView( gamePlayScene, this );
 
-    pauseMessage = new QGraphicsTextItem();
-    QFont labelFont("Arial", 24, QFont::Bold);
-    pauseMessage->setPlainText("Game Paused! \nPress ESC again to continue.");
-    pauseMessage->setFont(labelFont);
-    gamePlayScene->addItem(pauseMessage);
-    pauseMessage->hide();
 
 
     levelLoaded = false;
@@ -126,7 +120,10 @@ void GamePlay::show(){
 }
 
 bool GamePlay::loadLevel(GameLevel *level){
-    cout << "Level loaded: " << levelPlaying << endl;
+
+    //Set levelLoaded to false until we finish loading content.
+    levelLoaded = false;
+
     if(level == NULL){
         return false;
     }
@@ -146,7 +143,6 @@ bool GamePlay::loadLevel(GameLevel *level){
     myPlayer->setX(WINDOW_MAX_X - 200);
     myPlayer->setY(WINDOW_MAX_Y);
 
-    levelLoaded = true;
 
 
     //Load Monsters
@@ -169,6 +165,9 @@ bool GamePlay::loadLevel(GameLevel *level){
     scrollTimer->start();
     attackTimer->start();
 
+    levelLoaded = true;
+    cout << "Level loaded: " << levelPlaying << endl;
+
     return true;
 }
 
@@ -177,6 +176,13 @@ void GamePlay::pauseGame(){
     if(!levelLoaded){
         return;
     }
+
+
+    pauseMessage = new QGraphicsTextItem();
+    QFont labelFont("Arial", 24, QFont::Bold);
+    pauseMessage->setPlainText("Game Paused! \nPress ESC again to continue.");
+    pauseMessage->setFont(labelFont);
+    gamePlayScene->addItem(pauseMessage);
     gamePaused = true;
     scrollTimer->stop();
     attackTimer->stop();
@@ -303,6 +309,9 @@ bool GamePlay::monsterCollision(){
 }
 
 bool GamePlay::attackCollision(){
+    if(!getLevelLoaded()){
+        return false;
+    }
     for(int i = 0; i < myAttacks.size(); i++){
         for(int j = 0; j < myLevels[levelPlaying]->getMonsters().size(); j++){
             if(myAttacks[i]->collidesWithItem(myLevels[levelPlaying]->getMonsters()[j])){
