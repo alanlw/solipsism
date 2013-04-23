@@ -1,5 +1,6 @@
 #include "gameplay.h"
 #include <qapplication.h>
+#include <QGraphicsTextItem> //For pauses messages, etc.
 
 
 GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
@@ -21,6 +22,8 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
     //We need a scene and a view to do graphics in QT
     gamePlayScene = new QGraphicsScene(this);
     gamePlayView = new QGraphicsView( gamePlayScene, this );
+
+    pauseMessage = new QGraphicsTextItem();
 
 
     levelLoaded = false;
@@ -51,6 +54,9 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
     connect(attackTimer, SIGNAL(timeout()), this, SLOT(animateAttacks()));
     //When a player loses all lives, the game is over.
     connect(myPlayer, SIGNAL(allLivesLost()), this, SLOT(gameOver()));
+
+    levelLoaded = false;
+    gamePaused = false;
 
     score = 0;
 
@@ -106,6 +112,33 @@ bool GamePlay::loadLevel(GameLevel *level){
     attackTimer->start();
 
     return true;
+}
+
+void GamePlay::pauseGame(){
+    //Launch some window too?
+    if(!levelLoaded){
+        return;
+    }
+    gamePaused = true;
+    scrollTimer->stop();
+    attackTimer->stop();
+
+    QFont labelFont("Arial", 24, QFont::Bold);
+    pauseMessage->setPlainText("Game Paused! \nPress ESC again to continue.");
+    pauseMessage->setFont(labelFont);
+    gamePlayScene->addItem(pauseMessage);
+    pauseMessage->setX(viewRectX);
+    pauseMessage->setY(100);
+    pauseMessage->show();
+}
+void GamePlay::unPauseGame(){
+    if(!levelLoaded){
+        return;
+    }
+    pauseMessage->hide();
+    gamePaused = false;
+    scrollTimer->start();
+    attackTimer->start();
 }
 
 void GamePlay::movePlayer(MoveDirection dir){
@@ -185,6 +218,9 @@ int GamePlay::getScore(){
 bool GamePlay::getLevelLoaded(){
     return levelLoaded;
 }
+bool GamePlay::getGamePaused(){
+    return gamePaused;
+}
 
 bool GamePlay::monsterCollision(){
     if(myPlayer->getInvincible()){
@@ -237,6 +273,11 @@ bool GamePlay::attackCollision(){
 
 void GamePlay::mousePressEvent(QMouseEvent *e){
     if(!getLevelLoaded()){
+        //Don't register attacks if a level isn't loaded.
+        return;
+    }
+    if(getGamePaused()){
+        //Don't register attacks if the game is paused.
         return;
     }
     if(e->button() == Qt::LeftButton){

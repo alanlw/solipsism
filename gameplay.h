@@ -42,6 +42,8 @@ public:
       @param level A pointer to the level to be loaded.
     */
     bool loadLevel(GameLevel* level);
+    void pauseGame();
+    void unPauseGame();
 
     //Functions Triggered by User Input
     //=========================================================================
@@ -63,6 +65,8 @@ public:
     int getScore();
     /**Is a level currently loaded?*/
     bool getLevelLoaded();
+    /**Is the game paused?*/
+    bool getGamePaused();
 
 
 protected:
@@ -81,6 +85,9 @@ private:
     /** To display gameplay */
     QGraphicsScene* gamePlayScene;
 
+    /** To display a pause message in game*/
+    QGraphicsTextItem * pauseMessage;
+
     /** What the user sees */
     QGraphicsView *gamePlayView;
     /**x coordinate of scrolling view*/
@@ -94,6 +101,7 @@ private:
         GameLevel * myLevel;
 
     bool levelLoaded;
+    bool gamePaused;
 
 
 

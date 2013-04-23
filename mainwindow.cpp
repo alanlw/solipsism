@@ -47,7 +47,16 @@ MainWindow::~MainWindow()
 }
 void MainWindow::keyPressEvent(QKeyEvent *e){
     if(e->key() == Qt::Key_Escape){
-        cout << "You pressed ESC" << endl;
+        if(myGamePlay->getGamePaused()){
+            cout << "Resuming gameplay." << endl;
+            myGamePlay->unPauseGame();
+        }
+        else{
+            cout << "You pressed ESC to pause the game." << endl;
+            myGamePlay->pauseGame();
+        }
+
+        return;
     }
 
     switch (e->key()){
