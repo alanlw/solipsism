@@ -7,7 +7,12 @@
 
 class PsychicAttack : public Attack{
 public:
+    //=========================================================================
+    // Constructors and Destructor
+    //=========================================================================
+    /** Constructor*/
     PsychicAttack();
+    /** Destructor*/
     ~PsychicAttack();
 protected:
 

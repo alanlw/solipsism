@@ -19,27 +19,38 @@ class MainWindow : public QWidget {
     Q_OBJECT
     
 public:
-    /**Constructor*/
+    //=========================================================================
+    // Constructors and Destructor
+    //=========================================================================
+
+    /** Constructor*/
     explicit MainWindow(QWidget *parent = 0);
-    /**Destructor*/
+    /** Destructor*/
     ~MainWindow();
 
 
 protected:
+    /** Overloaded function to send QKeyEvent to GamePlay widget*/
     void keyPressEvent(QKeyEvent *e);
-    //void mousePressEvent(QMouseEvent *e);
     
 private:
-
+    /** Layout to hold actual gameplay and score*/
     QHBoxLayout* gameAndScore;
+    /** GamePlay widget with actual gameplay*/
     GamePlay* myGamePlay;
+    /** ScoreWidget that holds scores generated from GamePlay widget*/
     ScoreWidget* myScoreWidget;
 
+    /** Label to display game status messages*/
     QLabel *myLabel;
+    /** Layout for game controls*/
     QHBoxLayout* gameControls;
+    /** Start Button*/
     QPushButton *startButton;
+    /** Quit Button*/
     QPushButton *quitButton;
 
+    /** Main Layout*/
     QVBoxLayout *mainLayout;
 
 };

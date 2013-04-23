@@ -96,6 +96,7 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
     //For attack animations
     connect(attackTimer, SIGNAL(timeout()), this, SLOT(animateAttacks()));
     //When a player loses all lives, the game is over.
+    connect(scrollTimer, SIGNAL(timeout()), this, SLOT(animateMonsters()));
     connect(myPlayer, SIGNAL(allLivesLost()), this, SLOT(gameOver()));
 
     levelLoaded = false;
@@ -425,6 +426,9 @@ void GamePlay::animateAttacks(){
             }
         }
     }
+}
+void GamePlay::animateMonsters(){
+    //Write this so that monsters are animated via the scroll timer!
 }
 
 void GamePlay::launchGame(){
