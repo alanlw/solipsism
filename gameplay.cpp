@@ -10,22 +10,55 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
     //cout << "Has focus? " << hasFocus() << endl;
 
 
-    myPlayer = new GamePlayer();
 
-    //This is temporary, I need to think of a better way to store/access/etc. level data.
+
+    //=========================================================================
+    //This is temporary, I need to think of a better way to store/access/etc.
+    //level data.
+    //
     //Load my level
-    myLevel = new GameLevel("sample_map01.gif");
+    GameLevel * myLevel = new GameLevel("sample_map01.gif");
+    for (int n = 0; n < 12; n++){
+        ContradictionMonster* myContradiction = new ContradictionMonster();
+        myLevel->getMonsters().push_back(myContradiction);
+    }
+    myLevels.push_back(myLevel);
+    cout << "Level 0 Loaded." << endl;
+
+
+    myLevel = NULL;
+    myLevel = new GameLevel("sample_map02.gif");
 
     for (int n = 0; n < 15; n++){
         ContradictionMonster* myContradiction = new ContradictionMonster();
         myLevel->getMonsters().push_back(myContradiction);
     }
+    myLevels.push_back(myLevel);
+    cout << "Level 1 Loaded." << endl;
+
+    myLevel = NULL;
+    myLevel = new GameLevel("sample_map03.jpg");
+    //myLevel = new GameLevel("sample_map03.jpg");
+
+    for (int n = 0; n < 20; n++){
+        ContradictionMonster* myContradiction = new ContradictionMonster();
+        myLevel->getMonsters().push_back(myContradiction);
+    }
+    myLevels.push_back(myLevel);
+    cout << "Level 2 Loaded." << endl;
+
+    //=========================================================================
 
     //We need a scene and a view to do graphics in QT
     gamePlayScene = new QGraphicsScene(this);
     gamePlayView = new QGraphicsView( gamePlayScene, this );
 
     pauseMessage = new QGraphicsTextItem();
+    QFont labelFont("Arial", 24, QFont::Bold);
+    pauseMessage->setPlainText("Game Paused! \nPress ESC again to continue.");
+    pauseMessage->setFont(labelFont);
+    gamePlayScene->addItem(pauseMessage);
+    pauseMessage->hide();
 
 
     levelLoaded = false;
@@ -34,12 +67,26 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
     gamePlayView->setSceneRect(viewRectX, viewRectY, WINDOW_MAX_X*2, WINDOW_MAX_Y*2);
 
 
+    myPlayer = new GamePlayer();
+
+    //Load Player onto Screen
+    gamePlayScene->addItem(myPlayer);
+
+    myPlayer->setX(WINDOW_MAX_X - 200);
+    myPlayer->setY(WINDOW_MAX_Y);
+    gamePaused = true; //So I can't just move around the player to start.
+
+    connect(this, SIGNAL(levelCleared()), this, SLOT(nextLevel()));
+
+    /**Start on level 0*/
+    levelPlaying = 0;
+
+
     /**************************************************************************
       gamePlayScene
       ************************************************************************/
 
     gamePlayView->setWindowTitle( "Side Scroller Game");
-    gamePlayView->setBackgroundBrush(*myLevel->getBgImage());
     
 
     //Set timer for animation.
@@ -72,26 +119,35 @@ GamePlay::~GamePlay(){
 
     delete scrollTimer;
 
-    delete myLevel;
+    //delete myLevel;
 }
 void GamePlay::show(){
     gamePlayView->show();
 }
 
 bool GamePlay::loadLevel(GameLevel *level){
-
-
+    cout << "Level loaded: " << levelPlaying << endl;
     if(level == NULL){
         return false;
     }
 
-    levelLoaded = true;
+    gamePlayScene->clear();
+    //Change background image to level's appropriate image.
+    gamePlayView->setBackgroundBrush(*level->getBgImage());
+
+
+    viewRectX = 0;
+    viewRectY = 0;
+    gamePlayView->setSceneRect(viewRectX, viewRectY, WINDOW_MAX_X*2, WINDOW_MAX_Y*2);
 
     //Load Player onto Screen
+    myPlayer = new GamePlayer();
     gamePlayScene->addItem(myPlayer);
-
-    myPlayer->setX(WINDOW_MAX_X);
+    myPlayer->setX(WINDOW_MAX_X - 200);
     myPlayer->setY(WINDOW_MAX_Y);
+
+    levelLoaded = true;
+
 
     //Load Monsters
 
@@ -100,12 +156,12 @@ bool GamePlay::loadLevel(GameLevel *level){
         cout << "There are " << i+1 << " monsters to add." << endl;
         gamePlayScene->addItem(level->getMonsters()[i]);
 
-        cout << qrand()%300 << endl;
-        cout << qrand()%300 << endl;
+        //cout << qrand()%300 << endl;
+        //cout << qrand()%300 << endl;
 
         int sceneWidth = gamePlayScene->width();
         cout << "sceneWidth = " << sceneWidth << endl;
-        level->getMonsters()[i]->setX(qrand()%sceneWidth + 800); //These are arbitrary values for now.
+        level->getMonsters()[i]->setX(qrand()%sceneWidth + 400); //These are arbitrary values for now.
         //cout << "Scene width: " << gamePlayScene->width() << endl;
         level->getMonsters()[i]->setY(qrand()%300);
     }
@@ -125,12 +181,11 @@ void GamePlay::pauseGame(){
     scrollTimer->stop();
     attackTimer->stop();
 
-    QFont labelFont("Arial", 24, QFont::Bold);
-    pauseMessage->setPlainText("Game Paused! \nPress ESC again to continue.");
-    pauseMessage->setFont(labelFont);
-    gamePlayScene->addItem(pauseMessage);
+
     pauseMessage->setX(viewRectX);
     pauseMessage->setY(100);
+    pauseMessage->setZValue(10); //I must set this high enough that it goes
+                                 //on top of stuff!
     pauseMessage->show();
 }
 void GamePlay::unPauseGame(){
@@ -146,6 +201,9 @@ void GamePlay::unPauseGame(){
 void GamePlay::movePlayer(MoveDirection dir){
 
     if (!myPlayer->isEnabled()){
+        return;
+    }
+    if (!getLevelLoaded()){
         return;
     }
     if (monsterCollision()){
@@ -228,12 +286,12 @@ bool GamePlay::monsterCollision(){
     if(myPlayer->getInvincible()){
         return false;
     }
-    for(int i = 0; i < myLevel->getMonsters().size(); i++){
-        if (myPlayer->collidesWithItem(myLevel->getMonsters()[i])){
+    for(int i = 0; i < myLevels[levelPlaying]->getMonsters().size(); i++){
+        if (myPlayer->collidesWithItem(myLevels[levelPlaying]->getMonsters()[i])){
 
 
             //Apply collision damage to player.
-            myPlayer->takeDamge(myLevel->getMonsters()[i]->getCollisionDamage());
+            myPlayer->takeDamge(myLevels[levelPlaying]->getMonsters()[i]->getCollisionDamage());
             if(!myPlayer->getInvincible()){
                 myPlayer->tempInvincible(15);
             }
@@ -246,23 +304,23 @@ bool GamePlay::monsterCollision(){
 
 bool GamePlay::attackCollision(){
     for(int i = 0; i < myAttacks.size(); i++){
-        for(int j = 0; j < myLevel->getMonsters().size(); j++){
-            if(myAttacks[i]->collidesWithItem(myLevel->getMonsters()[j])){
+        for(int j = 0; j < myLevels[levelPlaying]->getMonsters().size(); j++){
+            if(myAttacks[i]->collidesWithItem(myLevels[levelPlaying]->getMonsters()[j])){
                 //cout << "Attack hit monster." << endl;
 
-                myLevel->getMonsters()[j]->takeDamge(myAttacks[i]->getAttackDamage());
+                myLevels[levelPlaying]->getMonsters()[j]->takeDamge(myAttacks[i]->getAttackDamage());
 
                 //Check if this kills this monster
-                if(myLevel->getMonsters()[j]->getHitPoints() <= 0){
-                    gamePlayScene->removeItem(myLevel->getMonsters()[j]);
-                    score += myLevel->getMonsters()[j]->getScoreVal();
-                    delete myLevel->getMonsters()[j]; //Will this cause errors?
-                    myLevel->getMonsters().remove(j);
+                if(myLevels[levelPlaying]->getMonsters()[j]->getHitPoints() <= 0){
+                    gamePlayScene->removeItem(myLevels[levelPlaying]->getMonsters()[j]);
+                    score += myLevels[levelPlaying]->getMonsters()[j]->getScoreVal();
+                    delete myLevels[levelPlaying]->getMonsters()[j]; //Will this cause errors?
+                    myLevels[levelPlaying]->getMonsters().remove(j);
                     return true;
                 }
 
-                if(!myLevel->getMonsters()[j]->getInvincible()){
-                    myLevel->getMonsters()[j]->tempInvincible(2);
+                if(!myLevels[levelPlaying]->getMonsters()[j]->getInvincible()){
+                    myLevels[levelPlaying]->getMonsters()[j]->tempInvincible(2);
                 }
 
                 return true;
@@ -299,7 +357,7 @@ void GamePlay::scrollWindow(){
     //Will it make this game significantly slower to do this here?
     emit updateScore();
 
-    if (viewRectX<= myLevel->getBgImage()->width() - WINDOW_MAX_X*2){
+    if (viewRectX<= myLevels[levelPlaying]->getBgImage()->width() - WINDOW_MAX_X*2){
         viewRectX++;
         gamePlayView->setSceneRect(viewRectX, viewRectY, WINDOW_MAX_X*2, WINDOW_MAX_Y*2);
 
@@ -325,7 +383,9 @@ void GamePlay::scrollWindow(){
         //Once we reach the end of the map, then stop and display start menu for now.
         //displayStartMenu();
 
-        //I must find out how to end the game here.
+        emit updateScore();
+        cout << "How do I only call levelCleared() once?" << endl;
+        emit levelCleared();
     }
 }
 
@@ -364,11 +424,31 @@ void GamePlay::launchGame(){
         return;
     }
     cout << "Game launched." << endl;
-    loadLevel(myLevel);
+    loadLevel(myLevels[levelPlaying]);
 }
 
 void GamePlay::gameOver(){
-    emit updateScore();
+
     cout << "Game Over!" << endl;
-    scrollTimer->stop();
+
+
+}
+
+void GamePlay::nextLevel(){
+    cout << "...here I must do something to advance gameplay." << endl;
+
+    //Add message or pause before proceeding?
+
+    //Temporary!!
+    if(levelPlaying < myLevels.size() - 1){
+
+        //If there are more levels to play, play them!
+        levelPlaying++;
+        loadLevel(myLevels[levelPlaying]);
+    }
+    else{
+        //Surely there is a better way to handle this? Splash screen?
+        gameOver();
+    }
+
 }

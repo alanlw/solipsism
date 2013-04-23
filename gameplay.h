@@ -98,10 +98,15 @@ private:
     /** To hold my level data*/
     QVector<GameLevel*> myLevels;
         //Temporary, just to make this easier to test.
-        GameLevel * myLevel;
+        //GameLevel * myLevel;
 
+    /**Is the level loaded?*/
     bool levelLoaded;
+    /**Is the game paused?*/
     bool gamePaused;
+
+    /**The index of the level the player is playing*/
+    int levelPlaying;
 
 
 
@@ -143,6 +148,9 @@ public slots:
 
     /** When player loses lives, stop the game.*/
     void gameOver();
+
+    /** When the player clears a level, we want to advance the player to a new level if possible.*/
+    void nextLevel();
 
 signals:
     /**Emit this signal so that the ScoreWidget can check the GamePlay widget

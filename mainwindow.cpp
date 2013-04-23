@@ -59,6 +59,11 @@ void MainWindow::keyPressEvent(QKeyEvent *e){
         return;
     }
 
+    if(myGamePlay->getGamePaused()){
+        return; //Don't let player move if game is paused.
+        // (By another event besides the pause function.)
+    }
+
     switch (e->key()){
     case Qt::Key_W:
         //cout << "W pressed for up." << endl;
