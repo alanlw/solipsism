@@ -11,7 +11,6 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
 
 
 
-
     //=========================================================================
     //This is temporary, I need to think of a better way to store/access/etc.
     //level data.
@@ -64,10 +63,10 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
     myPlayer = new GamePlayer();
 
     //Load Player onto Screen
-    gamePlayScene->addItem(myPlayer);
+    //gamePlayScene->addItem(myPlayer);
 
-    myPlayer->setX(WINDOW_MAX_X - 200);
-    myPlayer->setY(WINDOW_MAX_Y);
+    //myPlayer->setX(WINDOW_MAX_X - 200);
+    //myPlayer->setY(WINDOW_MAX_Y);
     gamePaused = true; //So I can't just move around the player to start.
 
     connect(this, SIGNAL(levelCleared()), this, SLOT(nextLevel()));
@@ -128,8 +127,13 @@ bool GamePlay::loadLevel(GameLevel *level){
     if(level == NULL){
         return false;
     }
+    //I must remove the player here so the player isn't deleted when I call
+    //clear().
+    gamePlayScene->removeItem(myPlayer);
+
 
     gamePlayScene->clear();
+
     //Change background image to level's appropriate image.
     gamePlayView->setBackgroundBrush(*level->getBgImage());
 
@@ -139,7 +143,6 @@ bool GamePlay::loadLevel(GameLevel *level){
     gamePlayView->setSceneRect(viewRectX, viewRectY, WINDOW_MAX_X*2, WINDOW_MAX_Y*2);
 
     //Load Player onto Screen
-    myPlayer = new GamePlayer();
     gamePlayScene->addItem(myPlayer);
     myPlayer->setX(WINDOW_MAX_X - 200);
     myPlayer->setY(WINDOW_MAX_Y);
@@ -456,8 +459,10 @@ void GamePlay::launchGame(){
 
 void GamePlay::gameOver(){
 
+    scrollTimer->stop();
+    attackTimer->stop();
+    gamePaused = true;
     cout << "Game Over!" << endl;
-
 
 }
 
