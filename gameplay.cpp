@@ -291,6 +291,15 @@ bool GamePlay::getLevelLoaded(){
 bool GamePlay::getGamePaused(){
     return gamePaused;
 }
+QGraphicsView* GamePlay::getGamePlayView(){
+    return gamePlayView;
+}
+int GamePlay::getViewRectX(){
+    return viewRectX;
+}
+int GamePlay::getViewRectY(){
+    return viewRectY;
+}
 
 bool GamePlay::monsterCollision(){
     if(myPlayer->getInvincible()){

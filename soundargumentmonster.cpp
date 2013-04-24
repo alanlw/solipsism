@@ -1,7 +1,8 @@
 #include "soundargumentmonster.h"
-#include "gameplay.h"
 
 SoundArgumentMonster::SoundArgumentMonster(){
+
+
     if(monsterImage->load("graphics/monsters/Sulfuric_Acid_Molecule_VdW.png")){
         cout << "Image loaded successfully" << endl;
     }
@@ -15,74 +16,64 @@ SoundArgumentMonster::SoundArgumentMonster(){
     scoreVal = 7;
 
     moveCounter = 0;
+    myDir = UP; //Monster will begin moving in a square starting with
+                //the RIGHT direction (it will turn RIGHT to start.)
+
 }
 SoundArgumentMonster::~SoundArgumentMonster(){
+
 
 }
 
 void SoundArgumentMonster::move(){
-    //Move monster appropriately. First find a direction to move in.
-    MoveDirection toMove;
-    //qrand() % ((high + 1) - low) + low;
-    int toMoveInt = (qrand() % ((4 + 1) - 1) + 1);
-    switch(toMoveInt){
-    case 1:
-        toMove = UP;
-        break;
-    case 2:
-        toMove = LEFT;
-        break;
-    case 3:
-        toMove = DOWN;
-        break;
-    case 4:
-        toMove = RIGHT;
-        break;
-    default:
-        toMove = NONE;
-        break;
+    //Travel a fixed distance, and then turn if it is time.
+    //I will use 100 as this fixed distance for now.
+    if (moveCounter % 100 == 0){
+        switch(myDir){
+        case LEFT:
+            myDir = UP;
+            break;
+        case UP:
+            myDir = RIGHT;
+            break;
+        case RIGHT:
+            myDir = DOWN;
+            break;
+        case DOWN:
+            myDir = LEFT;
+            break;
+        default:
+            ;
+        }
     }
 
-    switch(toMove){
-    case UP:
-        break;
+    //Now move.
+
+    int travelLength = 1;
+    if (moveClockwise){
+        ; //Do nothing
+    }
+    else{
+        travelLength *= -1;
+    }
+
+    switch(myDir){
     case LEFT:
+        moveBy(-1*travelLength, 0);
         break;
-    case DOWN:
+    case UP:
+        moveBy(0, travelLength);
         break;
     case RIGHT:
-        break;
-    default:
-        return;
-    }
-
-    /* I will need to find the conditions necessary to make sure this
-       monster does not go too far out of the scene.
-
-    switch(toMove){
-    case UP:
-        if(myPlayer->y() - 10 >= 0 ){
-            myPlayer->moveBy(0, -10);
-        }
-        break;
-    case LEFT:
-        if(myPlayer->x() >= viewRectX){
-            myPlayer->moveBy(-10,0);
-        }
+        moveBy(travelLength, 0);
         break;
     case DOWN:
-        if(myPlayer->y() + 10 <= 460){
-            myPlayer->moveBy(0, 10);
-        }
-        break;
-    case RIGHT:
-        if(myPlayer->x() <= viewRectX+WINDOW_MAX_X*2 - 150){
-            myPlayer->moveBy(10,0);
-        }
+        moveBy(0, -1*travelLength);
         break;
     default:
-        return;
+        ;
     }
-    */
+
+
 
 }

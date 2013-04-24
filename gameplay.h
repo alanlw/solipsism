@@ -70,6 +70,13 @@ public:
     /** @return Is the game paused?*/
     bool getGamePaused();
 
+    /** @return Return gamePlayView*/
+    QGraphicsView* getGamePlayView();
+    /** @return Return x coordinate of view on scene*/
+    int getViewRectX();
+    /** @return Return y coordinate of view on scene*/
+    int getViewRectY();
+
 
 protected:
 
