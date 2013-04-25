@@ -5,11 +5,11 @@ AnxietyMonster::AnxietyMonster(){
 
 
     if(monsterImage->load("graphics/monsters/anxiety.png")){
-        cout << "Image loaded successfully" << endl;
+        //cout << "Image loaded successfully" << endl;
     }
 
     else{
-        cout << "Image failed to load." << endl;
+        //cout << "Image failed to load." << endl;
     }
     setPixmap(*monsterImage);
     hitPoints = 30;
@@ -36,6 +36,17 @@ void AnxietyMonster::move(){
     int randX = qrand() % ((high + 1) - low) + low;
     int randY = qrand() % ((high + 1) - low) + low;
     moveBy(randX, randY);
+
+    //Keep within boundaries.
+    //cout << "scenePos()" << scenePos().x() << ", " << scenePos().y() << endl;
+    if(scenePos().y() < 50){
+        moveBy(0, 10);
+    }
+    if(scenePos().y() >= 550){
+        moveBy(0, -10);
+    }
+
+
     moveCounter++;
 
 

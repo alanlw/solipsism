@@ -5,11 +5,11 @@ MeanWordsMonster::MeanWordsMonster(){
 
 
     if(monsterImage->load("graphics/monsters/meanwords.png")){
-        cout << "Image loaded successfully" << endl;
+        //cout << "Image loaded successfully" << endl;
     }
 
     else{
-        cout << "Image failed to load." << endl;
+        //cout << "Image failed to load." << endl;
     }
     setPixmap(*monsterImage);
     hitPoints = 10;

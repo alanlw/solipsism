@@ -1,6 +1,7 @@
 #include "gameplay.h"
 #include <qapplication.h>
 #include <QGraphicsTextItem> //For pauses messages, etc.
+#include <QTime>
 
 
 GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
@@ -17,7 +18,7 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
     //
     //Load my level
     GameLevel * myLevel = new GameLevel("sample_map01.gif");
-    for (int n = 0; n < 4; n++){
+    for (int n = 0; n < 12; n++){
         ContradictionMonster* myContradiction = new ContradictionMonster();
         myLevel->getMonsters().push_back(myContradiction);
     }
@@ -29,12 +30,6 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
         AnxietyMonster* myAnxiety = new AnxietyMonster();
         myLevel->getMonsters().push_back(myAnxiety);
     }
-    /*
-    for (int n = 0; n < 4; n++){
-        MeanWordsMonster* myMeanWords = new MeanWordsMonster();
-        myLevel->getMonsters().push_back(myMeanWords);
-    }
-    */
     myLevels.push_back(myLevel);
     cout << "Level 0 Loaded." << endl;
 
@@ -136,6 +131,10 @@ void GamePlay::show(){
 
 bool GamePlay::loadLevel(GameLevel *level){
 
+    //For random numbers.
+    QTime time = QTime::currentTime();
+    qsrand((uint)time.msec());
+
     //Set levelLoaded to false until we finish loading content.
     levelLoaded = false;
 
@@ -172,9 +171,17 @@ bool GamePlay::loadLevel(GameLevel *level){
         //cout << qrand()%300 << endl;
         //cout << qrand()%300 << endl;
 
-        int sceneWidth = gamePlayScene->width();
+        //int sceneWidth = gamePlayScene->width();
+        int sceneWidth = level->getBgImage()->width();
         cout << "sceneWidth = " << sceneWidth << endl;
-        level->getMonsters()[i]->setX(qrand()%sceneWidth + 200); //These are arbitrary values for now.
+        //cout << "sceneWidth = " << sceneWidth << endl;
+        do{
+            level->getMonsters()[i]->setX(qrand()%sceneWidth); //These are arbitrary values for now.
+        } while(level->getMonsters()[i]->x() >= sceneWidth - 200 ||
+                level->getMonsters()[i]->x() < 400);
+        cout << level->getMonsters()[i]->x() << endl;
+
+
         //cout << "Scene width: " << gamePlayScene->width() << endl;
         level->getMonsters()[i]->setY(qrand()%500);
     }
@@ -471,7 +478,7 @@ void GamePlay::animateMonsters(){
 
         //Generate Attacks
         if(myLevels[levelPlaying]->getMonsters()[j]->getMonsterType() == "AnxietyMonster"
-                && myLevels[levelPlaying]->getMonsters()[j]->x() + myPlayer->x() + 300){
+                && myLevels[levelPlaying]->getMonsters()[j]->x() - myPlayer->x() < 550){
             //cout << "Launch attack!" << endl;
             //cout << myLevels[levelPlaying]->getMonsters()[j]->getMoveCounter() << endl;
             if(myLevels[levelPlaying]->getMonsters()[j]->getMoveCounter() % 100 == 0){
