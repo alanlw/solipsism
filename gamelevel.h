@@ -2,6 +2,7 @@
 #define GAMELEVEL_H
 
 #include <QPixmap>
+#include <QGraphicsPixmapItem>
 #include <QVector>
 
 #include <QString>
@@ -39,6 +40,9 @@ private:
 
     /** The Background Image*/
     QPixmap * bgImage;
+
+    /** A Level Transition Item to display*/
+    QGraphicsPixmapItem* transitionItem;
 
     /** Pointer to monsters in level*/
     QVector<Monster*> monsters;
