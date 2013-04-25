@@ -11,8 +11,11 @@ Monster::Monster(){
     //Monster is born mortal
     invincible = 0;
 
+    monsterType = "Monster";
+
     monsterTimer = new QTimer();
     monsterTimer->setInterval(100);
+    moveCounter = 0;
 
     connect(monsterTimer, SIGNAL(timeout()), this, SLOT(reduceInvincible()));
 }
@@ -31,21 +34,22 @@ int Monster::getScoreVal() const{
 int Monster::getInvincible() const{
     return invincible;
 }
-void Monster::takeDamge(int n){
+string Monster::getMonsterType() const{
+    return monsterType;
+}
+int Monster::getMoveCounter(){
+    return moveCounter;
+}
+
+void Monster::takeDamage(int n){
     if(!invincible){
         hitPoints -= n;
-    }
-    if (hitPoints <= 0){
-        //Perform operations here to kill monster, remove from
-        //the array of the living, etc.
-
-        this->hide();
     }
 
 
 }
 void Monster::tempInvincible(int numCycles){
-    //cout << "In tempInvincible" << endl;
+    cout << "In tempInvincible" << endl;
     invincible = numCycles;
     this->setOpacity(0.5);
     monsterTimer->start();
@@ -69,5 +73,5 @@ void Monster::reduceInvincible(){
     //cout << invincible << endl;
 }
 void Monster::move(){
-
+    moveCounter++;
 }

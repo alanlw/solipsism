@@ -17,18 +17,24 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
     //
     //Load my level
     GameLevel * myLevel = new GameLevel("sample_map01.gif");
-    for (int n = 0; n < 12; n++){
+    for (int n = 0; n < 4; n++){
         ContradictionMonster* myContradiction = new ContradictionMonster();
         myLevel->getMonsters().push_back(myContradiction);
     }
-    for (int n = 0; n < 12; n++){
+    for (int n = 0; n < 4; n++){
         SoundArgumentMonster* mySoundArgument = new SoundArgumentMonster();
         myLevel->getMonsters().push_back(mySoundArgument);
     }
-    for (int n = 0; n < 12; n++){
+    for (int n = 0; n < 4; n++){
         AnxietyMonster* myAnxiety = new AnxietyMonster();
         myLevel->getMonsters().push_back(myAnxiety);
     }
+    /*
+    for (int n = 0; n < 4; n++){
+        MeanWordsMonster* myMeanWords = new MeanWordsMonster();
+        myLevel->getMonsters().push_back(myMeanWords);
+    }
+    */
     myLevels.push_back(myLevel);
     cout << "Level 0 Loaded." << endl;
 
@@ -337,7 +343,7 @@ bool GamePlay::attackCollision(){
             if(myAttacks[i]->collidesWithItem(myLevels[levelPlaying]->getMonsters()[j])){
                 //cout << "Attack hit monster." << endl;
 
-                myLevels[levelPlaying]->getMonsters()[j]->takeDamge(myAttacks[i]->getAttackDamage());
+                myLevels[levelPlaying]->getMonsters()[j]->takeDamage(myAttacks[i]->getAttackDamage());
 
                 //Check if this kills this monster
                 if(myLevels[levelPlaying]->getMonsters()[j]->getHitPoints() <= 0){
@@ -462,6 +468,26 @@ void GamePlay::animateMonsters(){
    //Loop through monsters and call move() function on each.
     for(int j = 0; j < myLevels[levelPlaying]->getMonsters().size(); j++){
         myLevels[levelPlaying]->getMonsters()[j]->move();
+
+        //Generate Attacks
+        if(myLevels[levelPlaying]->getMonsters()[j]->getMonsterType() == "AnxietyMonster"
+                && myLevels[levelPlaying]->getMonsters()[j]->x() + myPlayer->x() + 300){
+            //cout << "Launch attack!" << endl;
+            //cout << myLevels[levelPlaying]->getMonsters()[j]->getMoveCounter() << endl;
+            if(myLevels[levelPlaying]->getMonsters()[j]->getMoveCounter() % 100 == 0){
+
+                //cout << myLevels[levelPlaying]->getMonsters()[j]->getMoveCounter() << endl;
+
+                MeanWordsMonster * temp = new MeanWordsMonster();
+                temp->setPos(myLevels[levelPlaying]->getMonsters()[j]->pos());
+                temp->setZValue(1);
+                temp->setX(temp->x() - 60);
+                gamePlayScene->addItem(temp);
+                myLevels[levelPlaying]->getMonsters().push_back(temp);
+
+            }
+        }
+
     }
 }
 

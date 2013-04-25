@@ -39,7 +39,10 @@ public:
     int getScoreVal() const;
     /** @return Is this monster temporarily invincible because it was just attacked?*/
     int getInvincible() const;
-
+    /** @return Get the monster's type*/
+    string getMonsterType() const;
+    /** @return The move counter's value*/
+    int getMoveCounter();
 
     /** Set the Monster's hitpoints*/
     void setHitPoints(int n);
@@ -51,7 +54,7 @@ public:
     //=========================================================================
     /** @post Player takes n damage.
         @param n The amount of damage the player takes */
-    void takeDamge(int n);
+    void takeDamage(int n);
     /** @post Player will not take damage temporarily.
         Make monster temporarily invincible (after taking damage)
         so that it takes some effort to defeat it.*/
@@ -80,6 +83,11 @@ protected:
     int invincible;
     /** For timing how long monster can be invincible*/
     QTimer* monsterTimer;
+
+    /** Counting calls to move function for making moves*/
+    int moveCounter;
+
+    string monsterType;
 
 private:
 

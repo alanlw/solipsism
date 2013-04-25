@@ -1,4 +1,5 @@
 #include "anxietymonster.h"
+#include "meanwordsmonster.h"
 
 AnxietyMonster::AnxietyMonster(){
 
@@ -19,8 +20,8 @@ AnxietyMonster::AnxietyMonster(){
     int high = 100;
     int low = 0;
     moveCounter = qrand() % ((high + 1) - low) + low;;
-    myDir = UP; //Monster will begin moving in a square starting with
-                //the RIGHT direction (it will turn RIGHT to start.)
+
+    monsterType = "AnxietyMonster";
 
 }
 AnxietyMonster::~AnxietyMonster(){
@@ -36,4 +37,7 @@ void AnxietyMonster::move(){
     int randY = qrand() % ((high + 1) - low) + low;
     moveBy(randX, randY);
     moveCounter++;
+
+
+
 }

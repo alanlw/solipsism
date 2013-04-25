@@ -41,10 +41,9 @@ generate Mean Words.
 loses hit points. Player must attack Mean Words mutliple times to defeat.
 Mean Words are projectiles launched by Anxieties.  
 
-These words will appear as words, example:
-BAKABAKABAKABAKABAKA
+	![Mean Words Monster](/graphics/monsters/meanwords.png)
 
-- Text will move in streams. Conceptually, I want to show literal attacks 
+- Text will move horizontally. Conceptually, I want to show literal attacks 
 being uttered at the User's consciousness.  
 
 ###Player Abilities

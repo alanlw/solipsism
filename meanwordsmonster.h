@@ -1,33 +1,43 @@
-#ifndef ANXIETYMONSTER_H
-#define ANXIETYMONSTER_H
+#ifndef MEANWORDSMONSTER_H
+#define MEANWORDSMONSTER_H
 
 #include "monster.h"
+#include <QGraphicsTextItem>
 
-class AnxietyMonster : public Monster{
+class MeanWordsMonster : public Monster{
 public:
     //=========================================================================
     // Constructors and Destructor
     //=========================================================================
     /** Constructor*/
-    AnxietyMonster();
+    MeanWordsMonster();
     /** Destructor*/
-    ~AnxietyMonster();
+    ~MeanWordsMonster();
 
     //=========================================================================
     // Animation Functions
     //=========================================================================
-    /** Overloaded move() function. Makes AnxietyMonster move in
+    /** Overloaded move() function. Makes MeanWordsMonster move in
         random cardinal directions about playing area. */
     void move();
+
+    //=======================================================================
+    // Accessor and Mutator Functions
+    //=======================================================================
 
 protected:
 
 private:
 
+    /** Counting so that I can move monster and change direction
+        intentionally.*/
+    int moveCounter;
 
     /** Is this Monster moving in the clockwise direction?*/
     bool moveClockwise;
 
+    MoveDirection myDir;
 
 };
-#endif // ANXIETYMONSTER_H
+
+#endif // MEANWORDSMONSTER_H

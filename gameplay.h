@@ -16,12 +16,15 @@
 #include <QMouseEvent>
 
 
-//Temporary
+//Header Files for my Moveable Items
+
 #include "monster.h"
 #include "contradictionmonster.h"
 #include "soundargumentmonster.h"
 #include "anxietymonster.h"
+#include "meanwordsmonster.h"
 #include "psychicattack.h"
+
 
 /** For controlling player avatar's movement*/
 //enum MoveDirection {NONE, LEFT, RIGHT, UP, DOWN };

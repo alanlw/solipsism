@@ -13,6 +13,7 @@ ContradictionMonster::ContradictionMonster(){
     collisionDamage = 50;
     scoreVal = 10;
 
+    monsterType = "ContradictionMonster";
 }
 ContradictionMonster::~ContradictionMonster(){
     //Anything needed that is not already done in Monster?

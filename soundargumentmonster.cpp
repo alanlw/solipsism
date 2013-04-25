@@ -22,6 +22,8 @@ SoundArgumentMonster::SoundArgumentMonster(){
     myDir = UP; //Monster will begin moving in a square starting with
                 //the RIGHT direction (it will turn RIGHT to start.)
 
+    monsterType = "SoundArgumentMonster";
+
 }
 SoundArgumentMonster::~SoundArgumentMonster(){
 
@@ -78,5 +80,4 @@ void SoundArgumentMonster::move(){
         ;
     }
     moveCounter++;
-
 }
