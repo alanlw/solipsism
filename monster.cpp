@@ -68,7 +68,6 @@ void Monster::reduceInvincible(){
     }
     //cout << invincible << endl;
 }
-
 void Monster::move(){
-    //Do nothing by default.
+
 }

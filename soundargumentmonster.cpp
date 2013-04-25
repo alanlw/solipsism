@@ -15,7 +15,10 @@ SoundArgumentMonster::SoundArgumentMonster(){
     collisionDamage = 7;
     scoreVal = 7;
 
-    moveCounter = 0;
+    //Use a random counter so that all these items aren't syncronized.
+    int high = 100;
+    int low = 0;
+    moveCounter = qrand() % ((high + 1) - low) + low;;
     myDir = UP; //Monster will begin moving in a square starting with
                 //the RIGHT direction (it will turn RIGHT to start.)
 
@@ -73,7 +76,7 @@ void SoundArgumentMonster::move(){
     default:
         ;
     }
-
+    moveCounter++;
 
 
 }

@@ -10,6 +10,8 @@ public:
     /** Destructor*/
     ~ContradictionMonster();
 
+    void move();
+
 protected:
 
 private:

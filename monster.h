@@ -9,6 +9,9 @@
 
 using namespace std;
 
+/** For controlling movements*/
+enum MoveDirection {NONE, LEFT, RIGHT, UP, DOWN };
+
 class Monster : public QObject, public QGraphicsPixmapItem {
 Q_OBJECT
 public:
@@ -57,7 +60,7 @@ public:
     /** Move monster as its attributes dictate.
     Called by animateMonster() slot.
     */
-    void move();
+    virtual void move();
 
 protected:
     /** Image of the monster*/

@@ -21,6 +21,10 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
         ContradictionMonster* myContradiction = new ContradictionMonster();
         myLevel->getMonsters().push_back(myContradiction);
     }
+    for (int n = 0; n < 12; n++){
+        SoundArgumentMonster* mySoundArgument = new SoundArgumentMonster();
+        myLevel->getMonsters().push_back(mySoundArgument);
+    }
     myLevels.push_back(myLevel);
     cout << "Level 0 Loaded." << endl;
 
@@ -61,6 +65,7 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
 
 
     myPlayer = new GamePlayer();
+    gamePlayScene->addItem(myPlayer);
 
     //Load Player onto Screen
     //gamePlayScene->addItem(myPlayer);
@@ -130,8 +135,6 @@ bool GamePlay::loadLevel(GameLevel *level){
     //I must remove the player here so the player isn't deleted when I call
     //clear().
     gamePlayScene->removeItem(myPlayer);
-
-
     gamePlayScene->clear();
 
     //Change background image to level's appropriate image.
@@ -161,9 +164,9 @@ bool GamePlay::loadLevel(GameLevel *level){
 
         int sceneWidth = gamePlayScene->width();
         cout << "sceneWidth = " << sceneWidth << endl;
-        level->getMonsters()[i]->setX(qrand()%sceneWidth + 400); //These are arbitrary values for now.
+        level->getMonsters()[i]->setX(qrand()%sceneWidth + 200); //These are arbitrary values for now.
         //cout << "Scene width: " << gamePlayScene->width() << endl;
-        level->getMonsters()[i]->setY(qrand()%300);
+        level->getMonsters()[i]->setY(qrand()%500);
     }
 
     scrollTimer->start();
@@ -418,6 +421,7 @@ void GamePlay::scrollWindow(){
 
 void GamePlay::animateAttacks(){
     //Will this be necessary?
+    //I still need to deal with cooling down attacks between levels.
     if(!getLevelLoaded()){
         return;
     }

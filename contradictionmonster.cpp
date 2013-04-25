@@ -17,3 +17,7 @@ ContradictionMonster::ContradictionMonster(){
 ContradictionMonster::~ContradictionMonster(){
     //Anything needed that is not already done in Monster?
 }
+
+void ContradictionMonster::move(){
+
+}

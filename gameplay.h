@@ -17,11 +17,13 @@
 
 
 //Temporary
+#include "monster.h"
 #include "contradictionmonster.h"
+#include "soundargumentmonster.h"
 #include "psychicattack.h"
 
 /** For controlling player avatar's movement*/
-enum MoveDirection {NONE, LEFT, RIGHT, UP, DOWN };
+//enum MoveDirection {NONE, LEFT, RIGHT, UP, DOWN };
 
 #define WINDOW_MAX_X 300
 #define WINDOW_MAX_Y 300

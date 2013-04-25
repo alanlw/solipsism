@@ -2,7 +2,6 @@
 #define SOUNDARGUMENTMONSTER_H
 
 #include "monster.h"
-#include "gameplay.h"
 
 class SoundArgumentMonster : public Monster{
 public:
@@ -24,8 +23,6 @@ public:
 protected:
 
 private:
-    GamePlay* g_; //I need a pointer to the GamePlay object so I can
-                  //move monster appropriately.
 
     /** Counting so that I can move monster and change direction
         intentionally.*/
@@ -33,6 +30,7 @@ private:
 
     /** Is this Monster moving in the clockwise direction?*/
     bool moveClockwise;
+
     MoveDirection myDir;
 
 };
