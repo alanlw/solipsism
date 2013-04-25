@@ -34,6 +34,17 @@ public:
     /** Get monsters*/
     QVector<Monster*>& getMonsters();
 
+    /** Get counter value*/
+    int getCounter() const;
+    void setCounter(int n);
+
+    /** Get opening screen pixmap*/
+    QPixmap * getOpeningScreen();
+    /** Get closing screen pixmap*/
+    QPixmap * getClosingScreen();
+
+
+
 private:
     /** The Level Name*/
     QString levelName;
@@ -48,6 +59,11 @@ private:
 
     /** Pointer to monsters in level*/
     QVector<Monster*> monsters;
+
+    /** A counter for working with timers and functions*/
+    int counter;
+
+
 
 protected:
 

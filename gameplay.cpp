@@ -110,16 +110,22 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
 
     //Set timer for animation.
     scrollTimer = new QTimer(this);
-    scrollTimer->setInterval(10);
+    scrollTimer->setInterval(30); //We will reduce this which each level...
 
     attackTimer = new QTimer();
     attackTimer->setInterval(10);
+
+    levelTransitionTimer = new QTimer();
+    levelTransitionTimer->setInterval(1000);
 
 
     //For scrolling of screen
     connect(scrollTimer, SIGNAL(timeout()), this, SLOT(scrollWindow()));
     //For attack animations
     connect(attackTimer, SIGNAL(timeout()), this, SLOT(animateAttacks()));
+    //For level transitions
+    connect(levelTransitionTimer, SIGNAL(timeout()), this, SLOT(openingLevelTransition()));
+
     //When a player loses all lives, the game is over.
     connect(scrollTimer, SIGNAL(timeout()), this, SLOT(animateMonsters()));
     connect(myPlayer, SIGNAL(allLivesLost()), this, SLOT(gameOver()));
@@ -176,6 +182,11 @@ bool GamePlay::loadLevel(GameLevel *level){
     myPlayer->setX(WINDOW_MAX_X - 200);
     myPlayer->setY(WINDOW_MAX_Y);
 
+
+    //Speed up timer.
+    if(!scrollTimer->interval() <= 10){
+        scrollTimer->setInterval(scrollTimer->interval() * (2.0/3.0));
+    }
 
 
     //Load Monsters
@@ -518,6 +529,25 @@ void GamePlay::animateMonsters(){
         }
 
     }
+}
+
+void GamePlay::openingLevelTransition(){
+    if (myLevels[levelPlaying]->getCounter() == 0){
+        return;
+        //If we aren't counting down... then don't have this image.
+    }
+    else{
+        //We only have to do this once, but is it bad to do it multiple times?
+        gamePlayScene->setBackgroundBrush(*myLevels[levelPlaying]->getOpeningScreen());
+
+
+        //Decrement level counter. Once it counts down to zero, action stops.
+        myLevels[levelPlaying]->setCounter(myLevels[levelPlaying]->getCounter() - 1);
+    }
+
+
+    //Load correct QPixmap (if not loaded already). Count down to stall time.
+    //Do not accept attacks/etc. during this time.
 }
 
 void GamePlay::launchGame(){

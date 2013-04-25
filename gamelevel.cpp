@@ -23,6 +23,8 @@ GameLevel::GameLevel(QString imageFileName, QString myLevelName){
     //I will want to change this later, to initialize as arguments command.
     openingScreen = new QPixmap;
     closingScreen = new QPixmap;
+
+    counter = 0;
 }
 
 GameLevel::~GameLevel(){
@@ -35,4 +37,19 @@ QPixmap* GameLevel::getBgImage(){
 
 QVector<Monster*>& GameLevel::getMonsters(){
     return monsters;
+}
+int GameLevel::getCounter() const{
+    return counter;
+}
+void GameLevel::setCounter(int n){
+    counter = n;
+}
+
+
+QPixmap* GameLevel::getOpeningScreen(){
+    return openingScreen;
+}
+
+QPixmap* GameLevel::getClosingScreen(){
+    return closingScreen;
 }

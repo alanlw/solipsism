@@ -163,6 +163,9 @@ public slots:
     /** Function called by timer to move monsters*/
     void animateMonsters();
 
+    /** Function called at the beginning of a level*/
+    void openingLevelTransition();
+
     /** When the player clicks the start button, launch game appropriately.*/
     void launchGame();
 
