@@ -5,6 +5,8 @@ using namespace std; //to make cout statements more convenient.
 
 PsychicAttack::PsychicAttack(){
 
+    attackDuration = 10;
+
     if(attackImage->load("graphics/attacks/psychic_attack.png")){
         //cout << "Image loaded successfully" << endl;
     }

@@ -18,15 +18,15 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
     //
     //Load my level
     GameLevel * myLevel = new GameLevel("sample_map01.gif");
-    for (int n = 0; n < 12; n++){
+    for (int n = 0; n < 10; n++){
         ContradictionMonster* myContradiction = new ContradictionMonster();
         myLevel->getMonsters().push_back(myContradiction);
     }
-    for (int n = 0; n < 4; n++){
+    for (int n = 0; n < 15; n++){
         SoundArgumentMonster* mySoundArgument = new SoundArgumentMonster();
         myLevel->getMonsters().push_back(mySoundArgument);
     }
-    for (int n = 0; n < 4; n++){
+    for (int n = 0; n < 5; n++){
         AnxietyMonster* myAnxiety = new AnxietyMonster();
         myLevel->getMonsters().push_back(myAnxiety);
     }
@@ -41,6 +41,14 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
         ContradictionMonster* myContradiction = new ContradictionMonster();
         myLevel->getMonsters().push_back(myContradiction);
     }
+    for (int n = 0; n < 20; n++){
+        SoundArgumentMonster* mySoundArgument = new SoundArgumentMonster();
+        myLevel->getMonsters().push_back(mySoundArgument);
+    }
+    for (int n = 0; n < 7; n++){
+        AnxietyMonster* myAnxiety = new AnxietyMonster();
+        myLevel->getMonsters().push_back(myAnxiety);
+    }
     myLevels.push_back(myLevel);
     cout << "Level 1 Loaded." << endl;
 
@@ -48,9 +56,17 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
     myLevel = new GameLevel("sample_map03.jpg");
     //myLevel = new GameLevel("sample_map03.jpg");
 
-    for (int n = 0; n < 20; n++){
+    for (int n = 0; n < 25; n++){
         ContradictionMonster* myContradiction = new ContradictionMonster();
         myLevel->getMonsters().push_back(myContradiction);
+    }
+    for (int n = 0; n < 25; n++){
+        SoundArgumentMonster* mySoundArgument = new SoundArgumentMonster();
+        myLevel->getMonsters().push_back(mySoundArgument);
+    }
+    for (int n = 0; n < 15; n++){
+        AnxietyMonster* myAnxiety = new AnxietyMonster();
+        myLevel->getMonsters().push_back(myAnxiety);
     }
     myLevels.push_back(myLevel);
     cout << "Level 2 Loaded." << endl;
@@ -142,8 +158,9 @@ bool GamePlay::loadLevel(GameLevel *level){
         return false;
     }
     //I must remove the player here so the player isn't deleted when I call
-    //clear().
+    //clear()
     gamePlayScene->removeItem(myPlayer);
+
     gamePlayScene->clear();
 
     //Change background image to level's appropriate image.
@@ -395,11 +412,6 @@ void GamePlay::mousePressEvent(QMouseEvent *e){
 ----------------------------------------------*/
 
 void GamePlay::scrollWindow(){
-    //Is this necessary? I am not sure if I have fully solved the level
-    //transition crash.
-    if(!getLevelLoaded()){
-        return;
-    }
 
     //Will it make this game significantly slower to do this here?
     emit updateScore();
@@ -440,6 +452,13 @@ void GamePlay::animateAttacks(){
     //Will this be necessary?
     //I still need to deal with cooling down attacks between levels.
     if(!getLevelLoaded()){
+        //Clear all attacks to prevent errors.
+        for(int i = 0; i < myAttacks.size(); i++){
+            gamePlayScene->removeItem(myAttacks[i]);
+
+            delete myAttacks[i];
+            myAttacks.remove(i);
+        }
         return;
     }
 
@@ -469,6 +488,9 @@ void GamePlay::animateAttacks(){
     }
 }
 void GamePlay::animateMonsters(){
+    if(!getLevelLoaded()){
+        return;
+    }
     //Write this so that monsters are animated via the scroll timer!
     //cout << "In animateMonsters!()" << endl;
 
@@ -509,6 +531,7 @@ void GamePlay::launchGame(){
 
 void GamePlay::gameOver(){
 
+    emit updateScore();
     scrollTimer->stop();
     attackTimer->stop();
     gamePaused = true;
