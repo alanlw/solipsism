@@ -25,6 +25,10 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
         SoundArgumentMonster* mySoundArgument = new SoundArgumentMonster();
         myLevel->getMonsters().push_back(mySoundArgument);
     }
+    for (int n = 0; n < 12; n++){
+        AnxietyMonster* myAnxiety = new AnxietyMonster();
+        myLevel->getMonsters().push_back(myAnxiety);
+    }
     myLevels.push_back(myLevel);
     cout << "Level 0 Loaded." << endl;
 

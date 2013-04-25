@@ -29,6 +29,7 @@ SoundArgumentMonster::~SoundArgumentMonster(){
 }
 
 void SoundArgumentMonster::move(){
+
     //Travel a fixed distance, and then turn if it is time.
     //I will use 100 as this fixed distance for now.
     if (moveCounter % 100 == 0){
@@ -77,6 +78,5 @@ void SoundArgumentMonster::move(){
         ;
     }
     moveCounter++;
-
 
 }

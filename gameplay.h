@@ -20,6 +20,7 @@
 #include "monster.h"
 #include "contradictionmonster.h"
 #include "soundargumentmonster.h"
+#include "anxietymonster.h"
 #include "psychicattack.h"
 
 /** For controlling player avatar's movement*/
