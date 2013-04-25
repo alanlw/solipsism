@@ -41,8 +41,10 @@ private:
     /** The Background Image*/
     QPixmap * bgImage;
 
-    /** A Level Transition Item to display*/
-    QGraphicsPixmapItem* transitionItem;
+    /** A level transition to display at the start of the level*/
+    QPixmap* openingScreen;
+    /** A level transition to display at the end of the level*/
+    QPixmap* closingScreen;
 
     /** Pointer to monsters in level*/
     QVector<Monster*> monsters;

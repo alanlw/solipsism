@@ -133,6 +133,8 @@ private:
     QTimer* scrollTimer;
     /** For attacking animation*/
     QTimer* attackTimer;
+    /** For opening and closing screens*/
+    QTimer* levelTransitionTimer;
 
     //Objects in the Game
     //=========================================================================

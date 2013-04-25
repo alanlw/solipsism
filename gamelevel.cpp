@@ -19,6 +19,10 @@ GameLevel::GameLevel(QString imageFileName, QString myLevelName){
     }
 
     levelName = myLevelName;
+
+    //I will want to change this later, to initialize as arguments command.
+    openingScreen = new QPixmap;
+    closingScreen = new QPixmap;
 }
 
 GameLevel::~GameLevel(){
