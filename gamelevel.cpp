@@ -9,14 +9,9 @@ GameLevel::GameLevel(QString imageFileName, QString myLevelName){
     QString imagePath;
     imagePath = "graphics/maps/";
     imagePath +=imageFileName;
-    //cout << imagePath.toStdString() << endl;
 
-    if(bgImage->load(imagePath)){
-        //cout << "Image loaded successfully" << endl;
-    }
-    else{
-        //cout << "Image failed to load." << endl;
-    }
+    bgImage->load(imagePath);
+
 
     levelName = myLevelName;
 

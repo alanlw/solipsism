@@ -49,7 +49,6 @@ void Monster::takeDamage(int n){
 
 }
 void Monster::tempInvincible(int numCycles){
-    //cout << "In tempInvincible" << endl;
     invincible = numCycles;
     this->setOpacity(0.5);
     monsterTimer->start();
@@ -70,7 +69,6 @@ void Monster::reduceInvincible(){
         monsterTimer->stop();
         this->setOpacity(1.0);
     }
-    //cout << invincible << endl;
 }
 void Monster::move(){
     moveCounter++;

@@ -1,13 +1,8 @@
 #include "contradictionmonster.h"
 
 ContradictionMonster::ContradictionMonster(){
-    if(monsterImage->load("graphics/monsters/contradiction.png")){
-        //cout << "Image loaded successfully" << endl;
-    }
+    monsterImage->load("graphics/monsters/contradiction.png");
 
-    else{
-        //cout << "Image failed to load." << endl;
-    }
     setPixmap(*monsterImage);
     hitPoints = 50;
     collisionDamage = 50;
@@ -16,9 +11,7 @@ ContradictionMonster::ContradictionMonster(){
     monsterType = "ContradictionMonster";
 }
 ContradictionMonster::~ContradictionMonster(){
-    //Anything needed that is not already done in Monster?
 }
-
 void ContradictionMonster::move(){
 
 }

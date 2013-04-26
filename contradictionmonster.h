@@ -10,6 +10,7 @@ public:
     /** Destructor*/
     ~ContradictionMonster();
 
+    /** Overloaded move function, makes this Monster not move at all*/
     void move();
 
 protected:

@@ -3,13 +3,7 @@
 #define DEFAULT_HITPOINTS 100
 GamePlayer::GamePlayer(){
     playerImage = new QPixmap();
-    if(playerImage->load("graphics/player/brain_in_vat.png")){
-        //cout << "Image loaded successfully" << endl;
-    }
-
-    else{
-        //cout << "Image failed to load." << endl;
-    }
+    playerImage->load("graphics/player/brain_in_vat.png");
     setPixmap(*playerImage);
     playerImage->scaledToWidth(100);
 
@@ -61,7 +55,6 @@ void GamePlayer::takeDamge(int n){
 
 }
 void GamePlayer::tempInvincible(int numCycles){
-    //cout << "In tempInvincible" << endl;
     invincible = numCycles;
     this->setOpacity(0.5);
     playerTimer->start();
@@ -89,5 +82,4 @@ void GamePlayer::reduceInvincible(){
         playerTimer->stop();
         this->setOpacity(1.0);
     }
-    //cout << invincible << endl;
 }

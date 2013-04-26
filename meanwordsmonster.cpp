@@ -4,13 +4,8 @@
 MeanWordsMonster::MeanWordsMonster(){
 
 
-    if(monsterImage->load("graphics/monsters/meanwords.png")){
-        //cout << "Image loaded successfully" << endl;
-    }
+    monsterImage->load("graphics/monsters/meanwords.png");
 
-    else{
-        //cout << "Image failed to load." << endl;
-    }
     setPixmap(*monsterImage);
     hitPoints = 10;
     collisionDamage = 5;

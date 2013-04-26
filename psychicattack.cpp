@@ -7,13 +7,8 @@ PsychicAttack::PsychicAttack(){
 
     attackDuration = 10;
 
-    if(attackImage->load("graphics/attacks/psychic_attack.png")){
-        //cout << "Image loaded successfully" << endl;
-    }
+    attackImage->load("graphics/attacks/psychic_attack.png");
 
-    else{
-        //cout << "Image failed to load." << endl;
-    }
 
 
     setPixmap(*attackImage);

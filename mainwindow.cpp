@@ -97,15 +97,5 @@ void MainWindow::updateMyLabel(){
 }
 
 
-/*
-void MainWindow::mousePressEvent(QMouseEvent *e){
-    if(e->button() == Qt::LeftButton){
-        cout << "Left Mouse Button pressed" << endl;
-        myGamePlay->clickAttack(e);
-    }
-
-}
-*/
-
 
 

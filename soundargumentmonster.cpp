@@ -3,13 +3,8 @@
 SoundArgumentMonster::SoundArgumentMonster(){
 
 
-    if(monsterImage->load("graphics/monsters/Sulfuric_Acid_Molecule_VdW.png")){
-        //cout << "Image loaded successfully" << endl;
-    }
+    monsterImage->load("graphics/monsters/Sulfuric_Acid_Molecule_VdW.png");
 
-    else{
-        //cout << "Image failed to load." << endl;
-    }
     setPixmap(*monsterImage);
     hitPoints = 30;
     collisionDamage = 17;

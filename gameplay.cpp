@@ -12,7 +12,7 @@
 
 GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
 
-
+    //QInput Dialog to get player's name
     bool ok;
     do {
         playerName = QInputDialog::getText(this, tr("Player Sign-in: "),
@@ -20,17 +20,11 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
                                              QDir::home().dirName(), &ok);
     }while (!(ok && !playerName.isEmpty()));
 
-
-
-    //setFocus();
-    //cout << "Has focus? " << hasFocus() << endl;
     populateLevels();
 
     //We need a scene and a view to do graphics in QT
     gamePlayScene = new QGraphicsScene(this);
     gamePlayView = new QGraphicsView( gamePlayScene, this );
-
-
 
     levelLoaded = false;
     viewRectX = 0;
@@ -40,37 +34,24 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
 
     //Welcoming Screen to Game
     QPixmap * welcome = new QPixmap;
-    if(welcome->load("graphics/menus/welcome.png")){
-        //cout << "Successfully loaded welcome image...." << endl;
-    }
-    else{
-        //cout << "Failed to load welcome image." << endl;
-    }
+    welcome->load("graphics/menus/welcome.png");
+
     gamePlayView->setBackgroundBrush(*welcome);
 
 
-
+    //Load Player onto Screen
     myPlayer = new GamePlayer();
     gamePlayScene->addItem(myPlayer);
     myPlayer->hide();
-
-    //Load Player onto Screen
-    //gamePlayScene->addItem(myPlayer);
-
-    //myPlayer->setX(WINDOW_MAX_X - 200);
-    //myPlayer->setY(WINDOW_MAX_Y);
-    gamePaused = true; //So I can't just move around the player to start.
-
-    connect(this, SIGNAL(levelCleared()), this, SLOT(nextLevel()));
 
     /**Start on level 0*/
     levelPlaying = 0;
 
 
 
-    /**************************************************************************
-      gamePlayScene
-      ************************************************************************/
+    //=========================================================================
+    //  gamePlayScene
+    //=========================================================================
 
     gamePlayView->setWindowTitle( "Side Scroller Game");
     
@@ -91,10 +72,13 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
     connect(scrollTimer, SIGNAL(timeout()), this, SLOT(animateMonsters()));
     connect(myPlayer, SIGNAL(allLivesLost()), this, SLOT(gameOver()));
 
-    levelLoaded = false;
-    gamePaused = false;
+    //For advancing levels
+    connect(this, SIGNAL(levelCleared()), this, SLOT(nextLevel()));
 
-    score = 0;
+    levelLoaded = false; //No level loaded at the start.
+    gamePaused = false; //Game does not begin 'paused', but rather unloaded.
+
+    score = 0; //Player's score starts at 0.
 
     show();
 }
@@ -104,7 +88,9 @@ void GamePlay::populateLevels(){
 
 
     //=========================================================================
-    //Load my level
+    //Load my levels
+    //=========================================================================
+
     GameLevel * temp = new GameLevel("level01.jpg");
     for (int n = 0; n < 10; n++){
         ContradictionMonster* myContradiction = new ContradictionMonster();
@@ -119,7 +105,6 @@ void GamePlay::populateLevels(){
         temp->getMonsters().push_back(myAnxiety);
     }
     myLevels.push_back(temp);
-    //cout << "Level 0 Loaded." << endl;
 
 
     temp = NULL;
@@ -138,11 +123,9 @@ void GamePlay::populateLevels(){
         temp->getMonsters().push_back(myAnxiety);
     }
     myLevels.push_back(temp);
-    //cout << "Level 1 Loaded." << endl;
 
     temp = NULL;
     temp = new GameLevel("level03.jpg");
-    //myLevel = new GameLevel("sample_map03.jpg");
 
     for (int n = 0; n < 25; n++){
         ContradictionMonster* myContradiction = new ContradictionMonster();
@@ -157,7 +140,6 @@ void GamePlay::populateLevels(){
         temp->getMonsters().push_back(myAnxiety);
     }
     myLevels.push_back(temp);
-    //cout << "Level 2 Loaded." << endl;
 
     temp = NULL;
     temp = new GameLevel("sample_map03.jpg");
@@ -175,7 +157,6 @@ void GamePlay::populateLevels(){
         temp->getMonsters().push_back(myAnxiety);
     }
     myLevels.push_back(temp);
-    //cout << "Level 3 Loaded." << endl;
 
     //=========================================================================
 
@@ -210,8 +191,7 @@ bool GamePlay::loadLevel(GameLevel *level){
     }
     //I must remove the player here so the player isn't deleted when I call
     //clear()
-    //myPlayer->show();
-    //gamePlayScene->removeItem(myPlayer);
+
     if(myPlayer != NULL){
         gamePlayScene->removeItem(myPlayer);
     }
@@ -235,26 +215,15 @@ bool GamePlay::loadLevel(GameLevel *level){
 
     //Load Monsters
 
-    //cout << "Are there monsters to add?" << endl;
     for(int i = 0; i < level->getMonsters().size(); i++){
         //cout << "There are " << i+1 << " monsters to add." << endl;
         gamePlayScene->addItem(level->getMonsters()[i]);
-
-        //cout << qrand()%300 << endl;
-        //cout << qrand()%300 << endl;
-
-        //int sceneWidth = gamePlayScene->width();
         int sceneWidth = level->getBgImage()->width();
-        //cout << "sceneWidth = " << sceneWidth << endl;
-        //cout << "sceneWidth = " << sceneWidth << endl;
         do{
-            level->getMonsters()[i]->setX(qrand()%sceneWidth); //These are arbitrary values for now.
+            level->getMonsters()[i]->setX(qrand()%sceneWidth);
         } while(level->getMonsters()[i]->x() >= sceneWidth - 200 ||
                 level->getMonsters()[i]->x() < 400);
-        //cout << level->getMonsters()[i]->x() << endl;
 
-
-        //cout << "Scene width: " << gamePlayScene->width() << endl;
         level->getMonsters()[i]->setY(qrand()%500);
     }
 
@@ -262,13 +231,11 @@ bool GamePlay::loadLevel(GameLevel *level){
     attackTimer->start();
 
     levelLoaded = true;
-    //cout << "Level loaded: " << levelPlaying << endl;
 
     return true;
 }
 
 void GamePlay::pauseGame(){
-    //Launch some window too?
     if(!levelLoaded){
         return;
     }
@@ -309,12 +276,8 @@ void GamePlay::movePlayer(MoveDirection dir){
         return;
     }
     if (monsterCollision()){
-        //"Bump back" player a little bit so he can escape being locked in
-        //collided position.
-        //myPlayer->moveBy(-15, 0);
         return;
     }
-    //cout << "Player: " << myPlayer->x() << ", viewRectX: " << viewRectX << endl;
 
     switch(dir){
     case UP:
@@ -345,18 +308,7 @@ void GamePlay::clickAttack(QMouseEvent *e){
     QPoint myPoint = e->pos(); //so errors don't complain.
     myPoint.setX(myPoint.x() + viewRectX - 35);
     myPoint.setY(myPoint.y() - 65);
-    //Right here I am only correcting the symptom... I must find how to
-    //get the actual scene coordinate instead of just correcting for the
-    //global window one.  Maybe this is a result of getting the QMouseEvent
-    //from MainWindow, but I haven't been able to successfully get it from
-    //somewhere else yet (nor do I know I would want to)
 
-    //cout << "ATTACK!! (" << myPoint.x() << ", " << myPoint.y() << ") " << endl;
-
-    //Now I will want to either create, or move some attack object here so I
-    //can do collision calculations with the other objects.
-
-    //Do I want to make this less specific to a psychic attack later?
     PsychicAttack* tempAtk = new PsychicAttack();
     myAttacks.push_back(tempAtk);
     tempAtk->setPos(myPoint);
@@ -441,8 +393,6 @@ bool GamePlay::attackCollision(){
                 }
 
                 return true;
-                //If I return here, that means an attack can only hit one
-                //monster at a time. I must decide if this is desirable.
             }
         }
     }
@@ -501,14 +451,11 @@ void GamePlay::scrollWindow(){
         //displayStartMenu();
 
         emit updateScore();
-        //cout << "How do I only call levelCleared() once?" << endl;
         emit levelCleared();
     }
 }
 
 void GamePlay::animateAttacks(){
-    //Will this be necessary?
-    //I still need to deal with cooling down attacks between levels.
     if(!getLevelLoaded()){
         //Clear all attacks to prevent errors.
         for(int i = 0; i < myAttacks.size(); i++){
@@ -550,7 +497,6 @@ void GamePlay::animateMonsters(){
         return;
     }
     //Write this so that monsters are animated via the scroll timer!
-    //cout << "In animateMonsters!()" << endl;
 
    //Loop through monsters and call move() function on each.
     for(int j = 0; j < myLevel->getMonsters().size(); j++){
@@ -559,11 +505,7 @@ void GamePlay::animateMonsters(){
         //Generate Attacks
         if(myLevel->getMonsters()[j]->getMonsterType() == "AnxietyMonster"
                 && myLevel->getMonsters()[j]->x() - myPlayer->x() < 550){
-            //cout << "Launch attack!" << endl;
-            //cout << myLevel->getMonsters()[j]->getMoveCounter() << endl;
             if(myLevel->getMonsters()[j]->getMoveCounter() % 100 == 0){
-
-                //cout << myLevel->getMonsters()[j]->getMoveCounter() << endl;
 
                 MeanWordsMonster * temp = new MeanWordsMonster();
                 temp->setPos(myLevel->getMonsters()[j]->pos());
@@ -601,7 +543,6 @@ void GamePlay::launchGame(){
         return;
     }
     cout << "Game launched." << endl;
-    //cout << myLevels.size() << endl;
     myLevel = myLevels[0];
     loadLevel(myLevel);
 }
@@ -621,11 +562,6 @@ void GamePlay::gameOver(){
 }
 
 void GamePlay::nextLevel(){
-    //cout << "...here I must do something to advance gameplay." << endl;
-
-    //Add message or pause before proceeding?
-
-    //Temporary!!
     if(levelPlaying < myLevels.size() - 1){
 
         //If there are more levels to play, play them!
@@ -635,7 +571,6 @@ void GamePlay::nextLevel(){
 
         for(int i = 0; i < myAttacks.size(); i++){
             gamePlayScene->removeItem(myAttacks[i]);
-            //Is it unwise to delete here?
             delete myAttacks[i];
             myAttacks.remove(i);
 
@@ -648,7 +583,6 @@ void GamePlay::nextLevel(){
         loadLevel(myLevel);
     }
     else{
-        //Surely there is a better way to handle this? Splash screen?
         gameOver();
     }
 
