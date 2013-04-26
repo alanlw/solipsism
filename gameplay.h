@@ -25,6 +25,8 @@
 #include "meanwordsmonster.h"
 #include "psychicattack.h"
 
+#include "menugraphicsitem.h"
+
 
 /** For controlling player avatar's movement*/
 //enum MoveDirection {NONE, LEFT, RIGHT, UP, DOWN };
@@ -139,8 +141,6 @@ private:
     QTimer* scrollTimer;
     /** For attacking animation*/
     QTimer* attackTimer;
-    /** For opening and closing screens*/
-    QTimer* levelTransitionTimer;
 
     //Objects in the Game
     //=========================================================================
@@ -168,9 +168,6 @@ public slots:
 
     /** Function called by timer to move monsters*/
     void animateMonsters();
-
-    /** Function called at the beginning of a level*/
-    void openingLevelTransition();
 
     /** When the player clicks the start button, launch game appropriately.*/
     void launchGame();

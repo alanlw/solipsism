@@ -25,8 +25,21 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
     gamePlayView->setSceneRect(viewRectX, viewRectY, WINDOW_MAX_X*2, WINDOW_MAX_Y*2);
 
 
+    //Welcoming Screen to Game
+    QPixmap * welcome = new QPixmap;
+    if(welcome->load("graphics/menus/welcome.png")){
+        cout << "success..." << endl;
+    }
+    else{
+        cout << "failed." << endl;
+    }
+    gamePlayView->setBackgroundBrush(*welcome);
+
+
+
     myPlayer = new GamePlayer();
     gamePlayScene->addItem(myPlayer);
+    myPlayer->hide();
 
     //Load Player onto Screen
     //gamePlayScene->addItem(myPlayer);
@@ -57,16 +70,10 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
     attackTimer = new QTimer();
     attackTimer->setInterval(10);
 
-    levelTransitionTimer = new QTimer();
-    levelTransitionTimer->setInterval(1000);
-
-
     //For scrolling of screen
     connect(scrollTimer, SIGNAL(timeout()), this, SLOT(scrollWindow()));
     //For attack animations
     connect(attackTimer, SIGNAL(timeout()), this, SLOT(animateAttacks()));
-    //For level transitions
-    connect(levelTransitionTimer, SIGNAL(timeout()), this, SLOT(openingLevelTransition()));
 
     //When a player loses all lives, the game is over.
     connect(scrollTimer, SIGNAL(timeout()), this, SLOT(animateMonsters()));
@@ -171,6 +178,7 @@ bool GamePlay::loadLevel(GameLevel *level){
     }
     //I must remove the player here so the player isn't deleted when I call
     //clear()
+    myPlayer->show();
     gamePlayScene->removeItem(myPlayer);
 
     gamePlayScene->clear();
@@ -531,24 +539,6 @@ void GamePlay::animateMonsters(){
     }
 }
 
-void GamePlay::openingLevelTransition(){
-    if (myLevel->getCounter() == 0){
-        return;
-        //If we aren't counting down... then don't have this image.
-    }
-    else{
-        //We only have to do this once, but is it bad to do it multiple times?
-        gamePlayScene->setBackgroundBrush(*myLevel->getOpeningScreen());
-
-
-        //Decrement level counter. Once it counts down to zero, action stops.
-        myLevel->setCounter(myLevel->getCounter() - 1);
-    }
-
-
-    //Load correct QPixmap (if not loaded already). Count down to stall time.
-    //Do not accept attacks/etc. during this time.
-}
 
 void GamePlay::launchGame(){
     if (levelLoaded){
@@ -558,6 +548,8 @@ void GamePlay::launchGame(){
         GamePlayer* tempPlayer = myPlayer;
         myPlayer = new GamePlayer();
         delete tempPlayer;
+
+        score = 0;
 
         scrollTimer->setInterval(STARTING_SCROLLTIMER_INTERVAL);
 

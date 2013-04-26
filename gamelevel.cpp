@@ -20,9 +20,6 @@ GameLevel::GameLevel(QString imageFileName, QString myLevelName){
 
     levelName = myLevelName;
 
-    //I will want to change this later, to initialize as arguments command.
-    openingScreen = new QPixmap;
-    closingScreen = new QPixmap;
 
     counter = 0;
 }
@@ -45,11 +42,3 @@ void GameLevel::setCounter(int n){
     counter = n;
 }
 
-
-QPixmap* GameLevel::getOpeningScreen(){
-    return openingScreen;
-}
-
-QPixmap* GameLevel::getClosingScreen(){
-    return closingScreen;
-}
