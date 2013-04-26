@@ -13,15 +13,15 @@ ScoreWidget::ScoreWidget(QWidget *parent, GamePlay* gp){
 
     hitpointsLabel = new QLabel("Hit Points");
     hitpointsLabel->setFont(labelFont);
-    hitpoints = new QLabel("000000");
+    hitpoints = new QLabel("");
 
     livesLabel = new QLabel("Lives");
     livesLabel->setFont(labelFont);
-    lives = new QLabel("<3<3<3");
+    lives = new QLabel("");
 
     scoreLabel = new QLabel("Score");
     scoreLabel->setFont(labelFont);
-    score = new QLabel("000000");
+    score = new QLabel("");
 
 
 
@@ -58,7 +58,14 @@ void ScoreWidget::scoreChanged(){
     hitpoints->setText(temp);
 
     temp = QString::number(myGamePlay->getPlayerLives());
-    lives->setText(temp);
+    QString hearts = "";
+    for(int i = 0; i < myGamePlay->getPlayerLives(); i++){
+        hearts+= "<3";
+    }
+    if(myGamePlay->getPlayerLives() == 0){
+        hearts = "</3 dead...";
+    }
+    lives->setText(hearts);
 
     temp = QString::number(myGamePlay->getScore());
     score->setText(temp);

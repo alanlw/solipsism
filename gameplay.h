@@ -25,7 +25,6 @@
 #include "meanwordsmonster.h"
 #include "psychicattack.h"
 
-#include "menugraphicsitem.h"
 
 
 /** For controlling player avatar's movement*/
