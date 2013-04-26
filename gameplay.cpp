@@ -177,6 +177,8 @@ void GamePlay::show(){
 
 bool GamePlay::loadLevel(GameLevel *level){
 
+    emit nameEntered();
+
     //For random numbers.
     QTime time = QTime::currentTime();
     qsrand((uint)time.msec());
