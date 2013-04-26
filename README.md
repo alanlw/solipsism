@@ -35,6 +35,17 @@ Run the program with the following command:
 ```
 
 
+### Screenshots
 
-### Screenshots -- [Optional]
-You can either remove this section or add screenshots if you wish.
+Player Sign-In:
+![Player Sign In](/screenshots/name_entry.png)
+
+Opening Screen:
+![Opening Screen](/screenshots/opening_screen.png)
+
+Game Play:
+![Game Play](/screenshots/game_play.png)
+
+Game Over:
+![Game Over](/screenshots/game_over.png)
+
