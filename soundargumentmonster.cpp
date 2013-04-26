@@ -12,7 +12,7 @@ SoundArgumentMonster::SoundArgumentMonster(){
     }
     setPixmap(*monsterImage);
     hitPoints = 30;
-    collisionDamage = 7;
+    collisionDamage = 17;
     scoreVal = 7;
 
     //Use a random counter so that all these items aren't syncronized.

@@ -3,15 +3,17 @@
 
 AnxietyMonster::AnxietyMonster(){
 
+    QPixmap* temp = new QPixmap();
+    temp->load("graphics/monsters/anxiety01.png");
+    monsterImages.push_back(temp);
+    temp = new QPixmap();
+    temp->load("graphics/monsters/anxiety02.png");
+    monsterImages.push_back(temp);
+    temp = new QPixmap();
+    temp->load("graphics/monsters/anxiety03.png");
+    monsterImages.push_back(temp);
 
-    if(monsterImage->load("graphics/monsters/anxiety.png")){
-        //cout << "Image loaded successfully" << endl;
-    }
-
-    else{
-        //cout << "Image failed to load." << endl;
-    }
-    setPixmap(*monsterImage);
+    setPixmap(*monsterImages[0]);
     hitPoints = 30;
     collisionDamage = 7;
     scoreVal = 7;
@@ -30,6 +32,9 @@ AnxietyMonster::~AnxietyMonster(){
 }
 
 void AnxietyMonster::move(){
+
+    setPixmap(*monsterImages[qrand()%3]);
+
 
     int high = 10;
     int low = -10;

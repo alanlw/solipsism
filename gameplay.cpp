@@ -93,7 +93,7 @@ void GamePlay::populateLevels(){
     //level data.
     //
     //Load my level
-    GameLevel * temp = new GameLevel("sample_map01.gif");
+    GameLevel * temp = new GameLevel("level01.jpg");
     for (int n = 0; n < 10; n++){
         ContradictionMonster* myContradiction = new ContradictionMonster();
         temp->getMonsters().push_back(myContradiction);
@@ -111,7 +111,7 @@ void GamePlay::populateLevels(){
 
 
     temp = NULL;
-    temp = new GameLevel("sample_map02.gif");
+    temp = new GameLevel("level02.jpg");
 
     for (int n = 0; n < 15; n++){
         ContradictionMonster* myContradiction = new ContradictionMonster();
@@ -129,7 +129,7 @@ void GamePlay::populateLevels(){
     cout << "Level 1 Loaded." << endl;
 
     temp = NULL;
-    temp = new GameLevel("sample_map03.jpg");
+    temp = new GameLevel("level03.jpg");
     //myLevel = new GameLevel("sample_map03.jpg");
 
     for (int n = 0; n < 25; n++){

@@ -68,6 +68,8 @@ public:
 protected:
     /** Image of the monster*/
     QPixmap * monsterImage;
+    /** ...Or if we want to use an animation...*/
+    vector<QPixmap *> monsterImages;
 
     /** Is the monster alive?*/
     bool alive;
