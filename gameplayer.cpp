@@ -4,11 +4,11 @@
 GamePlayer::GamePlayer(){
     playerImage = new QPixmap();
     if(playerImage->load("graphics/player/brain_in_vat.png")){
-        cout << "Image loaded successfully" << endl;
+        //cout << "Image loaded successfully" << endl;
     }
 
     else{
-        cout << "Image failed to load." << endl;
+        //cout << "Image failed to load." << endl;
     }
     setPixmap(*playerImage);
     playerImage->scaledToWidth(100);

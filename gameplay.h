@@ -77,6 +77,8 @@ public:
     bool getLevelLoaded();
     /** @return Is the game paused?*/
     bool getGamePaused();
+    /** @return the player's name*/
+    QString getPlayerName();
 
     /** @return Return gamePlayView*/
     QGraphicsView* getGamePlayView();
@@ -119,6 +121,8 @@ private:
         //Temporary, just to make this easier to test.
         //GameLevel * myLevel;
 
+    QString playerName;
+
     /** @return Is the level loaded?*/
     bool levelLoaded;
     /** @return Is the game paused?*/
@@ -149,7 +153,6 @@ private:
 
     /** Data of player*/
     GamePlayer* myPlayer;
-
 
 
     //Score-Keeping
@@ -187,6 +190,10 @@ signals:
     /** Emit this signal when a level is cleared so that a new level can be
       loaded.*/
     void levelCleared();
+
+    /** Emit a sginal when player's name is recieved so that I cna update
+        the label on the MainWindow. */
+    void nameEntered();
 
 
 

@@ -6,7 +6,7 @@ MenuGraphicsItem::MenuGraphicsItem(QString fileName){
     QString imagePath;
     imagePath = "graphics/menus/";
     imagePath +=fileName;
-    cout << imagePath.toStdString() << endl;
+    //cout << imagePath.toStdString() << endl;
     if(menuImage->load(imagePath)){
         //cout << "Image loaded successfully" << endl;
     }

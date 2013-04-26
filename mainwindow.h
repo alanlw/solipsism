@@ -55,6 +55,9 @@ private:
     /** Main Layout*/
     QVBoxLayout *mainLayout;
 
+ public slots:
+    void updateMyLabel();
+
 
 };
 

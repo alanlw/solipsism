@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)  {
     myScoreWidget = new ScoreWidget(this, myGamePlay);
 
     myLabel = new QLabel("Display Level Status Here.");
+    connect( myGamePlay, SIGNAL(nameEntered()), this, SLOT(updateMyLabel()));
 
     startButton = new QPushButton("Start Game", this);
     connect( startButton, SIGNAL(clicked()), myGamePlay, SLOT(launchGame()));
@@ -87,6 +88,11 @@ void MainWindow::keyPressEvent(QKeyEvent *e){
         return;
 
     }
+}
+
+void MainWindow::updateMyLabel(){
+    cout << "Updating label" << endl;
+    myLabel->setText(myGamePlay->getPlayerName());
 }
 
 

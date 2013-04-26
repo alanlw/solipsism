@@ -2,11 +2,23 @@
 #include <qapplication.h>
 #include <QGraphicsTextItem> //For pauses messages, etc.
 #include <QTime>
+#include <QInputDialog>
+#include <QDir>
+#include <QLineEdit>
 
 #define STARTING_SCROLLTIMER_INTERVAL 20
 
 
 GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
+
+
+    bool ok;
+    do {
+        playerName = QInputDialog::getText(this, tr("Player Sign-in: "),
+                                             tr("Enter your name:"), QLineEdit::Normal,
+                                             QDir::home().dirName(), &ok);
+    }while (!(ok && !playerName.isEmpty()));
+
 
 
     //setFocus();
@@ -28,10 +40,10 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
     //Welcoming Screen to Game
     QPixmap * welcome = new QPixmap;
     if(welcome->load("graphics/menus/welcome.png")){
-        cout << "success..." << endl;
+        //cout << "Successfully loaded welcome image...." << endl;
     }
     else{
-        cout << "failed." << endl;
+        //cout << "Failed to load welcome image." << endl;
     }
     gamePlayView->setBackgroundBrush(*welcome);
 
@@ -53,7 +65,6 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
     /**Start on level 0*/
     levelPlaying = 0;
 
-    //myLevel = NULL;
 
 
     /**************************************************************************
@@ -88,10 +99,10 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
 }
 
 void GamePlay::populateLevels(){
+
+
+
     //=========================================================================
-    //This is temporary, I need to think of a better way to store/access/etc.
-    //level data.
-    //
     //Load my level
     GameLevel * temp = new GameLevel("level01.jpg");
     for (int n = 0; n < 10; n++){
@@ -107,7 +118,7 @@ void GamePlay::populateLevels(){
         temp->getMonsters().push_back(myAnxiety);
     }
     myLevels.push_back(temp);
-    cout << "Level 0 Loaded." << endl;
+    //cout << "Level 0 Loaded." << endl;
 
 
     temp = NULL;
@@ -126,7 +137,7 @@ void GamePlay::populateLevels(){
         temp->getMonsters().push_back(myAnxiety);
     }
     myLevels.push_back(temp);
-    cout << "Level 1 Loaded." << endl;
+    //cout << "Level 1 Loaded." << endl;
 
     temp = NULL;
     temp = new GameLevel("level03.jpg");
@@ -145,7 +156,7 @@ void GamePlay::populateLevels(){
         temp->getMonsters().push_back(myAnxiety);
     }
     myLevels.push_back(temp);
-    cout << "Level 2 Loaded." << endl;
+    //cout << "Level 2 Loaded." << endl;
 
     //=========================================================================
 
@@ -178,8 +189,11 @@ bool GamePlay::loadLevel(GameLevel *level){
     }
     //I must remove the player here so the player isn't deleted when I call
     //clear()
-    myPlayer->show();
-    gamePlayScene->removeItem(myPlayer);
+    //myPlayer->show();
+    //gamePlayScene->removeItem(myPlayer);
+    if(myPlayer != NULL){
+        gamePlayScene->removeItem(myPlayer);
+    }
 
     gamePlayScene->clear();
 
@@ -193,15 +207,16 @@ bool GamePlay::loadLevel(GameLevel *level){
 
     //Load Player onto Screen
     gamePlayScene->addItem(myPlayer);
+    myPlayer->show();
     myPlayer->setX(WINDOW_MAX_X - 200);
     myPlayer->setY(WINDOW_MAX_Y);
 
 
     //Load Monsters
 
-    cout << "Are there monsters to add?" << endl;
+    //cout << "Are there monsters to add?" << endl;
     for(int i = 0; i < level->getMonsters().size(); i++){
-        cout << "There are " << i+1 << " monsters to add." << endl;
+        //cout << "There are " << i+1 << " monsters to add." << endl;
         gamePlayScene->addItem(level->getMonsters()[i]);
 
         //cout << qrand()%300 << endl;
@@ -209,13 +224,13 @@ bool GamePlay::loadLevel(GameLevel *level){
 
         //int sceneWidth = gamePlayScene->width();
         int sceneWidth = level->getBgImage()->width();
-        cout << "sceneWidth = " << sceneWidth << endl;
+        //cout << "sceneWidth = " << sceneWidth << endl;
         //cout << "sceneWidth = " << sceneWidth << endl;
         do{
             level->getMonsters()[i]->setX(qrand()%sceneWidth); //These are arbitrary values for now.
         } while(level->getMonsters()[i]->x() >= sceneWidth - 200 ||
                 level->getMonsters()[i]->x() < 400);
-        cout << level->getMonsters()[i]->x() << endl;
+        //cout << level->getMonsters()[i]->x() << endl;
 
 
         //cout << "Scene width: " << gamePlayScene->width() << endl;
@@ -226,7 +241,7 @@ bool GamePlay::loadLevel(GameLevel *level){
     attackTimer->start();
 
     levelLoaded = true;
-    cout << "Level loaded: " << levelPlaying << endl;
+    //cout << "Level loaded: " << levelPlaying << endl;
 
     return true;
 }
@@ -356,6 +371,9 @@ int GamePlay::getViewRectX(){
 int GamePlay::getViewRectY(){
     return viewRectY;
 }
+QString GamePlay::getPlayerName(){
+    return playerName;
+}
 
 bool GamePlay::monsterCollision(){
     if(myPlayer->getInvincible()){
@@ -462,7 +480,7 @@ void GamePlay::scrollWindow(){
         //displayStartMenu();
 
         emit updateScore();
-        cout << "How do I only call levelCleared() once?" << endl;
+        //cout << "How do I only call levelCleared() once?" << endl;
         emit levelCleared();
     }
 }
@@ -545,10 +563,6 @@ void GamePlay::launchGame(){
         cout << "A level is already loaded." << endl;
         cout << "Restarting game by reloading first level." << endl;
 
-        GamePlayer* tempPlayer = myPlayer;
-        myPlayer = new GamePlayer();
-        delete tempPlayer;
-
         score = 0;
 
         scrollTimer->setInterval(STARTING_SCROLLTIMER_INTERVAL);
@@ -566,7 +580,7 @@ void GamePlay::launchGame(){
         return;
     }
     cout << "Game launched." << endl;
-    cout << myLevels.size() << endl;
+    //cout << myLevels.size() << endl;
     myLevel = myLevels[0];
     loadLevel(myLevel);
 }
@@ -577,12 +591,13 @@ void GamePlay::gameOver(){
     scrollTimer->stop();
     attackTimer->stop();
     gamePaused = true;
+
     cout << "Game Over!" << endl;
 
 }
 
 void GamePlay::nextLevel(){
-    cout << "...here I must do something to advance gameplay." << endl;
+    //cout << "...here I must do something to advance gameplay." << endl;
 
     //Add message or pause before proceeding?
 
