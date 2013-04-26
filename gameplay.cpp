@@ -159,6 +159,24 @@ void GamePlay::populateLevels(){
     myLevels.push_back(temp);
     //cout << "Level 2 Loaded." << endl;
 
+    temp = NULL;
+    temp = new GameLevel("sample_map03.jpg");
+
+    for (int n = 0; n < 40; n++){
+        ContradictionMonster* myContradiction = new ContradictionMonster();
+        temp->getMonsters().push_back(myContradiction);
+    }
+    for (int n = 0; n < 30; n++){
+        SoundArgumentMonster* mySoundArgument = new SoundArgumentMonster();
+        temp->getMonsters().push_back(mySoundArgument);
+    }
+    for (int n = 0; n < 30; n++){
+        AnxietyMonster* myAnxiety = new AnxietyMonster();
+        temp->getMonsters().push_back(myAnxiety);
+    }
+    myLevels.push_back(temp);
+    //cout << "Level 3 Loaded." << endl;
+
     //=========================================================================
 
 }
