@@ -92,7 +92,7 @@ void MainWindow::keyPressEvent(QKeyEvent *e){
 }
 
 void MainWindow::updateMyLabel(){
-    cout << "Updating label" << endl;
+    //cout << "Updating label" << endl;
     myLabel->setText("Player name:\n" + myGamePlay->getPlayerName());
 }
 
