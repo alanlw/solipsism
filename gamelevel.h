@@ -36,6 +36,7 @@ public:
 
     /** Get counter value*/
     int getCounter() const;
+    /** Set counter value*/
     void setCounter(int n);
 
     /** Get opening screen pixmap*/

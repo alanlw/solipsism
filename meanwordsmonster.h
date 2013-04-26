@@ -4,6 +4,9 @@
 #include "monster.h"
 #include <QGraphicsTextItem>
 
+/**
+    Mean words are attacks launched by AnxietyMonsters.
+ */
 class MeanWordsMonster : public Monster{
 public:
     //=========================================================================

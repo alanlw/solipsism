@@ -9,6 +9,9 @@
 
 using namespace std;
 
+/**
+  This is the class for the User-controlled avatar in the game.
+  */
 class GamePlayer : public QObject, public QGraphicsPixmapItem {
 
  Q_OBJECT

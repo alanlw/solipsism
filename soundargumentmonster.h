@@ -3,6 +3,11 @@
 
 #include "monster.h"
 
+/**
+    Sound Arguments move in clockwise square formations triggered at fixed
+    intervals by a timer. Contact with a player will reduce player health.
+    Can be destroyed by player.
+  */
 class SoundArgumentMonster : public Monster{
 public:
     //=========================================================================

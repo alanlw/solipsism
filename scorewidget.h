@@ -6,7 +6,10 @@
 #include <QBoxLayout>
 
 #include "gameplay.h"
-
+/**
+  This widget keeps track of the Player's score. It is connected to a GamePlay
+  object via MainWindow.
+  */
 class ScoreWidget : public QWidget {
     Q_OBJECT
 public:

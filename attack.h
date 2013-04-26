@@ -5,6 +5,11 @@
 #include <QObject>
 #include <QTimer>
 
+/**
+  The Attack class is used as a base class for implementations of various
+  Mouse-based click attacks.
+
+  */
 class Attack : public QObject, public QGraphicsPixmapItem {
 Q_OBJECT
 public:

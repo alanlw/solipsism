@@ -25,7 +25,7 @@ to destroy. Contact with a Contradiction reduces hitpoints.
 	![Contradiction Monster](/graphics/monsters/contradiction.png)
 
 - Sound Arguments
-    - Sound Arguments move in clockwise square formations triggered at fixed intervals by a timer. Contact with a player will reduce player health. Will reverse direction if hit by a Contradiction. Can be destroyed by player.  
+    - Sound Arguments move in clockwise square formations triggered at fixed intervals by a timer. Contact with a player will reduce player health. Can be destroyed by player.  
 
 	![Sound Argument Monster](/graphics/monsters/Sulfuric_Acid_Molecule_VdW.png)
 
@@ -50,8 +50,8 @@ being uttered at the User's consciousness.
 
 - Psychic Attack
     - By clicking on certain monsters, the player can reduce these monster's
-    health and eventually make them disappear. An animation of a rippling
-    purple circles will represent this object.  
+    health and eventually make them disappear. An animation of a wavering
+    purple energy ball will represent this object.  
 
     ![Psychic Attack](/graphics/attacks/psychic_attack.png)
 

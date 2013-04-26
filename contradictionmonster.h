@@ -3,6 +3,12 @@
 
 #include "monster.h"
 
+/**
+    A Monster in this game.
+
+    Contradictions are very robust and will take multiple attacks.
+    to destroy. Contact with a Contradiction reduces hitpoints.
+  */
 class ContradictionMonster : public Monster{
 public:
     /** Constructor*/

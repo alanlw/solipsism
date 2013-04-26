@@ -5,6 +5,11 @@
 #include <QObject>
 #include <QMouseEvent>
 
+/**
+    By clicking on certain monsters, the player can reduce these monster's
+    health and eventually make them disappear. An animation of a rippling
+    purple circles will represent this object.
+  */
 class PsychicAttack : public Attack{
 public:
     //=========================================================================

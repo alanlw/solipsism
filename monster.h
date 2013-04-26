@@ -12,6 +12,9 @@ using namespace std;
 /** For controlling movements*/
 enum MoveDirection {NONE, LEFT, RIGHT, UP, DOWN };
 
+/**
+  Base class to derive enemy objects for in this game.
+  */
 class Monster : public QObject, public QGraphicsPixmapItem {
 Q_OBJECT
 public:
@@ -88,7 +91,9 @@ protected:
 
     /** Counting calls to move function for making moves*/
     int moveCounter;
-
+    /** Name of monster type so it is easy to apply appropriate calculations
+        to appropriate monsters in calculations.
+        */
     string monsterType;
 
 private:

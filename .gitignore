@@ -56,4 +56,5 @@ config.txt
 # Qt Generated Files
 moc_*
 *.pro
+*.pro.user
 Makefile

@@ -13,7 +13,8 @@
 
 
 /**
-MainWindow (add documentation later)
+MainWindow glues all the widgets together and makes sure they interact
+with each other properly.
 
 @author Alan Wong
 */
@@ -56,6 +57,7 @@ private:
     QVBoxLayout *mainLayout;
 
  public slots:
+    /** Update label with player's name*/
     void updateMyLabel();
 
 

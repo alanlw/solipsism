@@ -33,13 +33,21 @@
 #define WINDOW_MAX_X 300
 #define WINDOW_MAX_Y 300
 
+/**
+  This widget contains the actual implementation of game play, using a view
+  that pans over a scene.
+
+  */
+
 class GamePlay : public QWidget{
     Q_OBJECT
 
 public:
+    /** Constructor */
     GamePlay(QWidget *parent);
+    /** Destructor */
     ~GamePlay();
-
+    /** Show */
     void show();
 
     //=========================================================================
@@ -50,7 +58,9 @@ public:
       @param level A pointer to the level to be loaded.
     */
     bool loadLevel(GameLevel* level);
+    /** Pause the game */
     void pauseGame();
+    /** Unpause the game */
     void unPauseGame();
 
     //=========================================================================
@@ -88,7 +98,7 @@ public:
 
 
 protected:
-
+    /** Process mouse events to generate attacks*/
     void mousePressEvent(QMouseEvent *e);
 
     /** @return Return true if player is colliding with a monster.*/
