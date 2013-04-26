@@ -34,7 +34,7 @@ to destroy. Contact with a Contradiction reduces hitpoints.
 Contradiction Monster, they die. Can be destroyed by player. Anxieties
 generate Mean Words.  
 
-	![Anxiety Monster](/graphics/monsters/anxiety.png)
+	![Anxiety Monster](/graphics/monsters/anxiety01.png)
 
 - Mean Words
     - Mean Words moves toward player. If Mean Words hits player, player
@@ -95,8 +95,15 @@ Players will be prompted for their name when the game starts, after they click
  the "Start Game" button. After they enter their name, there will be a slight 
 delay, and game play will launch into the screen shown below. 
 
+Player Sign-In:
+![Player Sign In](/screenshots/name_entry.png)
 
+Opening Screen:
+![Opening Screen](/screenshots/opening_screen.png)
 
-Here is an image of the user interface:  
+Game Play:
+![Game Play](/screenshots/game_play.png)
 
-![Game Design Doc](/game_design_doc.jpg)
+Game Over:
+![Game Over](/screenshots/game_over.png)
+
