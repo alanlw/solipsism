@@ -5,6 +5,7 @@
 #include <QInputDialog>
 #include <QDir>
 #include <QLineEdit>
+#include <QMessageBox>
 
 #define STARTING_SCROLLTIMER_INTERVAL 20
 
@@ -594,6 +595,9 @@ void GamePlay::gameOver(){
     attackTimer->stop();
     gamePaused = true;
 
+    QString message = "For with much wisdom comes much sorrow;\n the more knowledge, the more grief.";
+    message+="\n\nPress 'Start Game' again to restart, or 'Quit' to quit.";
+    QMessageBox::warning(this,"Game Over!", message, QMessageBox::Ok);
     cout << "Game Over!" << endl;
 
 }
