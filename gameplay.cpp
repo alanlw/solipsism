@@ -3,75 +3,15 @@
 #include <QGraphicsTextItem> //For pauses messages, etc.
 #include <QTime>
 
+#define STARTING_SCROLLTIMER_INTERVAL 20
+
 
 GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
 
 
     //setFocus();
     //cout << "Has focus? " << hasFocus() << endl;
-
-
-
-    //=========================================================================
-    //This is temporary, I need to think of a better way to store/access/etc.
-    //level data.
-    //
-    //Load my level
-    GameLevel * myLevel = new GameLevel("sample_map01.gif");
-    for (int n = 0; n < 10; n++){
-        ContradictionMonster* myContradiction = new ContradictionMonster();
-        myLevel->getMonsters().push_back(myContradiction);
-    }
-    for (int n = 0; n < 15; n++){
-        SoundArgumentMonster* mySoundArgument = new SoundArgumentMonster();
-        myLevel->getMonsters().push_back(mySoundArgument);
-    }
-    for (int n = 0; n < 5; n++){
-        AnxietyMonster* myAnxiety = new AnxietyMonster();
-        myLevel->getMonsters().push_back(myAnxiety);
-    }
-    myLevels.push_back(myLevel);
-    cout << "Level 0 Loaded." << endl;
-
-
-    myLevel = NULL;
-    myLevel = new GameLevel("sample_map02.gif");
-
-    for (int n = 0; n < 15; n++){
-        ContradictionMonster* myContradiction = new ContradictionMonster();
-        myLevel->getMonsters().push_back(myContradiction);
-    }
-    for (int n = 0; n < 20; n++){
-        SoundArgumentMonster* mySoundArgument = new SoundArgumentMonster();
-        myLevel->getMonsters().push_back(mySoundArgument);
-    }
-    for (int n = 0; n < 7; n++){
-        AnxietyMonster* myAnxiety = new AnxietyMonster();
-        myLevel->getMonsters().push_back(myAnxiety);
-    }
-    myLevels.push_back(myLevel);
-    cout << "Level 1 Loaded." << endl;
-
-    myLevel = NULL;
-    myLevel = new GameLevel("sample_map03.jpg");
-    //myLevel = new GameLevel("sample_map03.jpg");
-
-    for (int n = 0; n < 25; n++){
-        ContradictionMonster* myContradiction = new ContradictionMonster();
-        myLevel->getMonsters().push_back(myContradiction);
-    }
-    for (int n = 0; n < 25; n++){
-        SoundArgumentMonster* mySoundArgument = new SoundArgumentMonster();
-        myLevel->getMonsters().push_back(mySoundArgument);
-    }
-    for (int n = 0; n < 15; n++){
-        AnxietyMonster* myAnxiety = new AnxietyMonster();
-        myLevel->getMonsters().push_back(myAnxiety);
-    }
-    myLevels.push_back(myLevel);
-    cout << "Level 2 Loaded." << endl;
-
-    //=========================================================================
+    populateLevels();
 
     //We need a scene and a view to do graphics in QT
     gamePlayScene = new QGraphicsScene(this);
@@ -100,6 +40,8 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
     /**Start on level 0*/
     levelPlaying = 0;
 
+    //myLevel = NULL;
+
 
     /**************************************************************************
       gamePlayScene
@@ -110,7 +52,7 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
 
     //Set timer for animation.
     scrollTimer = new QTimer(this);
-    scrollTimer->setInterval(30); //We will reduce this which each level...
+    scrollTimer->setInterval(STARTING_SCROLLTIMER_INTERVAL); //We will reduce this which each level...
 
     attackTimer = new QTimer();
     attackTimer->setInterval(10);
@@ -136,6 +78,70 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
     score = 0;
 
     show();
+}
+
+void GamePlay::populateLevels(){
+    //=========================================================================
+    //This is temporary, I need to think of a better way to store/access/etc.
+    //level data.
+    //
+    //Load my level
+    GameLevel * temp = new GameLevel("sample_map01.gif");
+    for (int n = 0; n < 10; n++){
+        ContradictionMonster* myContradiction = new ContradictionMonster();
+        temp->getMonsters().push_back(myContradiction);
+    }
+    for (int n = 0; n < 15; n++){
+        SoundArgumentMonster* mySoundArgument = new SoundArgumentMonster();
+        temp->getMonsters().push_back(mySoundArgument);
+    }
+    for (int n = 0; n < 5; n++){
+        AnxietyMonster* myAnxiety = new AnxietyMonster();
+        temp->getMonsters().push_back(myAnxiety);
+    }
+    myLevels.push_back(temp);
+    cout << "Level 0 Loaded." << endl;
+
+
+    temp = NULL;
+    temp = new GameLevel("sample_map02.gif");
+
+    for (int n = 0; n < 15; n++){
+        ContradictionMonster* myContradiction = new ContradictionMonster();
+        temp->getMonsters().push_back(myContradiction);
+    }
+    for (int n = 0; n < 20; n++){
+        SoundArgumentMonster* mySoundArgument = new SoundArgumentMonster();
+        temp->getMonsters().push_back(mySoundArgument);
+    }
+    for (int n = 0; n < 7; n++){
+        AnxietyMonster* myAnxiety = new AnxietyMonster();
+        temp->getMonsters().push_back(myAnxiety);
+    }
+    myLevels.push_back(temp);
+    cout << "Level 1 Loaded." << endl;
+
+    temp = NULL;
+    temp = new GameLevel("sample_map03.jpg");
+    //myLevel = new GameLevel("sample_map03.jpg");
+
+    for (int n = 0; n < 25; n++){
+        ContradictionMonster* myContradiction = new ContradictionMonster();
+        temp->getMonsters().push_back(myContradiction);
+    }
+    for (int n = 0; n < 25; n++){
+        SoundArgumentMonster* mySoundArgument = new SoundArgumentMonster();
+        temp->getMonsters().push_back(mySoundArgument);
+    }
+    for (int n = 0; n < 15; n++){
+        AnxietyMonster* myAnxiety = new AnxietyMonster();
+        temp->getMonsters().push_back(myAnxiety);
+    }
+    myLevels.push_back(temp);
+    cout << "Level 2 Loaded." << endl;
+
+    //=========================================================================
+
 }
 
 GamePlay::~GamePlay(){
@@ -181,12 +187,6 @@ bool GamePlay::loadLevel(GameLevel *level){
     gamePlayScene->addItem(myPlayer);
     myPlayer->setX(WINDOW_MAX_X - 200);
     myPlayer->setY(WINDOW_MAX_Y);
-
-
-    //Speed up timer.
-    if(!scrollTimer->interval() <= 10){
-        scrollTimer->setInterval(scrollTimer->interval() * (2.0/3.0));
-    }
 
 
     //Load Monsters
@@ -353,12 +353,12 @@ bool GamePlay::monsterCollision(){
     if(myPlayer->getInvincible()){
         return false;
     }
-    for(int i = 0; i < myLevels[levelPlaying]->getMonsters().size(); i++){
-        if (myPlayer->collidesWithItem(myLevels[levelPlaying]->getMonsters()[i])){
+    for(int i = 0; i < myLevel->getMonsters().size(); i++){
+        if (myPlayer->collidesWithItem(myLevel->getMonsters()[i])){
 
 
             //Apply collision damage to player.
-            myPlayer->takeDamge(myLevels[levelPlaying]->getMonsters()[i]->getCollisionDamage());
+            myPlayer->takeDamge(myLevel->getMonsters()[i]->getCollisionDamage());
             if(!myPlayer->getInvincible()){
                 myPlayer->tempInvincible(15);
             }
@@ -374,23 +374,23 @@ bool GamePlay::attackCollision(){
         return false;
     }
     for(int i = 0; i < myAttacks.size(); i++){
-        for(int j = 0; j < myLevels[levelPlaying]->getMonsters().size(); j++){
-            if(myAttacks[i]->collidesWithItem(myLevels[levelPlaying]->getMonsters()[j])){
+        for(int j = 0; j < myLevel->getMonsters().size(); j++){
+            if(myAttacks[i]->collidesWithItem(myLevel->getMonsters()[j])){
                 //cout << "Attack hit monster." << endl;
 
-                myLevels[levelPlaying]->getMonsters()[j]->takeDamage(myAttacks[i]->getAttackDamage());
+                myLevel->getMonsters()[j]->takeDamage(myAttacks[i]->getAttackDamage());
 
                 //Check if this kills this monster
-                if(myLevels[levelPlaying]->getMonsters()[j]->getHitPoints() <= 0){
-                    gamePlayScene->removeItem(myLevels[levelPlaying]->getMonsters()[j]);
-                    score += myLevels[levelPlaying]->getMonsters()[j]->getScoreVal();
-                    delete myLevels[levelPlaying]->getMonsters()[j]; //Will this cause errors?
-                    myLevels[levelPlaying]->getMonsters().remove(j);
+                if(myLevel->getMonsters()[j]->getHitPoints() <= 0){
+                    gamePlayScene->removeItem(myLevel->getMonsters()[j]);
+                    score += myLevel->getMonsters()[j]->getScoreVal();
+                    delete myLevel->getMonsters()[j]; //Will this cause errors?
+                    myLevel->getMonsters().remove(j);
                     return true;
                 }
 
-                if(!myLevels[levelPlaying]->getMonsters()[j]->getInvincible()){
-                    myLevels[levelPlaying]->getMonsters()[j]->tempInvincible(2);
+                if(!myLevel->getMonsters()[j]->getInvincible()){
+                    myLevel->getMonsters()[j]->tempInvincible(2);
                 }
 
                 return true;
@@ -427,7 +427,7 @@ void GamePlay::scrollWindow(){
     //Will it make this game significantly slower to do this here?
     emit updateScore();
 
-    if (viewRectX<= myLevels[levelPlaying]->getBgImage()->width() - WINDOW_MAX_X*2){
+    if (viewRectX<= myLevel->getBgImage()->width() - WINDOW_MAX_X*2){
         viewRectX++;
         gamePlayView->setSceneRect(viewRectX, viewRectY, WINDOW_MAX_X*2, WINDOW_MAX_Y*2);
 
@@ -506,24 +506,24 @@ void GamePlay::animateMonsters(){
     //cout << "In animateMonsters!()" << endl;
 
    //Loop through monsters and call move() function on each.
-    for(int j = 0; j < myLevels[levelPlaying]->getMonsters().size(); j++){
-        myLevels[levelPlaying]->getMonsters()[j]->move();
+    for(int j = 0; j < myLevel->getMonsters().size(); j++){
+        myLevel->getMonsters()[j]->move();
 
         //Generate Attacks
-        if(myLevels[levelPlaying]->getMonsters()[j]->getMonsterType() == "AnxietyMonster"
-                && myLevels[levelPlaying]->getMonsters()[j]->x() - myPlayer->x() < 550){
+        if(myLevel->getMonsters()[j]->getMonsterType() == "AnxietyMonster"
+                && myLevel->getMonsters()[j]->x() - myPlayer->x() < 550){
             //cout << "Launch attack!" << endl;
-            //cout << myLevels[levelPlaying]->getMonsters()[j]->getMoveCounter() << endl;
-            if(myLevels[levelPlaying]->getMonsters()[j]->getMoveCounter() % 100 == 0){
+            //cout << myLevel->getMonsters()[j]->getMoveCounter() << endl;
+            if(myLevel->getMonsters()[j]->getMoveCounter() % 100 == 0){
 
-                //cout << myLevels[levelPlaying]->getMonsters()[j]->getMoveCounter() << endl;
+                //cout << myLevel->getMonsters()[j]->getMoveCounter() << endl;
 
                 MeanWordsMonster * temp = new MeanWordsMonster();
-                temp->setPos(myLevels[levelPlaying]->getMonsters()[j]->pos());
+                temp->setPos(myLevel->getMonsters()[j]->pos());
                 temp->setZValue(1);
                 temp->setX(temp->x() - 60);
                 gamePlayScene->addItem(temp);
-                myLevels[levelPlaying]->getMonsters().push_back(temp);
+                myLevel->getMonsters().push_back(temp);
 
             }
         }
@@ -532,17 +532,17 @@ void GamePlay::animateMonsters(){
 }
 
 void GamePlay::openingLevelTransition(){
-    if (myLevels[levelPlaying]->getCounter() == 0){
+    if (myLevel->getCounter() == 0){
         return;
         //If we aren't counting down... then don't have this image.
     }
     else{
         //We only have to do this once, but is it bad to do it multiple times?
-        gamePlayScene->setBackgroundBrush(*myLevels[levelPlaying]->getOpeningScreen());
+        gamePlayScene->setBackgroundBrush(*myLevel->getOpeningScreen());
 
 
         //Decrement level counter. Once it counts down to zero, action stops.
-        myLevels[levelPlaying]->setCounter(myLevels[levelPlaying]->getCounter() - 1);
+        myLevel->setCounter(myLevel->getCounter() - 1);
     }
 
 
@@ -553,10 +553,30 @@ void GamePlay::openingLevelTransition(){
 void GamePlay::launchGame(){
     if (levelLoaded){
         cout << "A level is already loaded." << endl;
+        cout << "Restarting game by reloading first level." << endl;
+
+        GamePlayer* tempPlayer = myPlayer;
+        myPlayer = new GamePlayer();
+        delete tempPlayer;
+
+        scrollTimer->setInterval(STARTING_SCROLLTIMER_INTERVAL);
+
+        GameLevel* temp = new GameLevel();
+        loadLevel(temp);
+        for(int i = 0; i < myLevels.size(); i++){
+            delete myLevels[i];
+        }
+        myLevels.clear();
+        populateLevels();
+        myLevel = myLevels[0];
+        loadLevel(myLevel);
+        delete temp;
         return;
     }
     cout << "Game launched." << endl;
-    loadLevel(myLevels[levelPlaying]);
+    cout << myLevels.size() << endl;
+    myLevel = myLevels[0];
+    loadLevel(myLevel);
 }
 
 void GamePlay::gameOver(){
@@ -579,7 +599,22 @@ void GamePlay::nextLevel(){
 
         //If there are more levels to play, play them!
         levelPlaying++;
-        loadLevel(myLevels[levelPlaying]);
+        myLevel = myLevels[levelPlaying];
+
+
+        for(int i = 0; i < myAttacks.size(); i++){
+            gamePlayScene->removeItem(myAttacks[i]);
+            //Is it unwise to delete here?
+            delete myAttacks[i];
+            myAttacks.remove(i);
+
+        }
+        //Speed up timer.
+        if(!scrollTimer->interval() <= 10){
+            scrollTimer->setInterval(scrollTimer->interval() * (2.0/3.0));
+        }
+
+        loadLevel(myLevel);
     }
     else{
         //Surely there is a better way to handle this? Splash screen?

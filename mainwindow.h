@@ -55,6 +55,7 @@ private:
     /** Main Layout*/
     QVBoxLayout *mainLayout;
 
+
 };
 
 

@@ -49,7 +49,7 @@ void Monster::takeDamage(int n){
 
 }
 void Monster::tempInvincible(int numCycles){
-    cout << "In tempInvincible" << endl;
+    //cout << "In tempInvincible" << endl;
     invincible = numCycles;
     this->setOpacity(0.5);
     monsterTimer->start();

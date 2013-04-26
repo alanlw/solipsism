@@ -40,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)  {
     //Connect the ScoreWidget to this
     connect(myGamePlay, SIGNAL(updateScore()), myScoreWidget, SLOT(scoreChanged()));
 
+
 }
 MainWindow::~MainWindow()
 {
@@ -87,6 +88,8 @@ void MainWindow::keyPressEvent(QKeyEvent *e){
 
     }
 }
+
+
 /*
 void MainWindow::mousePressEvent(QMouseEvent *e){
     if(e->button() == Qt::LeftButton){

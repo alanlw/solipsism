@@ -112,6 +112,8 @@ private:
 
     /** To hold my level data*/
     QVector<GameLevel*> myLevels;
+    /** Pointer to the actual level I'm playing*/
+    GameLevel* myLevel;
         //Temporary, just to make this easier to test.
         //GameLevel * myLevel;
 
@@ -122,6 +124,10 @@ private:
 
     /** @return The index of the level the player is playing*/
     int levelPlaying;
+
+
+    //A helper function, actually load all the objects into the GameLevels.
+    void populateLevels();
 
 
 
@@ -175,6 +181,7 @@ public slots:
     /** When the player clears a level, we want to advance the player to a new level if possible.*/
     void nextLevel();
 
+
 signals:
     /** Emit this signal so that the ScoreWidget can check the GamePlay widget
       for score updates*/
@@ -183,6 +190,7 @@ signals:
     /** Emit this signal when a level is cleared so that a new level can be
       loaded.*/
     void levelCleared();
+
 
 
 };
