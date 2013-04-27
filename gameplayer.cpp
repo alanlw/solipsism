@@ -43,7 +43,7 @@ void GamePlayer::takeDamge(int n){
 
         if (lives <= 0){
             emit allLivesLost();
-            this->setEnabled(false);
+            //this->setEnabled(false);
             return;
         }
 

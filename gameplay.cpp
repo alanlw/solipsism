@@ -526,7 +526,11 @@ void GamePlay::launchGame(){
         cout << "A level is already loaded." << endl;
         cout << "Restarting game by reloading first level." << endl;
 
+        gamePaused =false;
+
         score = 0;
+        myPlayer->setLives(3);
+        myPlayer->setHitPoints(100);
 
         scrollTimer->setInterval(STARTING_SCROLLTIMER_INTERVAL);
 
