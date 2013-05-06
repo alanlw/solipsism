@@ -20,6 +20,9 @@ DepressionMonster::~DepressionMonster(){
 }
 
 void DepressionMonster::move(int x, int y){
+		
+		setOpacity(0.5);
+
     //cout << "In move with 2 parameters." << endl;
     if (x < 0){
         this->moveBy(2,0);

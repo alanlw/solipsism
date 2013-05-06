@@ -46,6 +46,20 @@ Mean Words are projectiles launched by Anxieties.
 - Text will move horizontally. Conceptually, I want to show literal attacks 
 being uttered at the User's consciousness.  
 
+- Depression
+	- Depression fulfills the PA6 Requirement of having a player-aware monster. 
+This monster will follow and hover over the player doing damage until it is 
+destroyed.  
+
+	![Depression Monster](/graphics/monsters/depression.png)
+
+- Despair
+	- Despair fulfills the PA6 Requirement of having a player-aware monster. 
+This monster will rapidly approach the player's location and self-destruct 
+doing damage upon contact with the player.  
+
+	![Despair Monster](/graphics/monsters/despair01.png)
+
 ###Player Abilities
 
 - Psychic Attack
@@ -79,6 +93,15 @@ after the game is already started.
 ###Scoring
 
 - For each monster that is destroyed, points are awarded. Scores cannot go down.
+
+###High Scores
+
+- This functionality has been added to fulfill the requirement for PA6. To 
+access High Scores, simply click the "High Scores" button at any time. 
+- New scores will be stored in the text file scores.txt when a player dies. 
+Whenever a new entry is made via the player dying, this document will be 
+updated. 
+- High Scores can be accessed at any time.
 
 ###Player Lives
 
