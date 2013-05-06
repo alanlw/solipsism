@@ -23,6 +23,7 @@
 #include "soundargumentmonster.h"
 #include "anxietymonster.h"
 #include "meanwordsmonster.h"
+#include "depressionmonster.h"
 #include "psychicattack.h"
 
 
