@@ -12,6 +12,8 @@ DepressionMonster::DepressionMonster(){
     this->setOffset(-320, -200);
     monsterType = "DepressionMonster";
 
+    setOpacity(0.5);
+
 }
 DepressionMonster::~DepressionMonster(){
 
@@ -23,7 +25,7 @@ void DepressionMonster::move(int x, int y){
         this->moveBy(2,0);
     }
     else if(x > 0){
-        this->moveBy(-2, 0);
+        this->moveBy(-4, 0);
     }
     if (y < 0){
         this->moveBy(0,2);

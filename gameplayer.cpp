@@ -7,8 +7,11 @@ GamePlayer::GamePlayer(){
     setPixmap(*playerImage);
     playerImage->scaledToWidth(100);
 
+    setOffset(-75, -65);
+
     lives = 3;
     hitPoints = DEFAULT_HITPOINTS;
+    collisionDamage = 5;
 
     //Player is born mortal.
     invincible = 0;
@@ -32,6 +35,9 @@ int GamePlayer::getHitPoints() const{
 
 int GamePlayer::getInvincible() const{
     return invincible;
+}
+int GamePlayer::getCollisionDamage() const{
+    return collisionDamage;
 }
 void GamePlayer::takeDamge(int n){
     if(!invincible){

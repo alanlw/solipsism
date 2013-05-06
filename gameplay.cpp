@@ -113,6 +113,10 @@ void GamePlay::populateLevels(){
         DepressionMonster* myDepression = new DepressionMonster();
         temp->getMonsters().push_back(myDepression);
     }
+    for (int n = 0; n < 7; n++){
+        DespairMonster* myDespair = new DespairMonster();
+        temp->getMonsters().push_back(myDespair);
+    }
     myLevels.push_back(temp);
 
 
@@ -131,6 +135,14 @@ void GamePlay::populateLevels(){
         AnxietyMonster* myAnxiety = new AnxietyMonster();
         temp->getMonsters().push_back(myAnxiety);
     }
+    for (int n = 0; n < 4; n++){
+        DepressionMonster* myDepression = new DepressionMonster();
+        temp->getMonsters().push_back(myDepression);
+    }
+    for (int n = 0; n < 12; n++){
+        DespairMonster* myDespair = new DespairMonster();
+        temp->getMonsters().push_back(myDespair);
+    }
     myLevels.push_back(temp);
 
     temp = NULL;
@@ -148,6 +160,14 @@ void GamePlay::populateLevels(){
         AnxietyMonster* myAnxiety = new AnxietyMonster();
         temp->getMonsters().push_back(myAnxiety);
     }
+    for (int n = 0; n < 6; n++){
+        DepressionMonster* myDepression = new DepressionMonster();
+        temp->getMonsters().push_back(myDepression);
+    }
+    for (int n = 0; n < 17; n++){
+        DespairMonster* myDespair = new DespairMonster();
+        temp->getMonsters().push_back(myDespair);
+    }
     myLevels.push_back(temp);
 
     temp = NULL;
@@ -164,6 +184,14 @@ void GamePlay::populateLevels(){
     for (int n = 0; n < 30; n++){
         AnxietyMonster* myAnxiety = new AnxietyMonster();
         temp->getMonsters().push_back(myAnxiety);
+    }
+    for (int n = 0; n < 10; n++){
+        DepressionMonster* myDepression = new DepressionMonster();
+        temp->getMonsters().push_back(myDepression);
+    }
+    for (int n = 0; n < 27; n++){
+        DespairMonster* myDespair = new DespairMonster();
+        temp->getMonsters().push_back(myDespair);
     }
     myLevels.push_back(temp);
 
@@ -300,7 +328,7 @@ void GamePlay::movePlayer(MoveDirection dir){
         }
         break;
     case DOWN:
-        if(myPlayer->y() + 10 <= 460){
+        if(myPlayer->y() + 10 <= 550){
             myPlayer->moveBy(0, 10);
         }
         break;
@@ -364,12 +392,25 @@ bool GamePlay::monsterCollision(){
     for(int i = 0; i < myLevel->getMonsters().size(); i++){
         if (myPlayer->collidesWithItem(myLevel->getMonsters()[i])){
 
+            //Apply collision damage to monster.
+            myLevel->getMonsters()[i]->takeDamage(myPlayer->getCollisionDamage());
+            //Check if this kills this monster
+            if(myLevel->getMonsters()[i]->getHitPoints() <= 0){
+                gamePlayScene->removeItem(myLevel->getMonsters()[i]);
+                score += myLevel->getMonsters()[i]->getScoreVal();
+                delete myLevel->getMonsters()[i]; //Will this cause errors?
+                myLevel->getMonsters().remove(i);
+                return true;
+            }
 
             //Apply collision damage to player.
             myPlayer->takeDamge(myLevel->getMonsters()[i]->getCollisionDamage());
             if(!myPlayer->getInvincible()){
                 myPlayer->tempInvincible(15);
             }
+
+
+
 
             return true;
         }
@@ -530,7 +571,13 @@ void GamePlay::animateMonsters(){
             //Send proper information so I can move this monster toward the player.
             int x = (myLevel->getMonsters()[j]->x() - myPlayer->x());
             int y = (myLevel->getMonsters()[j]->y() - myPlayer->y());
-            cout << "DepressionMonster in view" << endl;
+            myLevel->getMonsters()[j]->move(x, y);
+        }
+        if(myLevel->getMonsters()[j]->getMonsterType() == "DespairMonster"
+                && myLevel->getMonsters()[j]->x() - myPlayer->x() < 900){
+            //Send proper information so I can move this monster toward the player.
+            int x = (myLevel->getMonsters()[j]->x() - myPlayer->x());
+            int y = (myLevel->getMonsters()[j]->y() - myPlayer->y());
             myLevel->getMonsters()[j]->move(x, y);
         }
 

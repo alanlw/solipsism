@@ -34,6 +34,8 @@ public:
     int getHitPoints() const;
     /** @return Is the player invincible*/
     int getInvincible() const;
+    /** @return Damage a monster takes from colliding with player*/
+    int getCollisionDamage() const;
 
     /** @param n value to set GamePlayer's lives to
         @post GamePlayer's lives updated to n */
@@ -60,6 +62,8 @@ private:
     int lives;
     /** Number of hitpoints*/
     int hitPoints;
+    /** Amount of damage a player will do to a monster on collission*/
+    int collisionDamage;
 
     /** For temporary invincibility after hitting an obstacle.
         will count down to 0 (no longer invincible) with playerTimer.*/

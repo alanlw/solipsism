@@ -24,6 +24,7 @@
 #include "anxietymonster.h"
 #include "meanwordsmonster.h"
 #include "depressionmonster.h"
+#include "despairmonster.h"
 #include "psychicattack.h"
 
 
