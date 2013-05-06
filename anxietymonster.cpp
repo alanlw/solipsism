@@ -31,7 +31,10 @@ AnxietyMonster::~AnxietyMonster(){
 
 }
 
-void AnxietyMonster::move(){
+void AnxietyMonster::move(int x, int y){
+
+    //I am not using player awareness for this item so to get rid of warnings:
+    x = x; y = y;
 
     setPixmap(*monsterImages[qrand()%3]);
 

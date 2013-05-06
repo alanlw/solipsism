@@ -23,7 +23,7 @@ public:
     //=========================================================================
     /** Overloaded move() function. Makes AnxietyMonster move in
         random cardinal directions about playing area. */
-    void move();
+    void move(int x, int y);
 
 protected:
 

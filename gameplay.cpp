@@ -109,6 +109,10 @@ void GamePlay::populateLevels(){
         AnxietyMonster* myAnxiety = new AnxietyMonster();
         temp->getMonsters().push_back(myAnxiety);
     }
+    for (int n = 0; n < 2; n++){
+        DepressionMonster* myDepression = new DepressionMonster();
+        temp->getMonsters().push_back(myDepression);
+    }
     myLevels.push_back(temp);
 
 
@@ -520,6 +524,14 @@ void GamePlay::animateMonsters(){
                 myLevel->getMonsters().push_back(temp);
 
             }
+        }
+        if(myLevel->getMonsters()[j]->getMonsterType() == "DepressionMonster"
+                && myLevel->getMonsters()[j]->x() - myPlayer->x() < 900){
+            //Send proper information so I can move this monster toward the player.
+            int x = (myLevel->getMonsters()[j]->x() - myPlayer->x());
+            int y = (myLevel->getMonsters()[j]->y() - myPlayer->y());
+            cout << "DepressionMonster in view" << endl;
+            myLevel->getMonsters()[j]->move(x, y);
         }
 
     }

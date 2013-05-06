@@ -66,7 +66,10 @@ public:
     /** Move monster as its attributes dictate.
     Called by animateMonster() slot.
     */
-    virtual void move();
+    //virtual void move();
+    /** Move a monster that is player aware. Parameters passed should be
+      the player and monster's position differences.*/
+    virtual void move(int x = 0, int y = 0);
 
 protected:
     /** Image of the monster*/

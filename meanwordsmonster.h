@@ -22,7 +22,7 @@ public:
     //=========================================================================
     /** Overloaded move() function. Makes MeanWordsMonster move in
         random cardinal directions about playing area. */
-    void move();
+    void move(int x=0, int y=0);
 
     //=======================================================================
     // Accessor and Mutator Functions

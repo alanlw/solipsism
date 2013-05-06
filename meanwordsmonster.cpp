@@ -23,7 +23,11 @@ MeanWordsMonster::~MeanWordsMonster(){
 
 }
 
-void MeanWordsMonster::move(){
+void MeanWordsMonster::move(int x, int y){
+
+    //I am not using player awareness for this item so to get rid of warnings:
+    x = x; y = y;
+
     moveBy(-2, 0);
     moveCounter++;
 }

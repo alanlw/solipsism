@@ -34,6 +34,7 @@ int Monster::getScoreVal() const{
 int Monster::getInvincible() const{
     return invincible;
 }
+
 string Monster::getMonsterType() const{
     return monsterType;
 }
@@ -70,6 +71,14 @@ void Monster::reduceInvincible(){
         this->setOpacity(1.0);
     }
 }
+/*
 void Monster::move(){
     moveCounter++;
+}
+*/
+void Monster::move(int x, int y){
+    x = x;
+    y = y;
+    moveCounter++;
+    //Do nothing for now.
 }

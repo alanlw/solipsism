@@ -21,7 +21,7 @@ public:
     //=========================================================================
     /** Overloaded move() function. Makes DepressionMonster move in
         random cardinal directions about playing area. */
-    void move();
+    void move(int x, int y);
 
 protected:
 
@@ -31,7 +31,6 @@ private:
         intentionally.*/
     int moveCounter;
 
-    MoveDirection myDir;
 
 };
 #endif // DEPRESSIONMONSTER_H

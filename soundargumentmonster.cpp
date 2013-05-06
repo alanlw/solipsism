@@ -25,7 +25,10 @@ SoundArgumentMonster::~SoundArgumentMonster(){
 
 }
 
-void SoundArgumentMonster::move(){
+void SoundArgumentMonster::move(int x, int y){
+
+    //I am not using player awareness for this item so to get rid of warnings:
+    x = x; y = y;
 
     //Travel a fixed distance, and then turn if it is time.
     //I will use 100 as this fixed distance for now.
