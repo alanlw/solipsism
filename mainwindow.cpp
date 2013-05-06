@@ -42,6 +42,10 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)  {
     //Connect the ScoreWidget to this
     connect(myGamePlay, SIGNAL(updateScore()), myScoreWidget, SLOT(scoreChanged()));
 
+    //Add high score tracking capability for PA6
+    tracker = new ScoreTracker();
+    tracker->readScores();
+
 
 }
 MainWindow::~MainWindow()

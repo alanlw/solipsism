@@ -10,6 +10,7 @@
 #include "gameplay.h"
 #include "scorewidget.h"
 
+#include "scoretracker.h"
 
 
 /**
@@ -55,6 +56,9 @@ private:
 
     /** Main Layout*/
     QVBoxLayout *mainLayout;
+
+    /** To keep track of High Scores*/
+    ScoreTracker* tracker;
 
  public slots:
     /** Update label with player's name*/
