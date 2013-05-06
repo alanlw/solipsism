@@ -119,14 +119,18 @@ Players will be prompted for their name when the game starts, after they click
 delay, and game play will launch into the screen shown below. 
 
 Player Sign-In:
+
 ![Player Sign In](/screenshots/name_entry.png)
 
 Opening Screen:
+
 ![Opening Screen](/screenshots/opening_screen.png)
 
 Game Play:
+
 ![Game Play](/screenshots/game_play.png)
 
 Game Over:
+
 ![Game Over](/screenshots/game_over.png)
 
