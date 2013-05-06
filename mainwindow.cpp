@@ -112,8 +112,6 @@ void MainWindow::updateMyLabel(){
 
 
 void MainWindow::showHighScores(){
-    //Adding a definition to this function so I get no errors...
-    cout << "Here I would do high score showing work..." << endl;
     QMessageBox msgBox;
     msgBox.setWindowTitle("High Scores");
     msgBox.setWindowModality(Qt::ApplicationModal);
@@ -128,7 +126,6 @@ void MainWindow::showHighScores(){
 }
 
 void MainWindow::addPlayerScore(){
-   cout << "In addPlayerScore()"  << endl;
    tracker->addScore(myGamePlay->getScore(), myGamePlay->getPlayerName());
 }
 

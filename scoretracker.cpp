@@ -35,13 +35,11 @@ void ScoreTracker::readScores(){
 
     while(!fin.eof()){
         entries.insert(n, s);
-        cout << "Entered: " << n  << " " << s << endl;
 
         fin >> n;
         fin >> s;
     }
 
-    cout << "Testing to see if readScores() is called." << endl;
     fin.close();
 }
 void ScoreTracker::writeScores(){
@@ -51,7 +49,6 @@ void ScoreTracker::writeScores(){
     ofstream fout;
     fout.open("scores.txt");
 
-    cout << "In writeScores()" << endl;
     QMapIterator<int, string> i(entries);
     while (i.hasNext()) {
         i.next();
@@ -59,9 +56,6 @@ void ScoreTracker::writeScores(){
     }
 
     fout.close();
-
-    /*Okay, now I just have to make sure that when I actually display these
-      that they are displayed in descending order.*/
 
 }
 
@@ -81,7 +75,6 @@ QString ScoreTracker::getScoreString(){
     }
 
     string s = ss.str();
-    //QString m(ss.str());
     m = ("\n" + QString::fromStdString(s));
 
 
@@ -89,7 +82,6 @@ QString ScoreTracker::getScoreString(){
 }
 
 void ScoreTracker::addScore(int score, QString name){
-    cout << "Score added: " << score << " [" << name.toStdString() << "] " << endl;
     entries.insert(score, name.toStdString());
 
     writeScores();
