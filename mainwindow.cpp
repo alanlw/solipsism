@@ -1,4 +1,7 @@
 #include "mainwindow.h"
+#include <QMessageBox> //For high scores
+#include <QString>     //Also for high scores.
+
 
 MainWindow::MainWindow(QWidget *parent) : QWidget(parent)  {
     
@@ -45,10 +48,13 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)  {
     //Connect the ScoreWidget to this
     connect(myGamePlay, SIGNAL(updateScore()), myScoreWidget, SLOT(scoreChanged()));
 
+    //Connect Player Death to updating score list.
+    connect(myGamePlay, SIGNAL(addScore()), this, SLOT(addPlayerScore()));
+
     //Add high score tracking capability for PA6
     tracker = new ScoreTracker();
     tracker->readScores();  // Just for testing
-    tracker->writeScores(); // Just for testing
+    //tracker->writeScores(); // Just for testing
 
 
 }
@@ -108,5 +114,21 @@ void MainWindow::updateMyLabel(){
 void MainWindow::showHighScores(){
     //Adding a definition to this function so I get no errors...
     cout << "Here I would do high score showing work..." << endl;
+    QMessageBox msgBox;
+    msgBox.setWindowTitle("High Scores");
+    msgBox.setWindowModality(Qt::ApplicationModal);
+
+    QString scoreString;
+    scoreString = tracker->getScoreString();
+
+
+    msgBox.setText("Hello there. Here are the top three scores:\n\n " + scoreString);
+
+    msgBox.exec();
+}
+
+void MainWindow::addPlayerScore(){
+   cout << "In addPlayerScore()"  << endl;
+   tracker->addScore(myGamePlay->getScore(), myGamePlay->getPlayerName());
 }
 

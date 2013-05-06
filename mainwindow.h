@@ -69,6 +69,8 @@ private:
     void updateMyLabel();
     /** Display High Scores*/
     void showHighScores();
+    /** Update scores when a player dies*/
+    void addPlayerScore();
 
 };
 

@@ -16,8 +16,13 @@ GamePlay::GamePlay(QWidget *parent) : QWidget(parent){
     bool ok;
     do {
         playerName = QInputDialog::getText(this, tr("Player Sign-in: "),
-                                             tr("Enter your name:"), QLineEdit::Normal,
+                                             tr("Enter your name (no spaces please): "), QLineEdit::Normal,
                                              QDir::home().dirName(), &ok);
+
+        if(playerName.contains(" ")){
+            ok = false;
+            continue;
+        }
     }while (!(ok && !playerName.isEmpty()));
 
     populateLevels();
@@ -558,10 +563,13 @@ void GamePlay::gameOver(){
     attackTimer->stop();
     gamePaused = true;
 
+    emit addScore();
+
     QString message = "For with much wisdom comes much sorrow;\n the more knowledge, the more grief.";
     message+="\n\nPress 'Start Game' again to restart, or 'Quit' to quit.";
     QMessageBox::warning(this,"Game Over!", message, QMessageBox::Ok);
     cout << "Game Over!" << endl;
+
 
 }
 

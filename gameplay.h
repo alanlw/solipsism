@@ -198,6 +198,10 @@ signals:
       for score updates*/
     void updateScore();
 
+     /** Emit this signal when the player dies to add a score for candidacy to
+       the high score list.*/
+    void addScore();
+
     /** Emit this signal when a level is cleared so that a new level can be
       loaded.*/
     void levelCleared();

@@ -5,6 +5,7 @@
 #include <iostream>
 #include <QMap>
 #include <string>
+#include <QString>
 
 using namespace std;
 
@@ -24,6 +25,12 @@ public:
     void readScores();
     /** Write player scores stored in 'entries' to file.*/
     void writeScores();
+
+    /** Get a QString of the high scores*/
+    QString getScoreString();
+
+    /** Add a score to the list of entries*/
+    void addScore(int score, QString name);
 
 
 protected:
