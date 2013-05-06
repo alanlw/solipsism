@@ -44,4 +44,17 @@ void ScoreTracker::readScores(){
 }
 void ScoreTracker::writeScores(){
 
+    /*For now I will just print out the scores I have in my map to confirm
+      that they are stored properly. */
+
+    cout << "In writeScores()" << endl;
+    QMapIterator<int, string> i(entries);
+    while (i.hasNext()) {
+        i.next();
+        cout << i.key() << ": " << i.value() << endl;
+    }
+
+    /*Okay, now I just have to make sure that when I actually display these
+      that they are displayed in descending order.*/
+
 }

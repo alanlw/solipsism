@@ -54,6 +54,10 @@ private:
     /** Quit Button*/
     QPushButton *quitButton;
 
+    //For PA6
+    /** High Score Button*/
+    QPushButton *highScoreButton;
+
     /** Main Layout*/
     QVBoxLayout *mainLayout;
 
@@ -63,7 +67,8 @@ private:
  public slots:
     /** Update label with player's name*/
     void updateMyLabel();
-
+    /** Display High Scores*/
+    void showHighScores();
 
 };
 

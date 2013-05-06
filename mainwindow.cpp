@@ -16,6 +16,8 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)  {
     quitButton = new QPushButton("Quit", this);
     connect( quitButton, SIGNAL(clicked()), qApp, SLOT(quit()) );
 
+    highScoreButton = new QPushButton("High Scores", this);
+    connect( highScoreButton, SIGNAL(clicked()), this, SLOT(showHighScores()));
 
     mainLayout = new QVBoxLayout;
     gameAndScore = new QHBoxLayout;
@@ -36,6 +38,7 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)  {
     gameAndScore->addWidget(myScoreWidget);
 
     mainLayout->addLayout(gameAndScore);
+    mainLayout->addWidget(highScoreButton);
 
     setLayout(mainLayout);
 
@@ -44,7 +47,8 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)  {
 
     //Add high score tracking capability for PA6
     tracker = new ScoreTracker();
-    tracker->readScores();
+    tracker->readScores();  // Just for testing
+    tracker->writeScores(); // Just for testing
 
 
 }
@@ -101,5 +105,8 @@ void MainWindow::updateMyLabel(){
 }
 
 
-
+void MainWindow::showHighScores(){
+    //Adding a definition to this function so I get no errors...
+    cout << "Here I would do high score showing work..." << endl;
+}
 
