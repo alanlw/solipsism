@@ -31,11 +31,17 @@ using namespace std;
 class ScoreTracker{
 
 public:
+    //=========================================================================
+    // Constructors and Destructor
+    //=========================================================================
     /** Constructor*/
     ScoreTracker();
     /** Destructor*/
     ~ScoreTracker();
 
+    //=========================================================================
+    // Loading and Saving
+    //=========================================================================
     /** Read in player scores*/
     void readScores();
     /** Write player scores stored in 'entries' to file.*/

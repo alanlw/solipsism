@@ -38,15 +38,19 @@ Run the program with the following command:
 ### Screenshots
 
 Player Sign-In:
+
 ![Player Sign In](/screenshots/name_entry.png)
 
 Opening Screen:
+
 ![Opening Screen](/screenshots/opening_screen.png)
 
 Game Play:
+
 ![Game Play](/screenshots/game_play.png)
 
 Game Over:
+
 ![Game Over](/screenshots/game_over.png)
 
 

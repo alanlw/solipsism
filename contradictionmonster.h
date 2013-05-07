@@ -26,11 +26,17 @@ A copy of this License should be found under the LICENSE directory as "license.t
   */
 class ContradictionMonster : public Monster{
 public:
+    //=========================================================================
+    // Constructors and Destructor
+    //=========================================================================
     /** Constructor*/
     ContradictionMonster();
     /** Destructor*/
     ~ContradictionMonster();
 
+    //=========================================================================
+    // Animation Functions
+    //=========================================================================
     /** Overloaded move function, makes this Monster not move at all*/
     void move();
 

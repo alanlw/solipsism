@@ -22,7 +22,8 @@ A copy of this License should be found under the LICENSE directory as "license.t
     Anxieties move randomly about the map. If they collide with an
     Contradiction Monster, they die. Can be destroyed by player. Anxieties
     generate Mean Words.
-  */
+*/
+
 class AnxietyMonster : public Monster{
 public:
     //=========================================================================

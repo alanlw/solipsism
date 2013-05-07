@@ -34,6 +34,9 @@ using namespace std;
 class GameLevel{
 
 public:
+    //=========================================================================
+    // Constructors and Destructor
+    //=========================================================================
     /** Default constructor*/
     GameLevel();
     /** Constructor with path to level image file*/

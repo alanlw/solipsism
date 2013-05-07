@@ -28,6 +28,9 @@ A copy of this License should be found under the LICENSE directory as "license.t
 class Attack : public QObject, public QGraphicsPixmapItem {
 Q_OBJECT
 public:
+    //=========================================================================
+    // Constructors and Destructor
+    //=========================================================================
     /** Constructor*/
     Attack();
     /** Destructor*/
