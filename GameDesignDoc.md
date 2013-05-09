@@ -1,9 +1,7 @@
 # Game Design Document
-This is the beginning of my Game Design Document. 
 
 ## Game Overview
-This game is a side scrolling game set on a background that looks like lined 
-paper. 
+This game is a side scrolling action game. Players control an avatar with the keyboard and attack using the keyboard. 
 
 ###The Player
 
